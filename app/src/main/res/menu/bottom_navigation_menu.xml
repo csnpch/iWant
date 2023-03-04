@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_wish"
+        android:title="Wish"
+        android:icon="@drawable/hand_holding_hand_solid"
+    />
+
+
+    <item
+        android:id="@+id/menu_map"
+        android:title="Map"
+        android:icon="@drawable/map_location_dot_solid"
+    />
+
+
+    <item
+        android:id="@+id/menu_profile"
+        android:title="Profile"
+        android:icon="@drawable/user_solid"
+    />
+
+</menu>

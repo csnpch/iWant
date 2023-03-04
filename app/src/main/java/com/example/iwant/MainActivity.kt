@@ -11,8 +11,6 @@ import androidx.core.content.ContextCompat
 class MainActivity : AppCompatActivity() {
 
 
-
-
     private fun setAppbar() {
         supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.rounded_appbar))
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
@@ -21,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun init() {
+        // For declare xml to variable or others
     }
 
 
@@ -36,5 +35,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         this.init()
     }
+
 
 }

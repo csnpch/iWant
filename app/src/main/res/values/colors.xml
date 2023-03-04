@@ -12,9 +12,9 @@
     <color name="warning">#EF9000</color>       <!-- Button Edit/Update -->
     <color name="nothing">#6E6E6E</color>       <!-- Button Back or Cancel -->
 
-    <color name="labelColor">#008CF1</color>    <!-- Label text & Title -->
-    <color name="contentColor">#000000</color>
-    <color name="pinLocation">#FF3225</color>   <!-- Color for location icon -->
+    <color name="label_color">#008CF1</color>    <!-- Label text & Title -->
+    <color name="content_color">#000000</color>
+    <color name="pin_location">#FF3225</color>   <!-- Color for location icon -->
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
