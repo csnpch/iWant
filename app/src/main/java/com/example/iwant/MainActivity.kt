@@ -14,17 +14,10 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import nl.joery.animatedbottombar.AnimatedBottomBar
 
 
-class MainActivity: AppCompatActivity(), OnTabSelectedListener,
-    AnimatedBottomBar.OnTabSelectListener {
+class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBar.OnTabSelectListener {
 
     private lateinit var navigation_bar: AnimatedBottomBar
     private lateinit var fragmentManager: FragmentManager
-
-    private fun setAppbar() {
-        supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.rounded_appbar))
-        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar?.setCustomView(R.layout.appbar_layout)
-    }
 
 
     private fun init() {
@@ -63,14 +56,12 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Check auth for show appBar
-        val statusAuth = true
-        when (statusAuth) {
-            true -> this.setAppbar()             // Show appbar
-            false -> supportActionBar?.hide()    // Hide appbar for login & register screen
-        }
-
         setContentView(R.layout.activity_main)
+
+        // Custom Appbar
+        supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.rounded_appbar))
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setCustomView(R.layout.appbar_layout)
         this.init()
     }
 
