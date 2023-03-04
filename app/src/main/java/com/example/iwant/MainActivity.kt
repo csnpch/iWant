@@ -30,7 +30,7 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener,
     private fun init() {
         navigation_bar = findViewById(R.id.navigation_bar)
         navigation_bar.setOnTabSelectListener(this@MainActivity)
-        
+
         this.callFragment(WishFragment())
     }
 
@@ -50,17 +50,10 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener,
         newIndex: Int,
         newTab: AnimatedBottomBar.Tab
     ) {
-        fragmentManager = supportFragmentManager
         when (newTab.id) {
-            R.id.menu_wish -> {
-                this.callFragment(WishFragment())
-            }
-            R.id.menu_map -> {
-                this.callFragment(WishFragment())
-            }
-            R.id.menu_profile -> {
-                this.callFragment(ProfileFragment())
-            }
+            R.id.menu_wish -> this.callFragment(WishFragment())
+            R.id.menu_map -> this.callFragment(WishFragment())
+            R.id.menu_profile -> this.callFragment(ProfileFragment())
         }
     }
     override fun onTabSelected(tab: TabLayout.Tab?) { }
