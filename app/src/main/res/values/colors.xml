@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="appbar">#3A3A3A</color>
+    <color name="background">#F9F9F9</color>
+    <color name="content">#FFFFFF</color>
+    <color name="content_secondary">#F4F4F4</color>
+
+    <color name="primary">#8F00FF</color>       <!-- Logo & Title Text & Button Primary -->
+    <color name="secondary">#0050AE</color>     <!-- Button Secondary -->
+    <color name="success">#00A410</color>       <!-- Accept To Delivery -->
+    <color name="warning">#EF9000</color>       <!-- Button Edit/Update -->
+    <color name="nothing">#6E6E6E</color>       <!-- Button Back or Cancel -->
+
+    <color name="labelColor">#008CF1</color>    <!-- Label text & Title -->
+    <color name="contentColor">#000000</color>
+    <color name="pinLocation">#FF3225</color>   <!-- Color for location icon -->
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,4 +23,5 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
 </resources>
