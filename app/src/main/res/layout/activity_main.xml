@@ -15,36 +15,21 @@
 
 
         <!-- Container Body Contents -->
-        <ScrollView
-            android:scrollbars="vertical"
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
 
-
-            <TextView
-                android:layout_marginTop="40dp"
-                android:layout_marginHorizontal="40dp"
-                android:padding="28dp"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:text="content"
-                android:textColor="@color/content_color"
-                android:background="@color/content_secondary"
-                android:elevation="6dp"
-            />
-
-
-        </ScrollView>
-
+        />
 
         <!--  Bottom Navigator  -->
         <nl.joery.animatedbottombar.AnimatedBottomBar
-            app:abb_indicatorLocation="top"
+            android:id="@+id/navigation_bar"
             android:layout_alignParentBottom="true"
-            android:id="@+id/bottom_bar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="#FFF"
+            app:abb_indicatorLocation="top"
             app:abb_selectedTabType="text"
             app:abb_indicatorAppearance="round"
             app:abb_indicatorMargin="16dp"
