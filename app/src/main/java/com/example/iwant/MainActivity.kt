@@ -35,11 +35,11 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener,
     }
 
 
-    private fun callFragment(fragment: Any) {
+    private fun callFragment(fragment: Fragment) {
         fragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().replace(
             R.id.fragment_container,
-            fragment as Fragment
+            fragment
         ).commit()
     }
 
