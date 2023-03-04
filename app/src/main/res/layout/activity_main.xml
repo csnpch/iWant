@@ -8,16 +8,18 @@
     android:background="@color/background"
     android:orientation="vertical"
     >
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
+        <!-- Container Body Contents -->
         <ScrollView
             android:scrollbars="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
 
             <TextView
                 android:layout_marginTop="40dp"
@@ -29,9 +31,11 @@
                 android:textColor="@color/content_color"
                 android:background="@color/content_secondary"
                 android:elevation="6dp"
-                />
+            />
+
 
         </ScrollView>
+
 
         <!--  Bottom Navigator  -->
         <nl.joery.animatedbottombar.AnimatedBottomBar
@@ -50,9 +54,9 @@
             app:abb_textAppearance="@style/CustomText"
             app:abb_tabAnimation="slide"
             app:abb_animationDuration="200"
-            />
+        />
+
+
 
     </RelativeLayout>
-
-
 </LinearLayout>
