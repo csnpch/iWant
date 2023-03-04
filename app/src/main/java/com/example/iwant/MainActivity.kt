@@ -52,7 +52,7 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener,
     ) {
         when (newTab.id) {
             R.id.menu_wish -> this.callFragment(WishFragment())
-            R.id.menu_map -> this.callFragment(WishFragment())
+            R.id.menu_map -> this.callFragment(MapFragment())
             R.id.menu_profile -> this.callFragment(ProfileFragment())
         }
     }
