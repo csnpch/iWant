@@ -1,10 +1,9 @@
-package com.example.iwant.auth
+package com.example.iwant
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.iwant.R
 
-class SignUpActivity : AppCompatActivity() {
+class AuthActivity : AppCompatActivity() {
 
 
     private fun init() {
@@ -14,7 +13,7 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
+        setContentView(R.layout.activity_auth)
         supportActionBar?.hide()
 
         this.init()

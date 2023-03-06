@@ -6,6 +6,8 @@
     <color name="content">#FFFFFF</color>
     <color name="content_secondary">#F4F4F4</color>
     <color name="firstLetterTextLogo">#4E4E4E</color>
+    <color name="message_banner">#464646</color>
+    <color name="bg_logo_line">#06C755</color>
 
     <color name="primary">#8F00FF</color>       <!-- Logo & Title Text & Button Primary -->
     <color name="secondary">#0050AE</color>     <!-- Button Secondary -->

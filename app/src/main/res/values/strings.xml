@@ -2,4 +2,7 @@
     <string name="app_name">iWant</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message_auth_screen">
+        The iWant application will be an intermediary that will allow users and users with each other. Items can be delivered to each other through an agreement (Dil).
+    </string>
 </resources>

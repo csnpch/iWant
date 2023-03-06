@@ -4,22 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import com.example.iwant.auth.SignInActivity
 
 class SplashScreen : AppCompatActivity() {
 
 
     private fun validateAuthentication() {
 
-        var statusAuth: Boolean = true
+        var statusAuth: Boolean = false
         when (statusAuth) {
             // Go to Home (Wish Page)
             true -> {
                 startActivity(Intent(this@SplashScreen, MainActivity::class.java))
             }
-            // Go to Auth (SignIn Page)
+            // Go to Auth Page
             false -> {
-                startActivity(Intent(this@SplashScreen, SignInActivity::class.java))
+                startActivity(Intent(this@SplashScreen, AuthActivity::class.java))
             }
         }
         finish()
