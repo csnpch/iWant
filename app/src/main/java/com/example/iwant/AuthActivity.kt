@@ -1,13 +1,38 @@
 package com.example.iwant
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import com.google.android.flexbox.FlexboxLayout
 
-class AuthActivity : AppCompatActivity() {
+class AuthActivity : AppCompatActivity(), View.OnClickListener {
+
+
+    private lateinit var auth_btnSignInLine: FlexboxLayout
+    private lateinit var auth_btnSignInGoogle: FlexboxLayout
 
 
     private fun init() {
+        auth_btnSignInLine = findViewById(R.id.auth_btnSignInLine)
+        auth_btnSignInLine.setOnClickListener(this)
 
+        auth_btnSignInGoogle = findViewById(R.id.auth_btnSignInGoogle)
+        auth_btnSignInGoogle.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            auth_btnSignInLine.id -> {
+                startActivity(Intent(this@AuthActivity, MainActivity::class.java))
+                finish()
+            }
+            auth_btnSignInGoogle.id -> {
+                startActivity(Intent(this@AuthActivity, MainActivity::class.java))
+                finish()
+            }
+        }
     }
 
 
