@@ -49,7 +49,7 @@ class TermsActivity : AppCompatActivity(), View.OnClickListener {
         btn_continue = findViewById(R.id.terms_btn_continue)
         btn_continue.setOnClickListener(this)
 
-        edt_phoneNumber = findViewById(R.id.edt_phoneNumber)
+        edt_phoneNumber = findViewById(R.id.terms_edt_phoneNumber)
 
         this.initDialogReadTermsOfServices()
     }

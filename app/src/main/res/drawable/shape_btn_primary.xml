@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- pressed -->
+    <item android:state_pressed="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <corners  android:radius="6dp"/>
+            <solid android:color="@color/primary_hover"></solid>
+        </shape>
+    </item>
+    <!-- default -->
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <corners  android:radius="6dp"/>
+            <solid android:color="@color/primary"></solid>
+        </shape>
+    </item>
+</selector>
