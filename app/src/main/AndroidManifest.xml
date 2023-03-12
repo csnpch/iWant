@@ -13,14 +13,14 @@
         android:theme="@style/Theme.IWant"
         tools:targetApi="31">
         <activity
-            android:name=".auth.SignUpActivity"
+            android:name=".Auth.TermsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AuthActivity"
+            android:name=".Auth.AuthActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

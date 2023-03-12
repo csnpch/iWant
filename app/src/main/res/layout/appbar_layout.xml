@@ -4,7 +4,7 @@
     android:layout_height="60dp"
     android:layout_gravity="center_horizontal"
     android:gravity="center"
-    android:background="@drawable/rounded_appbar"
+    android:background="@drawable/shape_rounded_appbar"
     >
 
     <TextView

@@ -5,4 +5,6 @@
     <string name="message_auth_screen">
         The iWant application will be an intermediary that will allow users and users with each other. Items can be delivered to each other through an agreement (Dil).
     </string>
+    <string name="hint_phone">098XXXXXXX</string>
+    <string name="message_accept_terms">Accept <u>Terms of Services</u></string>
 </resources>

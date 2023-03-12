@@ -2,9 +2,6 @@ package com.example.iwant
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -59,7 +56,7 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         setContentView(R.layout.activity_main)
 
         // Custom Appbar
-        supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.rounded_appbar))
+        supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.shape_rounded_appbar))
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.appbar_layout)
         this.init()

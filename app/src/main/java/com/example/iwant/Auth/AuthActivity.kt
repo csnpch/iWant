@@ -1,10 +1,11 @@
-package com.example.iwant
+package com.example.iwant.Auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
+import com.example.iwant.MainActivity
+import com.example.iwant.R
 import com.google.android.flexbox.FlexboxLayout
 
 class AuthActivity : AppCompatActivity(), View.OnClickListener {
@@ -25,12 +26,10 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             auth_btnSignInLine.id -> {
-                startActivity(Intent(this@AuthActivity, MainActivity::class.java))
-                finish()
+                startActivity(Intent(this@AuthActivity, TermsActivity::class.java))
             }
             auth_btnSignInGoogle.id -> {
-                startActivity(Intent(this@AuthActivity, MainActivity::class.java))
-                finish()
+                startActivity(Intent(this@AuthActivity, TermsActivity::class.java))
             }
         }
     }
