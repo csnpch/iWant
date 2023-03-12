@@ -16,8 +16,9 @@
     <color name="success">#00A410</color>           <!-- Accept To Delivery -->
     <color name="warning">#EF9000</color>           <!-- Button Edit/Update -->
     <color name="warning_hover">#E27A00</color>
-    <color name="nothing">#6E6E6E</color>           <!-- Button Back or Cancel -->
-    <color name="nothing_hover">#606060</color>
+    <color name="nothing">#828282</color>           <!-- Button Back or Cancel -->
+    <color name="nothing_hover">#6E6E6E</color>
+    <color name="danger">#FF0000</color>
 
     <color name="btn_continue">#008CF1</color>          <!-- Label text & Title -->
     <color name="btn_continue_hover">#0081DE</color>    <!-- Label text & Title -->
