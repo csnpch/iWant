@@ -2,6 +2,7 @@
 <resources>
     <style name="CustomText">
         <item name="android:fontFamily">@font/kanit_regular</item>
+        <item name="android:letterSpacing">0.04</item>
         <item name="android:textSize">16sp</item>
     </style>
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">

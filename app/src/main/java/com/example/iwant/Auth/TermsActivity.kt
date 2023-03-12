@@ -8,6 +8,7 @@ import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager.LayoutParams
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -27,7 +28,9 @@ class TermsActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btn_continue: LinearLayout
     private lateinit var dialogTerms: AlertDialog
 
+    private lateinit var edt_phoneNumber: EditText
     private var statusAcceptTerms: Boolean = false
+
 
     private fun init() {
         btn_back = findViewById(R.id.term_btn_back)
@@ -35,7 +38,9 @@ class TermsActivity : AppCompatActivity(), View.OnClickListener {
 
         cb_acceptTermsOfServices = findViewById(R.id.terms_cb_accept)
         cb_acceptTermsOfServices.setOnCheckedChangeListener {
-            _, isChecked -> this.statusAcceptTerms = isChecked
+            _, isChecked ->
+                this.statusAcceptTerms = isChecked
+                this.toggleColorValidateAcceptTerms()
         }
 
         btn_readTermsOfServices = findViewById(R.id.terms_btn_read_terms_of_services)
@@ -43,6 +48,8 @@ class TermsActivity : AppCompatActivity(), View.OnClickListener {
 
         btn_continue = findViewById(R.id.terms_btn_continue)
         btn_continue.setOnClickListener(this)
+
+        edt_phoneNumber = findViewById(R.id.edt_phoneNumber)
 
         this.initDialogReadTermsOfServices()
     }
@@ -71,12 +78,30 @@ class TermsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    private fun onContinue() {
+    private fun toggleColorValidateAcceptTerms() {
         if (!statusAcceptTerms) {
             cb_acceptTermsOfServices.setButtonTintList(ColorStateList.valueOf(this@TermsActivity.getColor(R.color.danger)))
             btn_readTermsOfServices.setTextColor(ContextCompat.getColor(baseContext, R.color.danger))
+        } else {
+            cb_acceptTermsOfServices.setButtonTintList(ColorStateList.valueOf(this@TermsActivity.getColor(R.color.gray)))
+            btn_readTermsOfServices.setTextColor(ContextCompat.getColor(baseContext, R.color.gray))
+        }
+    }
+
+
+    private fun onContinue() {
+
+        val numberStr = edt_phoneNumber.text.toString()
+        if (numberStr.length !== 10 || numberStr[0] !== '0') {
+            edt_phoneNumber.error = "Phone number invalid"
             return
         }
+
+        if (!statusAcceptTerms) {
+            this.toggleColorValidateAcceptTerms()
+            return
+        }
+
         startActivity(Intent(this@TermsActivity, MainActivity::class.java))
         finishAffinity();
     }
