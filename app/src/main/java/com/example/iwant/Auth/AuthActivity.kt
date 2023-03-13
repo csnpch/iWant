@@ -25,12 +25,10 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            auth_btnSignInLine.id -> {
+            auth_btnSignInLine.id ->
                 startActivity(Intent(this@AuthActivity, TermsActivity::class.java))
-            }
-            auth_btnSignInGoogle.id -> {
+            auth_btnSignInGoogle.id ->
                 startActivity(Intent(this@AuthActivity, TermsActivity::class.java))
-            }
         }
     }
 

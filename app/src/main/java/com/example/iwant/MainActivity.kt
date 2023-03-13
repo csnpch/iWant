@@ -41,11 +41,16 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         newTab: AnimatedBottomBar.Tab
     ) {
         when (newTab.id) {
-            R.id.menu_wish -> this.callFragment(WishFragment())
-            R.id.menu_map -> this.callFragment(MapFragment())
-            R.id.menu_profile -> this.callFragment(ProfileFragment())
+            R.id.menu_wish ->
+                this.callFragment(WishFragment())
+            R.id.menu_map ->
+                this.callFragment(MapFragment())
+            R.id.menu_profile ->
+                this.callFragment(ProfileFragment())
         }
     }
+
+
     override fun onTabSelected(tab: TabLayout.Tab?) { }
     override fun onTabUnselected(tab: TabLayout.Tab?) { }
     override fun onTabReselected(tab: TabLayout.Tab?) { }
