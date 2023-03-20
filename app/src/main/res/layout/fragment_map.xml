@@ -8,51 +8,60 @@
 
 
     <LinearLayout
-        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="24dp"
         android:orientation="vertical"
         >
 
          <com.google.android.flexbox.FlexboxLayout
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="16dp"
-            app:flexDirection="row"
-            app:alignItems="center"
-            android:background="@drawable/shape_btn_white"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:elevation="2dp"
+             android:id="@+id/map_btn_location_choose"
+             android:layout_width="match_parent"
+             android:layout_height="52dp"
+             android:layout_margin="4dp"
+             android:paddingVertical="10dp"
+             android:paddingHorizontal="16dp"
+             app:flexDirection="row"
+             app:alignItems="center"
+             android:background="@drawable/shape_btn_white"
+             android:elevation="4dp"
             >
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/location_dot_solid"
                 />
 
             <TextView
-                android:id="@+id/map_txt_your_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="14dp"
-                android:text="Ban Neon Hom, Prachinburi"
-                android:textColor="@color/black"
-                android:letterSpacing="0.08"
-                />
+                 android:id="@+id/map_txt_your_location"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="14dp"
+                 android:text="Ban Neon Hom, Prachinburi"
+                 android:textSize="15dp"
+                 android:fontFamily="@font/kanit_regular"
+                 android:textColor="@color/black"
+                 android:letterSpacing="0.02"
+                 />
 
         </com.google.android.flexbox.FlexboxLayout>
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/map_googleMapView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="4dp"
             android:layout_marginBottom="48dp"
-            />
+            android:elevation="2dp"
+            >
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map_googleMapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
 
     </LinearLayout>
-
-
 
 </FrameLayout>

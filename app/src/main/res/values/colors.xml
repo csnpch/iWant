@@ -3,8 +3,10 @@
 
 
     <color name="primary">#8F00FF</color>           <!-- Logo & Title Text & Button Primary -->
+    <color name="primary_hover">#8000E5</color>
     <color name="secondary">#0050AE</color>         <!-- Button Secondary -->
     <color name="success">#00A410</color>           <!-- Accept To Delivery -->
+    <color name="success_hover">#008B0E</color>           <!-- Accept To Delivery -->
     <color name="warning">#EF9000</color>           <!-- Button Edit/Update -->
     <color name="warning_hover">#E27A00</color>
     <color name="nothing">#828282</color>           <!-- Button Back or Cancel -->
@@ -23,11 +25,10 @@
     <color name="btn_continue">#008CF1</color>          <!-- Label text & Title -->
     <color name="btn_continue_hover">#0081DE</color>    <!-- Label text & Title -->
     <color name="label_color">#008CF1</color>           <!-- Label text & Title -->
-    <color name="content_color">#000000</color>
     <color name="pin_location">#FF3225</color>          <!-- Color for location icon -->
     <color name="back_arrow">#939393</color>
     <color name="section">#A9A9A9</color>
-    <color name="primary_hover">#8000E5</color>
+    <color name="section_line">#E1C2FA</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

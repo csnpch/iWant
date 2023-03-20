@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_item_list_wish"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_margin="4dp"
+        android:paddingVertical="14dp"
+        android:paddingHorizontal="18dp"
+        android:background="@drawable/shape_item_wish"
+        android:elevation="4dp"
+        app:flexDirection="row"
+        app:justifyContent="space_between"
+        >
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:justifyContent="space_between"
+            app:flexDirection="column"
+            >
+
+            <TextView
+                android:id="@+id/wish_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ไข่ไก่เบอร์ 0"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/kanit_regular"
+                />
+
+            <TextView
+                android:id="@+id/wish_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ต้องการไข่ไก่เบอร์ 0 จำนวน 2 แผง เอาแผง ..."
+                android:textSize="12dp"
+                android:fontFamily="@font/kanit_regular"
+                android:textColor="@color/text_gray"
+                />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:justifyContent="space_between"
+            app:alignItems="flex_end"
+            app:flexDirection="column"
+            >
+
+            <TextView
+                android:id="@+id/wish_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.5 km"
+                android:textSize="14dp"
+                android:textColor="@color/secondary"
+                android:fontFamily="@font/kanit_regular"
+                android:letterSpacing="0.02"
+                />
+
+            <TextView
+                android:id="@+id/wish_timestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 day"
+                android:textSize="12dp"
+                android:fontFamily="@font/kanit_regular"
+                android:textColor="@color/text_gray"
+                android:letterSpacing="0.02"
+                />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+
+</LinearLayout>

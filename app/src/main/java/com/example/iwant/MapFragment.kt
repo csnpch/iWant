@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.google.android.flexbox.FlexboxLayout
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -16,14 +18,19 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MapFragment : Fragment(), OnMapReadyCallback {
 
 
+    private lateinit var btn_location_choose: FlexboxLayout
+    private lateinit var txt_your_location: TextView
     private lateinit var mapView: MapView
 
-
     private fun initView(view: View, savedInstanceState: Bundle?): View {
+        btn_location_choose = view.findViewById(R.id.map_btn_location_choose)
+        txt_your_location = view.findViewById(R.id.map_txt_your_location)
+
         mapView = view.findViewById(R.id.map_googleMapView)
         mapView.onCreate(savedInstanceState)
         mapView.onResume()
         mapView.getMapAsync(this)
+
         return view;
     }
 
