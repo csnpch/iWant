@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/shape_rounded_dialog"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_terms_and_condition"
+        android:textColor="@color/secondary"
+        android:textSize="20dp"
+        android:fontFamily="@font/kanit_regular"
+    />
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:textSize="14dp"
+        android:textColor="@color/gray"
+        android:fontFamily="@font/kanit_regular"
+        android:text="@string/text_terms_and_condition"
+        android:justificationMode="inter_word"
+        android:letterSpacing="0.02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    />
+    
+    <LinearLayout
+        android:id="@+id/terms_dialog_btn_close"
+        android:layout_marginTop="24dp"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:background="@drawable/shape_btn_nothing"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+    >
+        
+        <TextView
+            android:text="CLOSE"
+            android:textColor="@color/white"
+            android:fontFamily="@font/kanit_regular"
+            android:textAlignment="center"
+            android:letterSpacing="0.08"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        />
+        
+    </LinearLayout>
+
+
+</LinearLayout>
