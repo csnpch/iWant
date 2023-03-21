@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.iwant.Helpers.Helpers
 import com.example.iwant.Helpers.setListViewHeightBasedOnChildren
 
 class WishFragment : Fragment(), AdapterView.OnItemClickListener {
@@ -54,8 +55,10 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
         }
 
         for (i in 0..1) {
-            your_wish_titles.add("Title " + (i+1))
-            your_wish_subtitles.add("Sub Title " + (i+1))
+            your_wish_titles.add(
+                Helpers().subStringLength("Title Title Title Title Title Title Title " + (i+1), 42, true)
+            )
+            your_wish_subtitles.add("5 days left for expire")
             your_wish_timestamps.add("now" + (i+1))
             your_wish_response.add(i % 2 == 0)
         }
@@ -68,10 +71,14 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
 
     private fun setupWishList() {
         for (i in 0..6) {
-            wish_titles.add("Title " + (i+1))
-            wish_subtitles.add("Sub Title " + (i+1))
-            wish_distances.add("0." + (i+1).toString() + "km")
-            wish_timestamps.add((i+1).toString() + "hour ago")
+            wish_titles.add(
+                Helpers().subStringLength("Title Title Title Title Title Title Title " + (i+1), 42, true)
+            )
+            wish_subtitles.add(
+                Helpers().subStringLength("Sub Title Allow Access port when you need something maybe you can", 42, true)
+            )
+            wish_distances.add("0." + (i+1).toString() + " km")
+            wish_timestamps.add((i+1).toString() + " hour ago")
         }
 
         listview_wish.adapter = CustomListView_Wish(requireContext(), wish_titles, wish_subtitles, wish_distances, wish_timestamps)

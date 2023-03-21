@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     tools:context=".MapFragment">
 
 
@@ -55,11 +56,17 @@
             android:layout_marginBottom="48dp"
             android:elevation="2dp"
             >
+
+            <!-- uiZoomControls is shortcut navigation -->
             <com.google.android.gms.maps.MapView
                 android:id="@+id/map_googleMapView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                />
+                map:cameraZoom="12"
+                map:liteMode="false"
+                map:uiZoomControls="false"
+            />
+
         </LinearLayout>
 
     </LinearLayout>
