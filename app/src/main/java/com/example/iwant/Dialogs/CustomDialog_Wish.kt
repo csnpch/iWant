@@ -15,6 +15,7 @@ import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.ThemedSpinnerAdapter.Helper
 import com.example.iwant.Helpers.Helpers
 import com.example.iwant.Helpers.PermissionUtils
 import com.google.android.flexbox.FlexboxLayout
@@ -26,8 +27,8 @@ fun showDialogWish(
     Title: String,
     When: String,
     Distance: String,
-    Description: String,
-    Benefit: String,
+    Description: String = "",
+    Benefit: String = "",
     Contact: String,
     LatLog: ArrayList<Double>
 ) {
@@ -54,8 +55,8 @@ fun showDialogWish(
 
     txt_when.text = "Post When $When"
     txt_distance.text = Distance
-    txt_description.text = Description
-    txt_benefit.text = Benefit
+    txt_description.text = if (Description === "") "-" else Description
+    txt_benefit.text = if (Benefit === "") "-" else Benefit
     txt_contact.text = Contact
 
     // Event Area

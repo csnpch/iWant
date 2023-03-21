@@ -91,12 +91,8 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
 
     private fun setDataToWishList() {
         for (i in 0..6) {
-            wish_titles.add(
-                Helpers().subStringLength("Title Title Title Title Title Title Title " + (i+1), 42, true)
-            )
-            wish_subtitles.add(
-                Helpers().subStringLength("Sub Title Allow Access port when you need something maybe you can", 42, true)
-            )
+            wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
+            wish_subtitles.add("Sub Title Allow Access port when you need something maybe you can")
             wish_distances.add("0." + (i+1).toString() + " km")
             wish_timestamps.add((i+1).toString() + " hour ago")
             wish_benefit.add("Give a 10 bath")

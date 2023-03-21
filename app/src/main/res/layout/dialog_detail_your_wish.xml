@@ -9,50 +9,30 @@
     >
 
 
-    <com.google.android.flexbox.FlexboxLayout
+    <TextView
+        android:id="@+id/your_wish_dialog_txt_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:flexDirection="row"
-        app:alignItems="flex_end"
-        >
+        android:text="เนื้อสด สโพกหมู 4kg"
+        android:textSize="16dp"
+        android:textColor="@color/primary"
+        android:letterSpacing="0.04"
+        android:fontFamily="@font/kanit_medium"
+        />
 
-
-        <TextView
-            android:id="@+id/wish_dialog_txt_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ไข่ไก่เบอร์ 0"
-            android:textSize="16dp"
-            android:textAlignment="center"
-            android:textColor="@color/primary"
-            android:letterSpacing="0.04"
-            android:fontFamily="@font/kanit_medium"
-            />
-
-
-        <ImageView
-            android:id="@+id/wish_dialog_btn_exit"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:src="@drawable/circle_xmark_solid"
-            />
-
-
-    </com.google.android.flexbox.FlexboxLayout>
 
 
     <TextView
-        android:id="@+id/wish_dialog_txt_when"
+        android:id="@+id/your_wish_dialog_txt_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="14dp"
-        android:textColor="@color/very_gray"
+        android:textColor="@color/text_gray"
         android:fontFamily="@font/kanit_regular"
-        android:text="Post when 1 day ago"
+        android:text="เนื้อสด สโพกหมูประมาณ 4kg ขอเป็นหมูเลี้ยงนะ ไม่ใช่หมูป่า โทรมาถาม ก่อนมาส่งนะคะ"
         android:justificationMode="inter_word"
         android:letterSpacing="0.02"
-        android:textAlignment="center"
         />
 
 
@@ -63,239 +43,48 @@
         android:orientation="vertical"
         >
 
-
-        <!-- Row Input -->
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary"
-                android:fontFamily="@font/kanit_regular"
-                android:letterSpacing="0.06"
-                android:text="Distance from you"
-                />
+            android:textColor="@color/secondary"
+            android:fontFamily="@font/kanit_regular"
+            android:letterSpacing="0.06"
+            android:text="Peoples response to what you want"
+            />
 
-            <com.google.android.flexbox.FlexboxLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:flexDirection="row"
-                app:justifyContent="flex_start"
-                app:alignItems="flex_start"
-                android:layout_marginLeft="6dp"
-                android:layout_marginTop="4dp"
-                >
-                <ImageView
-                    android:layout_marginTop="6dp"
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
-                    android:src="@drawable/circle_solid"
-                    />
-                <TextView
-                    android:id="@+id/wish_dialog_txt_distance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_secondary"
-                    android:fontFamily="@font/kanit_regular"
-                    android:text="0.5 km"
-                    android:letterSpacing="0.04"
-                    android:layout_marginLeft="8dp"
-                    />
-            </com.google.android.flexbox.FlexboxLayout>
-
-        </LinearLayout>
-
-
-        <!-- Row Input -->
-        <LinearLayout
-            android:layout_marginTop="14dp"
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary"
-                android:fontFamily="@font/kanit_regular"
-                android:text="Description"
-                android:letterSpacing="0.06"
-                />
+            android:layout_height="wrap_content">
 
-            <com.google.android.flexbox.FlexboxLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:flexDirection="row"
-                app:justifyContent="flex_start"
-                app:alignItems="flex_start"
-                android:layout_marginLeft="6dp"
-                android:layout_marginTop="4dp"
-                >
-                <ImageView
-                    android:layout_marginTop="6dp"
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
-                    android:src="@drawable/circle_solid"
-                    />
-                <TextView
-                    android:id="@+id/wish_dialog_txt_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_secondary"
-                    android:fontFamily="@font/kanit_regular"
-                    android:text="ต้องการไข่ไก่เบอร์ 0 จำนวน 2 แผง ขอเป็นแผงพาสติก ไม่เอาแผงกระดาษ มาส่งได้ทุกวันจันทร์-ศุกร์ ช่วงเวลา 13:00 - 20:00"
-                    android:letterSpacing="0.04"
-                    android:layout_marginLeft="8dp"
-                    />
-            </com.google.android.flexbox.FlexboxLayout>
-
-        </LinearLayout>
-
-
-        <!-- Row Input -->
-        <LinearLayout
-            android:layout_marginTop="14dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/secondary"
-                    android:fontFamily="@font/kanit_regular"
-                    android:text="Benefit"
-                    android:letterSpacing="0.06"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:textColor="@color/warning_text"
-                    android:fontFamily="@font/kanit_regular"
-                    android:text="( Should call to confirm Dil again )"
-                    android:letterSpacing="0.04"
-                    />
-
-            </LinearLayout>
-
-            <com.google.android.flexbox.FlexboxLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:flexDirection="row"
-                app:justifyContent="flex_start"
-                app:alignItems="flex_start"
-                android:layout_marginLeft="6dp"
-                android:layout_marginTop="4dp"
-                >
-
-                <ImageView
-                    android:layout_marginTop="6dp"
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
-                    android:src="@drawable/circle_solid"
-                    />
-                <TextView
-                    android:id="@+id/wish_dialog_txt_benefit"
+                <com.google.android.flexbox.FlexboxLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_secondary"
-                    android:fontFamily="@font/kanit_regular"
-                    android:text="ให้ค่าเอามาส่ง 60 บาท"
-                    android:letterSpacing="0.04"
-                    android:layout_marginLeft="8dp"
-                    />
-
-            </com.google.android.flexbox.FlexboxLayout>
-
-        </LinearLayout>
-
-
-        <!-- Row Input -->
-        <LinearLayout
-            android:layout_marginTop="14dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-            <com.google.android.flexbox.FlexboxLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:flexDirection="row"
-                app:justifyContent="space_between"
-                app:alignItems="flex_end"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    app:flexDirection="row"
+                    app:justifyContent="space_between"
                     >
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/secondary"
                         android:fontFamily="@font/kanit_regular"
-                        android:text="Contact"
+                        android:letterSpacing="0.06"
+                        android:text="Peoples response to what you want"
+                        android:textSize="12dp"
                         />
 
-                    <com.google.android.flexbox.FlexboxLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="4dp"
-                        app:flexDirection="row"
-                        app:justifyContent="flex_start"
-                        app:alignItems="flex_start"
-                        android:letterSpacing="0.06"
-                        >
 
-                        <ImageView
-                            android:layout_marginTop="6dp"
-                            android:layout_width="8dp"
-                            android:layout_height="8dp"
-                            android:src="@drawable/circle_solid"
-                            />
-                        <TextView
-                            android:id="@+id/wish_dialog_txt_contact"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/text_secondary"
-                            android:fontFamily="@font/kanit_regular"
-                            android:text="0987654321"
-                            android:letterSpacing="0.04"
-                            android:layout_marginLeft="8dp"
-                            />
+                </com.google.android.flexbox.FlexboxLayout>
 
-                    </com.google.android.flexbox.FlexboxLayout>
+            </LinearLayout>
 
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/wish_dialog_btn_call"
-                    android:paddingTop="12dp"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:src="@drawable/phone_solid"
-                    android:scaleX="-1"
-                    />
-
-            </com.google.android.flexbox.FlexboxLayout>
-
-        </LinearLayout>
-
+        </ListView>
 
     </LinearLayout>
 

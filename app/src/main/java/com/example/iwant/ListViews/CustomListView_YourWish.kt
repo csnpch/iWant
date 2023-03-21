@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.iwant.Helpers.Helpers
 
 class CustomListView_YourWish(
     context: Context,
@@ -33,7 +34,10 @@ class CustomListView_YourWish(
         val timestampTextView = convertViewVar.findViewById<TextView>(R.id.your_wish_txt_timestamp)
         val statusResponse = convertViewVar.findViewById<LinearLayout>(R.id.your_wish_status_someone_responds)
 
-        titleTextView.text = titles[position]
+        val title = titles[position]
+        titleTextView.text =
+            if (title.length <= 42) title
+            else Helpers().subStringLength(title, 42, true)
         subtitleTextView.text = subtitles[position]
         timestampTextView.text = timestamps[position]
         if (status_response[position])
