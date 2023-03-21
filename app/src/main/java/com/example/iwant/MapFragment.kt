@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.iwant.Helpers.PermissionUtils
 import com.example.iwant.Helpers.getCurrentLocation
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -28,7 +29,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
     private var currentUserLocation = DoubleArray(2)
-    private val LOCATION_PERMISSION_REQUEST_CODE = 1
 
 
     private fun initView(view: View, savedInstanceState: Bundle?): View {
@@ -43,60 +43,22 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-
-    private fun checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted, request it
-            ActivityCompat.requestPermissions(requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
-        } else {
-            // Permission is already granted, get the user's location
-            getUserLocation()
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            LOCATION_PERMISSION_REQUEST_CODE -> {
-                // If permission is granted, get the user's location
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    getUserLocation()
-                }
-                return
-            }
-        }
-    }
-
     private fun getUserLocation() {
-        // Your code to get the user's location goes here
-        // TEST : Get current location user from Helpers package
-        val location: Pair<Double, Double>? = getCurrentLocation(requireContext())
-        currentUserLocation[0] = location?.first ?: 0.0 // set default value to 0.0 if location is null
-        currentUserLocation[1] = location?.second ?: 0.0 // set default value to 0.0 if location is null
+        getCurrentLocation(this) { location ->
+            currentUserLocation[0] = location.first
+            currentUserLocation[1] = location.second
 
-        System.out.println("location : " + location)
+            val currentLocation = LatLng(currentUserLocation[0], currentUserLocation[1])
+            this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f))
+            println("Current Location is $currentLocation")
+        }
     }
-
 
 
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
-        this.checkLocationPermission()
+        PermissionUtils.checkLocationPermission(this@MapFragment);
         this.getUserLocation()
-
-        // Test move location 1
-        val thailandLocation = LatLng(13.7248904, 100.3521307)
-        this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(thailandLocation, 10f))
-
-        // Test move location 2
-        object : CountDownTimer(2000, 1000) {
-            override fun onTick(millisUntilFinished: Long) { }
-            override fun onFinish() {
-                val currentLocation = LatLng(this@MapFragment.currentUserLocation[0], this@MapFragment.currentUserLocation[1])
-                this@MapFragment.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 10f))
-            }
-        }.start()
     }
 
     override fun onResume() {

@@ -8,4 +8,10 @@ class Helpers {
         }
         return value
     }
+
+    fun cleanPhoneNumber(value: String): String {
+        val phoneNumber = value.trim()
+        val phoneRegex = Regex("[^\\d+]") // remove character keep digit only
+        return phoneRegex.replace(phoneNumber, "")
+    }
 }
