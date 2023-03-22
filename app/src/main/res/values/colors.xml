@@ -28,6 +28,8 @@
     <color name="text_gray">#868686</color>
     <color name="text_veryHint">#C2C2C2</color>
     <color name="bg_logo_line">#06C755</color>
+    <color name="btn_cancel">#6F6F6F</color>
+    <color name="btn_cancel_hover">#666666</color>
     <color name="btn_continue">#008CF1</color>          <!-- Label text & Title -->
     <color name="btn_continue_hover">#0081DE</color>    <!-- Label text & Title -->
     <color name="label_color">#008CF1</color>           <!-- Label text & Title -->
@@ -46,5 +48,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#6D6D6D</color>
     <color name="very_gray">#2D2D2D</color>
+    <color name="soft_gray">#888888</color>
 
 </resources>

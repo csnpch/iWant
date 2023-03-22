@@ -62,21 +62,14 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
 
     private fun setDataToYourWishList() {
 
-        var statusHaveWishList: Boolean = !false;
-
-        if (!statusHaveWishList) {
-            container_your_wish.visibility = View.GONE
-            return
-        } else {
-            container_your_wish.visibility = View.VISIBLE
-        }
-
-
-        for (i in 0..1) {
+        var statusHaveWishList: Boolean = false
+        for (i in 0..2) {
+            statusHaveWishList = true
             your_wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
-            your_wish_description.add("5 days left for expire")
+            your_wish_description.add("${i+1} days left for expire")
             your_wish_timestamps.add("now" + (i+1))
-            if (i % 2== 0) {
+            // if check data peoples responses then
+            if (i % 2 == 0) {
                 for (i in 0..1) {
                     val response1 = arrayOf(
                         arrayOf("Somjit Nimitmray$i", "0987654321", "03/03/2023, 20:24"),
@@ -84,8 +77,14 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
                     )
                     your_wish_people_responses.add(response1)
                 }
+            } else {
+                your_wish_people_responses.add(null)
             }
         }
+
+
+        if (statusHaveWishList)
+            container_your_wish.visibility = View.VISIBLE
 
 
         listview_yourWish.adapter = CustomListView_YourWish(
@@ -93,6 +92,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
         )
         listview_yourWish.onItemClickListener = this;
         setListViewHeightBasedOnChildren(listview_yourWish)
+
     }
 
 

@@ -7,6 +7,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.CountDownTimer
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
@@ -69,13 +70,13 @@ fun showDialogYourWish(
 
     // Event Area
     listview_responses.setOnItemClickListener { parent, view, position, id ->
+
         val txt_fullname = view.findViewById<TextView>(R.id.your_wish_dialog_listview_fullname)
         val txt_contact = view.findViewById<TextView>(R.id.your_wish_dialog_listview_contact)
         val builder = androidx.appcompat.app.AlertDialog.Builder(Context)
-
         val title = SpannableString("Call \" ${txt_fullname.text} \" ?")
-        title.setSpan(AbsoluteSizeSpan(14, true), 0, title.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
 
+        title.setSpan(AbsoluteSizeSpan(14, true), 0, title.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         builder.setTitle(title)
         builder.setPositiveButton("CALL") { dialog, which ->
             val cleanedPhoneNumber = Helpers().cleanPhoneNumber(txt_contact.text.toString().trim())
@@ -84,7 +85,14 @@ fun showDialogYourWish(
             )
         }
         builder.setNegativeButton("Close") { _, _ -> }
-        builder.create().show()
+
+        object: CountDownTimer(400, 400) {
+            override fun onTick(millisUntilFinished: Long) {}
+            override fun onFinish() {
+                builder.create().show()
+            }
+        }.start()
+
     }
 
     btn_close.setOnClickListener {

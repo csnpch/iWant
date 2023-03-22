@@ -40,6 +40,26 @@ object PermissionUtils {
      *
      * @return true if the app has been granted the location permission, false otherwise
      */
+    fun checkLocationPermission(activity: Activity): Boolean {
+        return if (ContextCompat.checkSelfPermission(
+                activity,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Permission is not granted, request it
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+            false
+        } else {
+            // Permission is already granted
+            true
+        }
+    }
+
+
     fun checkLocationPermission(fragment: Fragment): Boolean {
         return if (ContextCompat.checkSelfPermission(
                 fragment.requireContext(),

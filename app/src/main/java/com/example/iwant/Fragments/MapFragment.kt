@@ -87,6 +87,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         mapView.onLowMemory()
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {}
