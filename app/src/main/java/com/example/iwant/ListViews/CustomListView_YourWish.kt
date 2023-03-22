@@ -14,7 +14,7 @@ class CustomListView_YourWish(
     private val titles: ArrayList<String>,
     private val subtitles: ArrayList<String>,
     private val timestamps: ArrayList<String>,
-    private val status_response: ArrayList<Boolean>
+    private val peoples_responses: ArrayList<Array<Array<String>>?>
 ) : ArrayAdapter<String>(
     context,
     R.layout.item_your_wish_list,
@@ -32,7 +32,7 @@ class CustomListView_YourWish(
         val titleTextView = convertViewVar!!.findViewById<TextView>(R.id.your_wish_txt_title)
         val subtitleTextView = convertViewVar.findViewById<TextView>(R.id.your_wish_txt_subtitle)
         val timestampTextView = convertViewVar.findViewById<TextView>(R.id.your_wish_txt_timestamp)
-        val statusResponse = convertViewVar.findViewById<LinearLayout>(R.id.your_wish_status_someone_responds)
+        val status_responds = convertViewVar.findViewById<LinearLayout>(R.id.your_wish_status_someone_responds)
 
         val title = titles[position]
         titleTextView.text =
@@ -40,10 +40,9 @@ class CustomListView_YourWish(
             else Helpers().subStringLength(title, 42, true)
         subtitleTextView.text = subtitles[position]
         timestampTextView.text = timestamps[position]
-        if (status_response[position])
-            statusResponse.visibility = View.VISIBLE
-        else
-            statusResponse.visibility = View.GONE
+
+        if (peoples_responses[position] != null)
+            status_responds.visibility = View.VISIBLE
 
         return convertViewVar
     }

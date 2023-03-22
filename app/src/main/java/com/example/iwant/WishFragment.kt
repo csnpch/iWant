@@ -8,28 +8,25 @@ import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import com.example.iwant.Helpers.Helpers
 import com.example.iwant.Helpers.setListViewHeightBasedOnChildren
 import com.example.iwant.Dialogs.showDialogWish
+import com.example.iwant.Dialogs.showDialogYourWish
 
 class WishFragment : Fragment(), AdapterView.OnItemClickListener {
-
 
     private lateinit var container_wish: LinearLayout
     private lateinit var container_your_wish: LinearLayout
     private lateinit var listview_wish: ListView
     private lateinit var listview_yourWish: ListView
-    private lateinit var dialogYourWish: AlertDialog
 
     private var your_wish_titles: ArrayList<String> = ArrayList()
-    private var your_wish_subtitles: ArrayList<String> = ArrayList()
+    private var your_wish_description: ArrayList<String> = ArrayList()
     private var your_wish_timestamps: ArrayList<String> = ArrayList()
-    private var your_wish_response: ArrayList<Boolean> = ArrayList()
+    private var your_wish_people_responses: ArrayList<Array<Array<String>>?> = arrayListOf(null)
 
     private var wish_titles: ArrayList<String> = ArrayList()
-    private var wish_subtitles: ArrayList<String> = ArrayList()
+    private var wish_description: ArrayList<String> = ArrayList()
     private var wish_distances: ArrayList<String> = ArrayList()
     private var wish_timestamps: ArrayList<String> = ArrayList()
     private var wish_benefit: ArrayList<String> = ArrayList()
@@ -38,6 +35,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
 
 
     private fun initView(view: View, savedInstanceState: Bundle?): View {
+
         container_wish = view.findViewById(R.id.wish_container_wish)
         container_your_wish = view.findViewById(R.id.wish_container_your_wish)
         listview_wish = view.findViewById(R.id.wish_items_wish)
@@ -50,21 +48,8 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     }
 
 
-    private fun showDialogYourWish() {
-//        val mBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
-//        val mView: View = layoutInflater.inflate(R.layout.dialog_detail_your_wish, null)
-//
-//        mView.findViewById<ImageView>(R.id.your_wish_)
-//            .setOnClickListener {
-//                dialogWish.dismiss()
-//            }
-//
-//        mBuilder.setView(mView)
-//        dialogWish = mBuilder.create()
-    }
-
-
     private fun setDataToYourWishList() {
+
         var statusHaveWishList: Boolean = !false;
 
         if (!statusHaveWishList) {
@@ -74,16 +59,26 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
             container_your_wish.visibility = View.VISIBLE
         }
 
+
         for (i in 0..1) {
-            your_wish_titles.add(
-                Helpers().subStringLength("Title Title Title Title Title Title Title " + (i+1), 42, true)
-            )
-            your_wish_subtitles.add("5 days left for expire")
+            your_wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
+            your_wish_description.add("5 days left for expire")
             your_wish_timestamps.add("now" + (i+1))
-            your_wish_response.add(i % 2 == 0)
+            if (i % 2== 0) {
+                for (i in 0..1) {
+                    val response1 = arrayOf(
+                        arrayOf("Somjit Nimitmray$i", "0987654321", "03/03/2023, 20:24"),
+                        arrayOf("John Doe$i", "0123456789", "03/03/2023, 20:24")
+                    )
+                    your_wish_people_responses.add(response1)
+                }
+            }
         }
 
-        listview_yourWish.adapter = CustomListView_YourWish(requireContext(), your_wish_titles, your_wish_subtitles, your_wish_timestamps, your_wish_response)
+
+        listview_yourWish.adapter = CustomListView_YourWish(
+            requireContext(), your_wish_titles, your_wish_description, your_wish_timestamps, your_wish_people_responses
+        )
         listview_yourWish.onItemClickListener = this;
         setListViewHeightBasedOnChildren(listview_yourWish)
     }
@@ -92,7 +87,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     private fun setDataToWishList() {
         for (i in 0..6) {
             wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
-            wish_subtitles.add("Sub Title Allow Access port when you need something maybe you can")
+            wish_description.add("Sub Title Allow Access port when you need something maybe you can")
             wish_distances.add("0." + (i+1).toString() + " km")
             wish_timestamps.add((i+1).toString() + " hour ago")
             wish_benefit.add("Give a 10 bath")
@@ -100,7 +95,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
             wish_latlog.add(arrayListOf(14.1508167 + (0.1 + i), 101.3611667 + (0.1 + i)))
         }
 
-        listview_wish.adapter = CustomListView_Wish(requireContext(), wish_titles, wish_subtitles, wish_distances, wish_timestamps)
+        listview_wish.adapter = CustomListView_Wish(requireContext(), wish_titles, wish_description, wish_distances, wish_timestamps)
         listview_wish.onItemClickListener = this;
         setListViewHeightBasedOnChildren(listview_wish)
     }
@@ -111,7 +106,16 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
         when(parent?.adapter) {
             listview_yourWish.adapter -> {
 
-                Toast.makeText(requireContext(), "OnClickItem " + position + " on [YourWish]", Toast.LENGTH_SHORT).show();
+                showDialogYourWish(
+                    requireContext(),
+                    requireActivity(),
+                    0,
+                    "Title Title Title 1",
+                    "Sula Sama Description Description Description 1",
+                    "4 DAYS",
+                    4,
+                    your_wish_people_responses[position]
+                )
 
             }
             listview_wish.adapter -> {
@@ -123,7 +127,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
                     wish_titles[position],
                     wish_timestamps[position],
                     wish_distances[position],
-                    wish_subtitles[position],
+                    wish_description[position],
                     wish_benefit[position],
                     wish_contact[position],
                     wish_latlog[position]

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="24dp"
     android:background="@drawable/shape_rounded_dialog"
@@ -37,133 +37,157 @@
 
 
     <LinearLayout
+        android:id="@+id/your_wish_dialog_container_peoples_response"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:layout_marginTop="32dp"
         android:orientation="vertical"
         >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/secondary"
             android:fontFamily="@font/kanit_regular"
             android:letterSpacing="0.06"
             android:text="Peoples response to what you want"
             />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <ListView
+                android:id="@+id/your_wish_dialog_listview_response"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-                <com.google.android.flexbox.FlexboxLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:flexDirection="row"
-                    app:justifyContent="space_between"
-                    >
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/secondary"
-                        android:fontFamily="@font/kanit_regular"
-                        android:letterSpacing="0.06"
-                        android:text="Peoples response to what you want"
-                        android:textSize="12dp"
-                        />
-
-
-                </com.google.android.flexbox.FlexboxLayout>
-
-            </LinearLayout>
-
-        </ListView>
+                />
 
     </LinearLayout>
+
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:flexDirection="row"
+        app:justifyContent="space_between"
+        app:alignItems="center"
+    >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXPIRE : "
+                android:textSize="16dp"
+                android:textColor="@color/very_gray"
+                android:fontFamily="@font/kanit_regular"
+                />
+
+
+            <TextView
+                android:id="@+id/your_wish_dialog_txt_expire_time_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 DAYS LEFT"
+                android:textSize="16dp"
+                android:textColor="@color/danger_2"
+                android:fontFamily="@font/kanit_regular"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/your_wish_dialog_btn_destroy"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:background="@drawable/shape_btn_danger"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            >
+
+            <TextView
+                android:text="DESTROY"
+                android:textColor="@color/white"
+                android:fontFamily="@font/kanit_regular"
+                android:textAlignment="center"
+                android:letterSpacing="0.08"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+
+    </com.google.android.flexbox.FlexboxLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
         android:orientation="vertical"
         >
 
-        <!-- Button Open Navigator -->
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/wish_dialog_btn_open_navigator"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="24dp"
-            android:elevation="6dp"
+        <!-- Button add more days for Expire -->
+        <LinearLayout
+            android:id="@+id/your_wish_dialog_btn_add_more_days_for_expire"
+            android:elevation="2dp"
             android:gravity="center"
             android:background="@drawable/shape_btn_secondary"
-            app:justifyContent="center"
-            app:alignItems="center"
-            >
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/map_pin_solid_white"
-                />
-
-            <TextView
-                android:layout_marginLeft="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:fontFamily="@font/kanit_medium"
-                android:textAlignment="center"
-                android:letterSpacing="0.08"
-                android:textSize="14dp"
-                android:text="OPEN NAVIGATOR DROP WISH"
-                />
-
-        </com.google.android.flexbox.FlexboxLayout>
-
-        <!-- Button Accept To Deliver -->
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/wish_dialog_btn_accept_to_deliver"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:elevation="6dp"
-            android:gravity="center"
-            android:background="@drawable/shape_btn_primary"
-            app:justifyContent="center"
-            app:alignItems="center"
             >
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/people_carry_box_solid"
+            <TextView
+                android:id="@+id/your_wish_dialog_txt_btn_add_more_days_for_expire"
+                android:text="Add 2 more days for expire"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:fontFamily="@font/kanit_regular"
+                android:textAlignment="center"
+                android:letterSpacing="0.08"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 />
+
+        </LinearLayout>
+
+        <!-- Button Close -->
+        <LinearLayout
+            android:id="@+id/your_wish_dialog_btn_close"
+            android:layout_marginTop="8dp"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/shape_btn_nothing"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            >
 
             <TextView
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="CLOSE"
+                android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:fontFamily="@font/kanit_medium"
-                android:textAlignment="center"
                 android:textSize="14dp"
+                android:textAlignment="center"
                 android:letterSpacing="0.08"
-                android:text="ACCEPT TO DELIVER"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 />
 
-        </com.google.android.flexbox.FlexboxLayout>
-
+        </LinearLayout>
 
     </LinearLayout>
-
 
 
 </LinearLayout>

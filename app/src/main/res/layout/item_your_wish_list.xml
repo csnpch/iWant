@@ -10,7 +10,7 @@
         android:id="@+id/your_wish_status_someone_responds"
         android:layout_width="match_parent"
         android:layout_height="34dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_marginBottom="-10dp"
         android:layout_marginHorizontal="4dp"
         android:background="@drawable/shape_item_wish_response"
