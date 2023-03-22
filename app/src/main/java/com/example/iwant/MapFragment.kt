@@ -1,6 +1,7 @@
 package com.example.iwant
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -13,27 +14,36 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.iwant.Helpers.PermissionUtils
 import com.example.iwant.Helpers.getCurrentLocation
+import com.example.iwant.Wish.AddWishActivity
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
 
-    private lateinit var btn_location_choose: FlexboxLayout
     private lateinit var txt_your_location: TextView
+    private lateinit var btn_location_choose: FlexboxLayout
+    private lateinit var btn_floating_action_button: FloatingActionButton
+
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
     private var currentUserLocation = DoubleArray(2)
 
 
     private fun initView(view: View, savedInstanceState: Bundle?): View {
-        btn_location_choose = view.findViewById(R.id.map_btn_location_choose)
         txt_your_location = view.findViewById(R.id.map_txt_your_location)
+        btn_location_choose = view.findViewById(R.id.map_btn_location_choose)
+        btn_floating_action_button = view.findViewById(R.id.map_btn_floating_action_button)
+
+        btn_floating_action_button.setOnClickListener{
+            startActivity(Intent(requireContext(), AddWishActivity::class.java))
+        }
 
         mapView = view.findViewById(R.id.map_googleMapView)
         mapView.onCreate(savedInstanceState)

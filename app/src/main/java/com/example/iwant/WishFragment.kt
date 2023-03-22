@@ -1,5 +1,6 @@
 package com.example.iwant
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,9 @@ import androidx.fragment.app.Fragment
 import com.example.iwant.Helpers.setListViewHeightBasedOnChildren
 import com.example.iwant.Dialogs.showDialogWish
 import com.example.iwant.Dialogs.showDialogYourWish
+import com.example.iwant.Helpers.PermissionUtils
+import com.example.iwant.Wish.AddWishActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WishFragment : Fragment(), AdapterView.OnItemClickListener {
 
@@ -19,6 +23,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     private lateinit var container_your_wish: LinearLayout
     private lateinit var listview_wish: ListView
     private lateinit var listview_yourWish: ListView
+    private lateinit var btn_floating_action_button: FloatingActionButton
 
     private var your_wish_titles: ArrayList<String> = ArrayList()
     private var your_wish_description: ArrayList<String> = ArrayList()
@@ -40,6 +45,11 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
         container_your_wish = view.findViewById(R.id.wish_container_your_wish)
         listview_wish = view.findViewById(R.id.wish_items_wish)
         listview_yourWish = view.findViewById(R.id.wish_items_your_wish)
+        btn_floating_action_button = view.findViewById(R.id.wish_btn_floating_action_button)
+
+        btn_floating_action_button.setOnClickListener{
+            startActivity(Intent(requireContext(), AddWishActivity::class.java))
+        }
 
         this.setDataToYourWishList()
         this.setDataToWishList()
@@ -166,7 +176,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
 
 
     private fun main() {
-
+        PermissionUtils.checkLocationPermission(this@WishFragment);
     }
 
 

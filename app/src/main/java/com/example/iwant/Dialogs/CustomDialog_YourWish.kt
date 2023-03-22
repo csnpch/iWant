@@ -54,7 +54,7 @@ fun showDialogYourWish(
     tmpTitle.setSpan(UnderlineSpan(), 0, tmpTitle.length, 0)
     txt_title.text = tmpTitle
     txt_description.text = Description
-    txt_expire_time_left.text = TimeLeft
+    txt_expire_time_left.text = "$TimeLeft LEFTS"
     txt_btn_add_more_days.text = "Add $UnitDayAddMoreExpire more days for expire"
 
     if (PeopleResponse != null) {
