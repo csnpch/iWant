@@ -1,9 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Wish.AddWishActivity">
+    tools:context=".Wish.AddWishActivity"
+    android:background="@color/background"
+    android:orientation="vertical"
+>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="318dp"
+            android:layout_height="wrap_content"
+            app:flexDirection="row"
+            app:alignItems="flex_end"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semi_bold"
+                android:text="WISH"
+                android:textSize="24dp"
+                android:textColor="@color/primary"
+                android:letterSpacing="0.04"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="4dp"
+                android:fontFamily="@font/kanit_regular"
+                android:text="/ Add"
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                android:letterSpacing="0.04"
+                />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+
+        <!-- Gap -->
+        <LinearLayout
+            android:layout_marginTop="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <TextView
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:text="Pickup location (Choose check)"
+                android:fontFamily="@font/kanit_regular"
+                android:textColor="@color/secondary"
+                android:letterSpacing="0.04"
+                />
+
+            <LinearLayout
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/shape_btn_white"
+                android:elevation="4dp"
+                android:layout_marginBottom="4dp"
+                >
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:flexDirection="row"
+                    app:alignItems="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/location_dot_solid"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="9dp"
+                        android:text="Current location"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/kanit_regular"
+                        android:letterSpacing="0.04"
+                        />
+
+                </com.google.android.flexbox.FlexboxLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <TextView
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:text="Phone"
+                android:fontFamily="@font/kanit_regular"
+                android:textColor="@color/secondary"
+                android:letterSpacing="0.04"
+                />
+
+            <EditText
+                android:id="@+id/profile_edt_phone"
+                android:layout_width="310dp"
+                android:layout_height="40dp"
+                android:enabled="false"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="6dp"
+                android:elevation="4dp"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:background="@drawable/shape_input_text"
+                android:textSize="16dp"
+                android:fontFamily="@font/kanit_regular"
+                android:hint="098XXXXXXX"
+                android:textColor="@color/text_gray"
+                android:letterSpacing="0.06"
+                android:inputType="numberSigned"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <TextView
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:text="Email Address"
+                android:fontFamily="@font/kanit_regular"
+                android:textColor="@color/secondary"
+                android:letterSpacing="0.04"
+                />
+
+            <EditText
+                android:id="@+id/profile_edt_email"
+                android:layout_width="310dp"
+                android:layout_height="40dp"
+                android:enabled="false"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="6dp"
+                android:elevation="4dp"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:background="@drawable/shape_input_text"
+                android:textSize="16dp"
+                android:fontFamily="@font/kanit_regular"
+                android:hint="payat.chankarn@hotmailcom"
+                android:textColor="@color/text_gray"
+                android:letterSpacing="0.06"
+                android:inputType="numberSigned"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/profile_area_btn_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="visible"
+            >
+
+            <LinearLayout
+                android:id="@+id/profile_btn_edit"
+                android:layout_width="310dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/shape_btn_warning"
+                android:gravity="center"
+                android:elevation="4dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EDIT"
+                    android:fontFamily="@font/kanit_regular"
+                    android:textColor="@color/white"
+                    android:letterSpacing="0.04"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/profile_area_btn_onEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            >
+
+            <LinearLayout
+                android:id="@+id/profile_btn_save"
+                android:layout_width="310dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/shape_btn_primary"
+                android:gravity="center"
+                android:elevation="4dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SAVE"
+                    android:fontFamily="@font/kanit_regular"
+                    android:textColor="@color/white"
+                    android:letterSpacing="0.04"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/profile_btn_cancel"
+                android:layout_width="310dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/shape_btn_nothing"
+                android:gravity="center"
+                android:elevation="4dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CANCEL"
+                    android:fontFamily="@font/kanit_regular"
+                    android:textColor="@color/white"
+                    android:letterSpacing="0.04"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

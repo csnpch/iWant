@@ -1,7 +1,11 @@
 package com.example.iwant
 
+import android.graphics.fonts.FontFamily
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.AbsoluteSizeSpan
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -68,6 +72,27 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.appbar_layout)
         this.init()
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(R.anim.slide_left,R.anim.no_change)
+    }
+
+
+    override fun finish() {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        val title = SpannableString("Your need to exit ?")
+        title.setSpan(AbsoluteSizeSpan(14, true), 0, title.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+
+        builder.setTitle(title)
+        builder.setPositiveButton("EXIT") { dialog, which ->
+            super.finish()
+        }
+
+        builder.setNegativeButton("NO") { _, _ -> }
+        builder.create().show()
     }
 
 }

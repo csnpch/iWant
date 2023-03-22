@@ -69,7 +69,6 @@ fun showDialogYourWish(
 
     // Event Area
     listview_responses.setOnItemClickListener { parent, view, position, id ->
-
         val txt_fullname = view.findViewById<TextView>(R.id.your_wish_dialog_listview_fullname)
         val txt_contact = view.findViewById<TextView>(R.id.your_wish_dialog_listview_contact)
         val builder = androidx.appcompat.app.AlertDialog.Builder(Context)
