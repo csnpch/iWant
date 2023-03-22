@@ -1,4 +1,4 @@
-package com.example.iwant
+package com.example.iwant.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-
+import com.example.iwant.R
 
 
 class ProfileFragment : Fragment(), View.OnClickListener {
