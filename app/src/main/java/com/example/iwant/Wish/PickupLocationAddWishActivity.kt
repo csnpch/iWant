@@ -1,17 +1,17 @@
 package com.example.iwant.Wish
 
-import android.graphics.drawable.BitmapDrawable
+
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.example.iwant.Helpers.PermissionUtils
 import com.example.iwant.Helpers.getCurrentLocation
 import com.example.iwant.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -19,21 +19,22 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
-class PickupLocationWishActivity : AppCompatActivity(), OnMapReadyCallback {
+class PickupLocationAddWishActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var pickup_location_btn_confirm_location: LinearLayout
 
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
-    private var currentUserLocation = DoubleArray(2)
-    private var currentChooseLocation = DoubleArray(2)
+    private var latLngChooseLocation = DoubleArray(2)
 
 
     private fun init(savedInstanceState: Bundle?) {
 
         pickup_location_btn_confirm_location = findViewById(R.id.pickup_location_btn_confirm_location)
         pickup_location_btn_confirm_location.setOnClickListener{
-            Toast.makeText(this, "lat = ${currentChooseLocation[0]}, long = ${currentChooseLocation[1]}", Toast.LENGTH_SHORT).show()
+            val returnIntent = Intent()
+            returnIntent.putExtra("latLngChooseLocation", "lat:${latLngChooseLocation[0]},lng:${latLngChooseLocation[1]}")
+            setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
 
@@ -44,32 +45,30 @@ class PickupLocationWishActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-    private fun getUserLocation() {
-        getCurrentLocation(this) { location ->
-            currentUserLocation[0] = location.first
-            currentUserLocation[1] = location.second
+    private fun getLatLngChooseLocationFromAddWish() {
+        // Retrieve the latitude and longitude values from the Intent
+        val latLngString = intent.getStringExtra("latLngChooseLocation")
+        val latLngParts = latLngString!!.split(",")
+        if (latLngParts.isNotEmpty()) {
+            latLngChooseLocation[0] = latLngParts[0].substring(4).toDouble()
+            latLngChooseLocation[1] = latLngParts[1].substring(4).toDouble()
+            Toast.makeText(this, "Data from AddWish: lat = ${latLngChooseLocation[0]}, log = ${latLngChooseLocation[1]}", Toast.LENGTH_SHORT).show()
 
-            val currentLocation = LatLng(currentUserLocation[0], currentUserLocation[1])
-            this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 19f))
-            println("Current Location is $currentLocation")
-            // find name location by latlng if don't have name show lat long value
+        } else {
+            Toast.makeText(this, "Can't get latLng from AddWish", Toast.LENGTH_SHORT).show()
         }
+
     }
 
 
-    private fun setPosPickupLocation() {
 
-        var statusOnUpdate = false
+    override fun onMapReady(googleMap: GoogleMap) {
 
-        // If update
-        if (statusOnUpdate) {
-            // get from old data before update
-            currentChooseLocation[0] = 14.150816666666667
-            currentChooseLocation[1] = 101.36116666666666
+        PermissionUtils.checkLocationPermission(this);
+        this.getLatLngChooseLocationFromAddWish()
 
-            val latlng = LatLng(currentChooseLocation[0],currentChooseLocation[1])
-            this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 19f))
-        }
+        this.googleMap = googleMap
+        this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latLngChooseLocation[0], latLngChooseLocation[1]), 19f))
 
         // Create marker at center of map
         val markerOptions = MarkerOptions()
@@ -81,18 +80,10 @@ class PickupLocationWishActivity : AppCompatActivity(), OnMapReadyCallback {
         this.googleMap.setOnCameraMoveListener {
             val latlng = this.googleMap.cameraPosition.target
             marker?.position = latlng
-            currentChooseLocation[0] = latlng.latitude
-            currentChooseLocation[1] = latlng.longitude
+            latLngChooseLocation[0] = latlng.latitude
+            latLngChooseLocation[1] = latlng.longitude
         }
 
-    }
-
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        this.googleMap = googleMap
-        PermissionUtils.checkLocationPermission(this);
-        this.getUserLocation()
-        this.setPosPickupLocation();
     }
 
     override fun onResume() {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Wish.PickupLocationWishActivity"
+    tools:context=".Wish.PickupLocationAddWishActivity"
 >
 
 
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="-4dp"
-            android:background="@drawable/shape_btn_primary"
+            android:background="@drawable/shape_btn_primary_rect"
             android:gravity="center"
             android:elevation="4dp"
             android:layout_alignParentBottom="true"
@@ -45,7 +45,7 @@
                 android:text="CONFIRM LOCATION"
                 android:fontFamily="@font/kanit_medium"
                 android:textColor="@color/white"
-                android:letterSpacing="0.04"
+                android:letterSpacing="0.06"
                 />
 
         </LinearLayout>

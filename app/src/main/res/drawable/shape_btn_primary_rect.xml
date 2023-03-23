@@ -3,18 +3,13 @@
     <!-- pressed -->
     <item android:state_pressed="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
-            <corners  android:radius="6dp"/>
-<!--            <solid android:color="@color/nothing_hover"></solid>-->
-            <solid android:color="@color/btn_cancel_hover"></solid>
+            <solid android:color="@color/primary_hover"></solid>
         </shape>
     </item>
     <!-- default -->
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
-            <corners  android:radius="6dp"/>
-<!--            <solid android:color="@color/nothing"></solid>-->
-            <solid android:color="@color/btn_cancel"></solid>
+            <solid android:color="@color/primary"></solid>
         </shape>
     </item>
 </selector>
-

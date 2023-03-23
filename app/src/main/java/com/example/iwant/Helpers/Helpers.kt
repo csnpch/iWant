@@ -14,4 +14,5 @@ class Helpers {
         val phoneRegex = Regex("[^\\d+]") // remove character keep digit only
         return phoneRegex.replace(phoneNumber, "")
     }
+
 }
