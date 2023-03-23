@@ -16,6 +16,8 @@ import com.example.iwant.Helpers.getCurrentLocation
 import com.example.iwant.Maps.PickupLocationActivity
 import com.example.iwant.R
 import com.google.android.flexbox.FlexboxLayout
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.LatLng
 
 
 class AddWishActivity : AppCompatActivity(), View.OnClickListener {
@@ -96,8 +98,8 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
             latLngChooseLocation[1] = 101.36116666666666
         } else {
             getCurrentLocation(this) { location ->
-                currentLocation[0] = location.first
-                currentLocation[1] = location.second
+                currentLocation[0] = location.first!!
+                currentLocation[1] = location.second!!
                 latLngChooseLocation[0] = currentLocation[0]
                 latLngChooseLocation[1] = currentLocation[1]
             }
