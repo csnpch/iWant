@@ -9,16 +9,33 @@
     >
 
 
-    <TextView
-        android:id="@+id/your_wish_dialog_txt_title"
+    <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="เนื้อสด สโพกหมู 4kg"
-        android:textSize="16dp"
-        android:textColor="@color/primary"
-        android:letterSpacing="0.04"
-        android:fontFamily="@font/kanit_medium"
-        />
+        app:flexDirection="row"
+        app:justifyContent="space_between"
+        app:alignItems="flex_end"
+    >
+
+        <TextView
+            android:id="@+id/your_wish_dialog_txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="เนื้อสด สโพกหมู 4kg"
+            android:textSize="16dp"
+            android:textColor="@color/primary"
+            android:letterSpacing="0.04"
+            android:fontFamily="@font/kanit_medium"
+            />
+
+        <ImageView
+            android:id="@+id/your_wish_dialog_map_preview"
+            android:layout_width="50dp"
+            android:layout_height="26dp"
+            android:src="@drawable/map_location_dot_solid_gray"
+            />
+
+    </com.google.android.flexbox.FlexboxLayout>
 
 
 
@@ -26,7 +43,7 @@
         android:id="@+id/your_wish_dialog_txt_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="14dp"
         android:textSize="14dp"
         android:textColor="@color/text_gray"
         android:fontFamily="@font/kanit_regular"
@@ -161,31 +178,67 @@
 
         </LinearLayout>
 
-        <!-- Button Close -->
-        <LinearLayout
-            android:id="@+id/your_wish_dialog_btn_close"
-            android:layout_marginTop="8dp"
-            android:elevation="2dp"
-            android:gravity="center"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/shape_btn_nothing"
+        <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            >
+            android:layout_height="wrap_content"
+        >
 
-            <TextView
-                android:text="CLOSE"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:fontFamily="@font/kanit_medium"
-                android:textSize="14dp"
-                android:textAlignment="center"
-                android:letterSpacing="0.08"
+
+            <!-- Button Edit -->
+            <LinearLayout
+                android:id="@+id/your_wish_dialog_btn_edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="40dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="8dp"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:background="@drawable/shape_btn_warning"
+                >
 
-        </LinearLayout>
+                <TextView
+                    android:text="EDIT"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/kanit_regular"
+                    android:textAlignment="center"
+                    android:letterSpacing="0.08"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+
+            <!-- Button Close -->
+            <LinearLayout
+                android:id="@+id/your_wish_dialog_btn_close"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="8dp"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/shape_btn_nothing"
+                >
+
+                <TextView
+                    android:text="CLOSE"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/kanit_medium"
+                    android:textSize="14dp"
+                    android:textAlignment="center"
+                    android:letterSpacing="0.08"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+
+        </com.google.android.flexbox.FlexboxLayout>
 
     </LinearLayout>
 

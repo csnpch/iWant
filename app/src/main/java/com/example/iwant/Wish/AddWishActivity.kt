@@ -13,10 +13,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import com.example.iwant.Helpers.getCurrentLocation
+import com.example.iwant.Map.PickupLocationActivity
 import com.example.iwant.R
 import com.google.android.flexbox.FlexboxLayout
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.model.LatLng
 
 
 class AddWishActivity : AppCompatActivity(), View.OnClickListener {
@@ -24,19 +23,20 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var txt_name_location: TextView
     private lateinit var btn_pickup_location: FlexboxLayout
     private lateinit var txt_title: TextView
-    private lateinit var txt_desciption: TextView
+    private lateinit var txt_description: TextView
     private lateinit var txt_benefit: TextView
     private lateinit var txt_contact: TextView
     private lateinit var btn_create_wish: LinearLayout
     private lateinit var btn_cancel: LinearLayout
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
+    private var currentLocation = DoubleArray(2)
     private var latLngChooseLocation = DoubleArray(2)
 
 
     private fun init() {
 
         txt_title = findViewById(R.id.add_wish_txt_title)
-        txt_desciption = findViewById(R.id.add_wish_txt_description)
+        txt_description = findViewById(R.id.add_wish_txt_description)
         txt_benefit = findViewById(R.id.add_wish_txt_benefit)
         txt_contact = findViewById(R.id.add_wish_txt_contact)
 
@@ -55,6 +55,17 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
+    private fun showPickupLocationName() {
+        // Check if view only not move location
+        if (currentLocation[0] == latLngChooseLocation[0] && currentLocation[1] == latLngChooseLocation[1]) {
+            txt_name_location.text = "Current location"
+            return;
+        }
+
+        txt_name_location.text = "${latLngChooseLocation[0]}, ${latLngChooseLocation[1]}"
+    }
+
+
     private fun receiveValueFromPickupLocation() {
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -65,6 +76,7 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
                     if (latLngParts.isNotEmpty()) {
                         latLngChooseLocation[0] = latLngParts[0].substring(4).toDouble()
                         latLngChooseLocation[1] = latLngParts[1].substring(4).toDouble()
+                        this.showPickupLocationName()
                         Toast.makeText(this, "AddWish: lat = ${latLngChooseLocation[0]}, log = ${latLngChooseLocation[1]}", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this, "Can't get latLng from pickupLocation", Toast.LENGTH_SHORT).show()
@@ -84,8 +96,10 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
             latLngChooseLocation[1] = 101.36116666666666
         } else {
             getCurrentLocation(this) { location ->
-                latLngChooseLocation[0] = location.first
-                latLngChooseLocation[1] = location.second
+                currentLocation[0] = location.first
+                currentLocation[1] = location.second
+                latLngChooseLocation[0] = currentLocation[0]
+                latLngChooseLocation[1] = currentLocation[1]
             }
         }
 
@@ -97,7 +111,7 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
         when (v?.id) {
 
             btn_pickup_location.id -> {
-                val intent = Intent(this, PickupLocationAddWishActivity::class.java)
+                val intent = Intent(this, PickupLocationActivity::class.java)
                 intent.putExtra("latLngChooseLocation", "lat:${latLngChooseLocation[0]},lng:${latLngChooseLocation[1]}")
                 activityResultLauncher.launch(intent)
                 overridePendingTransition(R.anim.slide_left,R.anim.no_change)

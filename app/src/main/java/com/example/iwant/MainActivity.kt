@@ -75,12 +75,6 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
     }
 
 
-    override fun onPause() {
-        super.onPause()
-        overridePendingTransition(R.anim.slide_left,R.anim.no_change)
-    }
-
-
     override fun finish() {
         val builder = androidx.appcompat.app.AlertDialog.Builder(this)
         val title = SpannableString("Your need to exit ?")

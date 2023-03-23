@@ -16,12 +16,15 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.iwant.CustomListView_DialogResponse
 import com.example.iwant.Helpers.Helpers
+import com.example.iwant.Map.MapViewActivity
+import com.example.iwant.Map.PickupLocationActivity
 import java.sql.Time
 
 @SuppressLint("MissingInflatedId")
@@ -31,13 +34,17 @@ fun showDialogYourWish(
     Index: Int, Title: String,
     Description: String, TimeLeft: String,
     UnitDayAddMoreExpire: Int,
-    PeopleResponse: Array<Array<String>>?
+    PeopleResponse: Array<Array<String>>?,
+    LatLng: ArrayList<Double>
 ) {
     var dialogYourWish: AlertDialog? = null // create local variable to store dialog instance
 
     val displayMetrics = DisplayMetrics()
     val mBuilder: AlertDialog.Builder = AlertDialog.Builder(Context, R.style.CustomAlertDialog)
     val mView: View = LayoutInflater.from(Context).inflate(R.layout.dialog_detail_your_wish, null)
+
+    val img_btn_map_icon = mView.findViewById<ImageView>(R.id.your_wish_dialog_map_preview)
+    val btn_edit = mView.findViewById<LinearLayout>(R.id.your_wish_dialog_btn_edit)
 
     val txt_title = mView.findViewById<TextView>(R.id.your_wish_dialog_txt_title)
     val txt_description = mView.findViewById<TextView>(R.id.your_wish_dialog_txt_description)
@@ -94,6 +101,20 @@ fun showDialogYourWish(
         }.start()
 
     }
+
+
+    img_btn_map_icon.setOnClickListener {
+        val intent = Intent(Context, MapViewActivity::class.java)
+        intent.putExtra("LatLng", "lat:${LatLng[0]},lng:${LatLng[1]}")
+        Activity.startActivity(intent)
+        Activity.overridePendingTransition(R.anim.no_change,R.anim.no_change)
+    }
+
+
+    btn_edit.setOnClickListener {
+        Toast.makeText(Context, "On Click Edit $Index", Toast.LENGTH_SHORT).show()
+    }
+
 
     btn_close.setOnClickListener {
         dialogYourWish?.dismiss()

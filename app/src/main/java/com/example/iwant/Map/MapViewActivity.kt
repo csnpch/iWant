@@ -1,5 +1,4 @@
-package com.example.iwant.Wish
-
+package com.example.iwant.Map
 
 import android.app.Activity
 import android.content.Intent
@@ -8,7 +7,6 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.iwant.Helpers.PermissionUtils
-import com.example.iwant.Helpers.getCurrentLocation
 import com.example.iwant.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,10 +16,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
+class MapViewActivity : AppCompatActivity(), OnMapReadyCallback {
 
-class PickupLocationAddWishActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private lateinit var pickup_location_btn_confirm_location: LinearLayout
+    private lateinit var btn_close: LinearLayout
 
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
@@ -30,15 +28,12 @@ class PickupLocationAddWishActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun init(savedInstanceState: Bundle?) {
 
-        pickup_location_btn_confirm_location = findViewById(R.id.pickup_location_btn_confirm_location)
-        pickup_location_btn_confirm_location.setOnClickListener{
-            val returnIntent = Intent()
-            returnIntent.putExtra("latLngChooseLocation", "lat:${latLngChooseLocation[0]},lng:${latLngChooseLocation[1]}")
-            setResult(Activity.RESULT_OK, returnIntent)
+        btn_close = findViewById(R.id.mapview_btn_close)
+        btn_close.setOnClickListener{
             finish()
         }
 
-        mapView = findViewById(R.id.pickup_location_googleMapView)
+        mapView = findViewById(R.id.mapview_googleMapView)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
@@ -47,15 +42,13 @@ class PickupLocationAddWishActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun getLatLngChooseLocationFromAddWish() {
         // Retrieve the latitude and longitude values from the Intent
-        val latLngString = intent.getStringExtra("latLngChooseLocation")
+        val latLngString = intent.getStringExtra("LatLng")
         val latLngParts = latLngString!!.split(",")
         if (latLngParts.isNotEmpty()) {
             latLngChooseLocation[0] = latLngParts[0].substring(4).toDouble()
             latLngChooseLocation[1] = latLngParts[1].substring(4).toDouble()
-            Toast.makeText(this, "Data from AddWish: lat = ${latLngChooseLocation[0]}, log = ${latLngChooseLocation[1]}", Toast.LENGTH_SHORT).show()
-
         } else {
-            Toast.makeText(this, "Can't get latLng from AddWish", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Can't get latLng from Previous Activity", Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -68,21 +61,13 @@ class PickupLocationAddWishActivity : AppCompatActivity(), OnMapReadyCallback {
         this.getLatLngChooseLocationFromAddWish()
 
         this.googleMap = googleMap
-        this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latLngChooseLocation[0], latLngChooseLocation[1]), 19f))
+        this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latLngChooseLocation[0], latLngChooseLocation[1]), 17f))
 
         // Create marker at center of map
         val markerOptions = MarkerOptions()
             .position(this.googleMap.cameraPosition.target)
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-        val marker = this.googleMap.addMarker(markerOptions)
-
-        // Update marker position as map moves
-        this.googleMap.setOnCameraMoveListener {
-            val latlng = this.googleMap.cameraPosition.target
-            marker?.position = latlng
-            latLngChooseLocation[0] = latlng.latitude
-            latLngChooseLocation[1] = latlng.longitude
-        }
+        this.googleMap.addMarker(markerOptions)
 
     }
 
@@ -109,11 +94,10 @@ class PickupLocationAddWishActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pickup_location_wish)
+        setContentView(R.layout.activity_map_view)
 
         supportActionBar?.hide()
         this.init(savedInstanceState)
     }
-
 
 }
