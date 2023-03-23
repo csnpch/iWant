@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.example.iwant.Helpers.PermissionUtils
 import com.example.iwant.Helpers.getCurrentLocation
 import com.example.iwant.R
@@ -39,6 +40,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         btn_floating_action_button.setOnClickListener{
             startActivity(Intent(requireContext(), AddWishActivity::class.java))
+            requireActivity().overridePendingTransition(R.anim.slide_left,R.anim.no_change)
         }
 
         mapView = view.findViewById(R.id.map_googleMapView)
@@ -51,12 +53,13 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     private fun getUserLocation() {
         getCurrentLocation(this) { location ->
-            currentUserLocation[0] = location.first
-            currentUserLocation[1] = location.second
+            currentUserLocation[0] = location.first!!
+            currentUserLocation[1] = location.second!!
+            println("Current Location is ${currentUserLocation[0]}:${currentUserLocation[1]}")
 
+            // before get current user location next move camera to location
             val currentLocation = LatLng(currentUserLocation[0], currentUserLocation[1])
             this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f))
-            println("Current Location is $currentLocation")
         }
     }
 

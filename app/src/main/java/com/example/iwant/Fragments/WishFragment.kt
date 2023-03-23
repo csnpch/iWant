@@ -31,6 +31,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     private var your_wish_description: ArrayList<String> = ArrayList()
     private var your_wish_timestamps: ArrayList<String> = ArrayList()
     private var your_wish_people_responses: ArrayList<Array<Array<String>>?> = arrayListOf(null)
+    private var your_wish_latlng: ArrayList<ArrayList<Double>> = ArrayList()
 
     private var wish_titles: ArrayList<String> = ArrayList()
     private var wish_description: ArrayList<String> = ArrayList()
@@ -38,7 +39,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     private var wish_timestamps: ArrayList<String> = ArrayList()
     private var wish_benefit: ArrayList<String> = ArrayList()
     private var wish_contact: ArrayList<String> = ArrayList()
-    private var wish_latlog: ArrayList<ArrayList<Double>> = ArrayList()
+    private var wish_latlng: ArrayList<ArrayList<Double>> = ArrayList()
 
 
     private fun initView(view: View, savedInstanceState: Bundle?): View {
@@ -51,6 +52,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
 
         btn_floating_action_button.setOnClickListener{
             startActivity(Intent(requireContext(), AddWishActivity::class.java))
+            requireActivity().overridePendingTransition(R.anim.slide_left,R.anim.no_change)
         }
 
         this.setDataToYourWishList()
@@ -63,11 +65,12 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     private fun setDataToYourWishList() {
 
         var statusHaveWishList: Boolean = false
-        for (i in 0..2) {
+        for (i in 0..1) {
             statusHaveWishList = true
             your_wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
             your_wish_description.add("${i+1} days left for expire")
             your_wish_timestamps.add("now" + (i+1))
+            your_wish_latlng.add(arrayListOf(14.1508167 + (0.1 + i), 101.3611667 + (0.1 + i)))
             // if check data peoples responses then
             if (i % 2 == 0) {
                 for (i in 0..1) {
@@ -104,7 +107,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
             wish_timestamps.add((i+1).toString() + " hour ago")
             wish_benefit.add("Give a 10 bath")
             wish_contact.add("098765432" + (i+1).toString())
-            wish_latlog.add(arrayListOf(14.1508167 + (0.1 + i), 101.3611667 + (0.1 + i)))
+            wish_latlng.add(arrayListOf(14.1508167 + (0.1 + i), 101.3611667 + (0.1 + i)))
         }
 
         listview_wish.adapter = CustomListView_Wish(requireContext(), wish_titles, wish_description, wish_distances, wish_timestamps)
@@ -121,12 +124,13 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
                 showDialogYourWish(
                     requireContext(),
                     requireActivity(),
-                    0,
+                    position,
                     "Title Title Title 1",
                     "Sula Sama Description Description Description 1",
                     "4 DAYS",
                     4,
-                    your_wish_people_responses[position]
+                    your_wish_people_responses[position],
+                    your_wish_latlng[position]
                 )
 
             }
@@ -142,7 +146,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
                     wish_description[position],
                     wish_benefit[position],
                     wish_contact[position],
-                    wish_latlog[position]
+                    wish_latlng[position]
                 )
 
             }

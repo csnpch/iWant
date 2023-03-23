@@ -1,17 +1,15 @@
 package com.example.iwant.Helpers
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Looper
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.*
-import java.util.concurrent.TimeUnit
 
-private const val INTERVAL: Long = 10000
-private const val FASTEST_INTERVAL: Long = 8000
+private const val INTERVAL: Long = 2000
+private const val FASTEST_INTERVAL: Long = 240000
 
 fun getCurrentLocation(fragment: Fragment, onSuccess: (Pair<Double, Double>) -> Unit) {
     // Create a location request

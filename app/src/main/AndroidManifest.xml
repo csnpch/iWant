@@ -20,7 +20,14 @@
         android:theme="@style/Theme.IWant"
         tools:targetApi="31">
         <activity
-            android:name=".Wish.PickupLocationAddWishActivity"
+            android:name=".Map.MapViewActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Map.PickupLocationActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
