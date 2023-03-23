@@ -20,21 +20,21 @@
         android:theme="@style/Theme.IWant"
         tools:targetApi="31">
         <activity
-            android:name=".Map.MapViewActivity"
+            android:name=".Maps.MapViewActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Map.PickupLocationActivity"
+            android:name=".Maps.PickupLocationActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Wish.AddWishActivity"
+            android:name=".Wishs.AddWishActivity"
             android:exported="false"
             android:screenOrientation="portrait">
             <meta-data
@@ -46,7 +46,7 @@
             android:value="AIzaSyDqmAsr4iXa9cDBnTB5r-GjeURHT_ZYcJw" />
 
         <activity
-            android:name=".Auth.TermsActivity"
+            android:name=".Auths.TermsActivity"
             android:exported="false"
             android:screenOrientation="portrait">
             <meta-data
@@ -54,7 +54,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Auth.AuthActivity"
+            android:name=".Auths.AuthActivity"
             android:exported="false"
             android:screenOrientation="portrait">
             <meta-data

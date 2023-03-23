@@ -1,4 +1,4 @@
-package com.example.iwant.Wish
+package com.example.iwant.Wishs
 
 import android.app.Activity
 import android.content.Intent
@@ -13,7 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import com.example.iwant.Helpers.getCurrentLocation
-import com.example.iwant.Map.PickupLocationActivity
+import com.example.iwant.Maps.PickupLocationActivity
 import com.example.iwant.R
 import com.google.android.flexbox.FlexboxLayout
 

@@ -8,7 +8,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.*
 
-private const val INTERVAL: Long = 2000
+private const val INTERVAL: Long = 1000
 private const val FASTEST_INTERVAL: Long = 240000
 
 fun getCurrentLocation(fragment: Fragment, onSuccess: (Pair<Double, Double>) -> Unit) {

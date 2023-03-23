@@ -23,9 +23,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.iwant.CustomListView_DialogResponse
 import com.example.iwant.Helpers.Helpers
-import com.example.iwant.Map.MapViewActivity
-import com.example.iwant.Map.PickupLocationActivity
-import java.sql.Time
+import com.example.iwant.Maps.MapViewActivity
 
 @SuppressLint("MissingInflatedId")
 fun showDialogYourWish(

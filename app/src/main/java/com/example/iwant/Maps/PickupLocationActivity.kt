@@ -1,4 +1,4 @@
-package com.example.iwant.Map
+package com.example.iwant.Maps
 
 
 import android.app.Activity

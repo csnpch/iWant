@@ -1,4 +1,4 @@
-package com.example.iwant.Auth
+package com.example.iwant.Auths
 
 import android.content.Intent
 import android.content.res.ColorStateList

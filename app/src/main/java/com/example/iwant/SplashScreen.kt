@@ -3,10 +3,9 @@ package com.example.iwant
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
-import com.example.iwant.Auth.AuthActivity
+import com.example.iwant.Auths.AuthActivity
 
 class SplashScreen : AppCompatActivity() {
 

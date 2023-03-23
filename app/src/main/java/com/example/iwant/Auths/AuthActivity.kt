@@ -1,10 +1,9 @@
-package com.example.iwant.Auth
+package com.example.iwant.Auths
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.iwant.MainActivity
 import com.example.iwant.R
 import com.google.android.flexbox.FlexboxLayout
 

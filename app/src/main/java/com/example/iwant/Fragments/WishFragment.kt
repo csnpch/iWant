@@ -16,7 +16,7 @@ import com.example.iwant.Dialogs.showDialogWish
 import com.example.iwant.Dialogs.showDialogYourWish
 import com.example.iwant.Helpers.PermissionUtils
 import com.example.iwant.R
-import com.example.iwant.Wish.AddWishActivity
+import com.example.iwant.Wishs.AddWishActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WishFragment : Fragment(), AdapterView.OnItemClickListener {
