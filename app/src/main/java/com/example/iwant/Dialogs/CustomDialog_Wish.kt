@@ -23,6 +23,7 @@ fun showDialogWish(
     Context: Context,
     Activity: Activity,
     Index: Int,
+    Id: String,
     Title: String,
     When: String,
     Distance: String,

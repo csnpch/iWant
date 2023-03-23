@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
     <!-- Required permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- permissions for Google Maps SDK -->
@@ -18,25 +18,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IWant"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".Wishs.EditWishActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Maps.MapViewActivity"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Maps.PickupLocationActivity"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Wishs.CRU_WishActivity"
+            android:name=".Wishs.AddWishActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -48,7 +55,7 @@
         <activity
             android:name=".Auths.TermsActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -56,7 +63,7 @@
         <activity
             android:name=".Auths.AuthActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -64,7 +71,7 @@
         <activity
             android:name=".SplashScreen"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -78,7 +85,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

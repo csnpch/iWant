@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Wishs.CRU_WishActivity"
+    tools:context=".Wishs.AddWishActivity"
     android:background="@color/background"
     android:orientation="vertical"
 >
@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginLeft="6dp"
                     android:fontFamily="@font/kanit_regular"
                     android:text="/ Add"
                     android:textSize="16dp"

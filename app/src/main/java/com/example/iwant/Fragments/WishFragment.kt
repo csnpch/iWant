@@ -16,7 +16,7 @@ import com.example.iwant.Dialogs.showDialogWish
 import com.example.iwant.Dialogs.showDialogYourWish
 import com.example.iwant.Helpers.PermissionUtils
 import com.example.iwant.R
-import com.example.iwant.Wishs.CRU_WishActivity
+import com.example.iwant.Wishs.AddWishActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WishFragment : Fragment(), AdapterView.OnItemClickListener {
@@ -27,6 +27,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     private lateinit var listview_yourWish: ListView
     private lateinit var btn_floating_action_button: FloatingActionButton
 
+    private var your_wish_ids: ArrayList<String> = ArrayList()
     private var your_wish_titles: ArrayList<String> = ArrayList()
     private var your_wish_description: ArrayList<String> = ArrayList()
     private var your_wish_time_for_expire: ArrayList<String> = ArrayList()
@@ -34,6 +35,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     private var your_wish_people_responses: ArrayList<Array<Array<String>>?> = arrayListOf(null)
     private var your_wish_latlng: ArrayList<ArrayList<Double>> = ArrayList()
 
+    private var wish_ids: ArrayList<String> = ArrayList()
     private var wish_titles: ArrayList<String> = ArrayList()
     private var wish_description: ArrayList<String> = ArrayList()
     private var wish_distances: ArrayList<String> = ArrayList()
@@ -54,7 +56,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
         btn_floating_action_button = view.findViewById(R.id.wish_btn_floating_action_button)
 
         btn_floating_action_button.setOnClickListener{
-            startActivity(Intent(requireContext(), CRU_WishActivity::class.java))
+            startActivity(Intent(requireContext(), AddWishActivity::class.java))
             requireActivity().overridePendingTransition(R.anim.slide_left,R.anim.no_change)
         }
 
@@ -70,6 +72,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
         var statusHaveWishList: Boolean = false
         for (i in 0..1) {
             statusHaveWishList = true
+            your_wish_ids.add("0$i");
             your_wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
             your_wish_description.add("Sula Sama Description Description 1")
             your_wish_time_for_expire.add("${i+1} days") // dialog += "left for expire"
@@ -95,7 +98,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
 
 
         listview_yourWish.adapter = CustomListView_YourWish(
-            requireContext(), your_wish_titles, your_wish_time_for_expire, your_wish_timestamps, your_wish_people_responses
+            requireContext(), your_wish_ids, your_wish_titles, your_wish_time_for_expire, your_wish_timestamps, your_wish_people_responses
         )
         listview_yourWish.onItemClickListener = this;
         setListViewHeightBasedOnChildren(listview_yourWish)
@@ -105,6 +108,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     // Wish public
     private fun setDataToWishList() {
         for (i in 0..6) {
+            wish_ids.add("0$i")
             wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
             wish_description.add("Sub Title Allow Access port when you need something maybe you can")
             wish_distances.add("0." + (i+1).toString() + " km")
@@ -114,7 +118,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
             wish_latlng.add(arrayListOf(14.1508167 + (0.1 + i), 101.3611667 + (0.1 + i)))
         }
 
-        listview_wish.adapter = CustomListView_Wish(requireContext(), wish_titles, wish_description, wish_distances, wish_timestamps)
+        listview_wish.adapter = CustomListView_Wish(requireContext(), wish_ids, wish_titles, wish_description, wish_distances, wish_timestamps)
         listview_wish.onItemClickListener = this;
         setListViewHeightBasedOnChildren(listview_wish)
     }
@@ -129,6 +133,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
                     requireContext(),
                     requireActivity(),
                     position,
+                    your_wish_ids[position],
                     your_wish_titles[position],
                     your_wish_description[position],
                     your_wish_time_for_expire[position],
@@ -144,6 +149,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
                     requireContext(),
                     requireActivity(),
                     position,
+                    wish_ids[position],
                     wish_titles[position],
                     wish_timestamps[position],
                     wish_distances[position],

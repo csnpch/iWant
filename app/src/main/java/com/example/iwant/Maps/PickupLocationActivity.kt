@@ -51,7 +51,7 @@ class PickupLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         if (latLngParts.isNotEmpty()) {
             latLngChooseLocation[0] = latLngParts[0].substring(4).toDouble()
             latLngChooseLocation[1] = latLngParts[1].substring(4).toDouble()
-            Toast.makeText(this, "Data from AddWish: lat = ${latLngChooseLocation[0]}, log = ${latLngChooseLocation[1]}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Data from Previous Activity: lat = ${latLngChooseLocation[0]}, log = ${latLngChooseLocation[1]}", Toast.LENGTH_SHORT).show()
 
         } else {
             Toast.makeText(this, "Can't get latLng from AddWish", Toast.LENGTH_SHORT).show()

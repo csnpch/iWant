@@ -38,7 +38,7 @@ class MapViewActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-    private fun getLatLngChooseLocationFromAddWish() {
+    private fun getLatLngChooseLocationFromPreviousActivity() {
         // Retrieve the latitude and longitude values from the Intent
         val latLngString = intent.getStringExtra("LatLng")
         val latLngParts = latLngString!!.split(",")
@@ -56,7 +56,7 @@ class MapViewActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
 
         PermissionUtils.checkLocationPermission(this);
-        this.getLatLngChooseLocationFromAddWish()
+        this.getLatLngChooseLocationFromPreviousActivity()
 
         this.googleMap = googleMap
         this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latLngChooseLocation[0], latLngChooseLocation[1]), 17f))

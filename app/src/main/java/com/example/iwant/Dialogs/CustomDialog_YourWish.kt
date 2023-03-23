@@ -24,14 +24,16 @@ import android.widget.Toast
 import com.example.iwant.CustomListView_DialogResponse
 import com.example.iwant.Helpers.Helpers
 import com.example.iwant.Maps.MapViewActivity
-import java.util.Locale
 
 @SuppressLint("MissingInflatedId")
 fun showDialogYourWish(
     Context: Context,
     Activity: Activity,
-    Index: Int, Title: String,
-    Description: String, TimeLeft: String,
+    Index: Int,
+    Id: String,
+    Title: String,
+    Description: String,
+    TimeLeft: String,
     UnitDayAddMoreExpire: Int,
     PeopleResponse: Array<Array<String>>?,
     LatLng: ArrayList<Double>
@@ -74,6 +76,8 @@ fun showDialogYourWish(
         )
     }
 
+
+
     // Event Area
     listview_responses.setOnItemClickListener { parent, view, position, id ->
 
@@ -110,9 +114,12 @@ fun showDialogYourWish(
     }
 
 
-    btn_edit.setOnClickListener {
-        Toast.makeText(Context, "On Click Edit $Index", Toast.LENGTH_SHORT).show()
-    }
+//    btn_edit.setOnClickListener {
+//        val intent = Intent(Activity, EditWishActivity::class.java)
+//        intent.putExtra("latLngChooseLocation", "lat:${LatLng[0]},lng:${LatLng[1]}")
+//        Activity.startActivity(intent)
+//        Activity.overridePendingTransition(R.anim.slide_left,R.anim.no_change)
+//    }
 
 
     btn_close.setOnClickListener {
@@ -126,6 +133,8 @@ fun showDialogYourWish(
     btn_destroy.setOnClickListener {
         Toast.makeText(Context, "On Click Destroy Index = $Index", Toast.LENGTH_SHORT).show()
     }
+
+
 
     mBuilder.setView(mView)
     dialogYourWish = mBuilder.create()

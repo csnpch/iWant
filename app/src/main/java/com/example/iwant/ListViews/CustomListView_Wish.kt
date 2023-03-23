@@ -11,6 +11,7 @@ import com.example.iwant.Helpers.Helpers
 
 class CustomListView_Wish(
     context: Context,
+    private val ids: ArrayList<String>,
     private val titles: ArrayList<String>,
     private val subtitles: ArrayList<String>,
     private val distances: ArrayList<String>,

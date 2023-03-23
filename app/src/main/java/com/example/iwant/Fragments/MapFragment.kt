@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.example.iwant.Helpers.PermissionUtils
 import com.example.iwant.Helpers.getCurrentLocation
 import com.example.iwant.R
-import com.example.iwant.Wishs.CRU_WishActivity
+import com.example.iwant.Wishs.AddWishActivity
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -38,7 +38,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         btn_floating_action_button = view.findViewById(R.id.map_btn_floating_action_button)
 
         btn_floating_action_button.setOnClickListener{
-            startActivity(Intent(requireContext(), CRU_WishActivity::class.java))
+            startActivity(Intent(requireContext(), AddWishActivity::class.java))
             requireActivity().overridePendingTransition(R.anim.slide_left,R.anim.no_change)
         }
 

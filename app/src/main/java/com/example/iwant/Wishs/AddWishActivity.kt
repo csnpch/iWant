@@ -19,7 +19,7 @@ import com.example.iwant.R
 import com.google.android.flexbox.FlexboxLayout
 
 
-class CRU_WishActivity : AppCompatActivity(), View.OnClickListener {
+class AddWishActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var txt_name_location: TextView
     private lateinit var btn_pickup_location: FlexboxLayout
@@ -30,9 +30,10 @@ class CRU_WishActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btn_create_wish: LinearLayout
     private lateinit var btn_cancel: LinearLayout
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
+
     private var currentLocation = DoubleArray(2)
     private var latLngChooseLocation = DoubleArray(2)
-
+    private var statusOnUpdate: Boolean = true
 
     private fun init() {
 
@@ -71,21 +72,26 @@ class CRU_WishActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private fun receiveValueFromPickupLocation() {
+
+        fun receiveLatLng(data: Intent?) {
+            val returnedValueLatLng = data?.getStringExtra("latLngChooseLocation")
+            if (returnedValueLatLng != "") {
+                val latLng = returnedValueLatLng!!.split(",")
+                if (latLng.isNotEmpty()) {
+                    latLngChooseLocation[0] = latLng[0].substring(4).toDouble()
+                    latLngChooseLocation[1] = latLng[1].substring(4).toDouble()
+                    this.showPickupLocationName()
+                    //  Toast.makeText(this, "INTENT: lat = ${latLngChooseLocation[0]}, log = ${latLngChooseLocation[1]}", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Can't get latLng from previous activity", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
-                val returnedValue = data?.getStringExtra("latLngChooseLocation")
-                if (returnedValue != "") {
-                    val latLngParts = returnedValue!!.split(",")
-                    if (latLngParts.isNotEmpty()) {
-                        latLngChooseLocation[0] = latLngParts[0].substring(4).toDouble()
-                        latLngChooseLocation[1] = latLngParts[1].substring(4).toDouble()
-                        this.showPickupLocationName()
-                        Toast.makeText(this, "AddWish: lat = ${latLngChooseLocation[0]}, log = ${latLngChooseLocation[1]}", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "Can't get latLng from pickupLocation", Toast.LENGTH_SHORT).show()
-                    }
-                }
+                receiveLatLng(data)
             }
         }
     }
@@ -93,7 +99,6 @@ class CRU_WishActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun getLatLngLocationDefault() {
 
-        var statusOnUpdate = false
         if (statusOnUpdate) {
             // set default from old data before update
             latLngChooseLocation[0] = 14.150816666666667
