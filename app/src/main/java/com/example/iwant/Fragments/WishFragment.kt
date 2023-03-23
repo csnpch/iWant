@@ -16,7 +16,7 @@ import com.example.iwant.Dialogs.showDialogWish
 import com.example.iwant.Dialogs.showDialogYourWish
 import com.example.iwant.Helpers.PermissionUtils
 import com.example.iwant.R
-import com.example.iwant.Wishs.AddWishActivity
+import com.example.iwant.Wishs.CRU_WishActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WishFragment : Fragment(), AdapterView.OnItemClickListener {
@@ -29,6 +29,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
 
     private var your_wish_titles: ArrayList<String> = ArrayList()
     private var your_wish_description: ArrayList<String> = ArrayList()
+    private var your_wish_time_for_expire: ArrayList<String> = ArrayList()
     private var your_wish_timestamps: ArrayList<String> = ArrayList()
     private var your_wish_people_responses: ArrayList<Array<Array<String>>?> = arrayListOf(null)
     private var your_wish_latlng: ArrayList<ArrayList<Double>> = ArrayList()
@@ -41,6 +42,8 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     private var wish_contact: ArrayList<String> = ArrayList()
     private var wish_latlng: ArrayList<ArrayList<Double>> = ArrayList()
 
+    private var UNIT_DAY_ADD_MORE_EXPIRE: Int = 4
+
 
     private fun initView(view: View, savedInstanceState: Bundle?): View {
 
@@ -51,7 +54,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
         btn_floating_action_button = view.findViewById(R.id.wish_btn_floating_action_button)
 
         btn_floating_action_button.setOnClickListener{
-            startActivity(Intent(requireContext(), AddWishActivity::class.java))
+            startActivity(Intent(requireContext(), CRU_WishActivity::class.java))
             requireActivity().overridePendingTransition(R.anim.slide_left,R.anim.no_change)
         }
 
@@ -61,15 +64,16 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
         return view;
     }
 
-
+    // Your wish
     private fun setDataToYourWishList() {
 
         var statusHaveWishList: Boolean = false
         for (i in 0..1) {
             statusHaveWishList = true
             your_wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
-            your_wish_description.add("${i+1} days left for expire")
-            your_wish_timestamps.add("now" + (i+1))
+            your_wish_description.add("Sula Sama Description Description 1")
+            your_wish_time_for_expire.add("${i+1} days") // dialog += "left for expire"
+            your_wish_timestamps.add("${i+1} min")
             your_wish_latlng.add(arrayListOf(14.1508167 + (0.1 + i), 101.3611667 + (0.1 + i)))
             // if check data peoples responses then
             if (i % 2 == 0) {
@@ -91,14 +95,14 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
 
 
         listview_yourWish.adapter = CustomListView_YourWish(
-            requireContext(), your_wish_titles, your_wish_description, your_wish_timestamps, your_wish_people_responses
+            requireContext(), your_wish_titles, your_wish_time_for_expire, your_wish_timestamps, your_wish_people_responses
         )
         listview_yourWish.onItemClickListener = this;
         setListViewHeightBasedOnChildren(listview_yourWish)
 
     }
 
-
+    // Wish public
     private fun setDataToWishList() {
         for (i in 0..6) {
             wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
@@ -125,10 +129,10 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
                     requireContext(),
                     requireActivity(),
                     position,
-                    "Title Title Title 1",
-                    "Sula Sama Description Description Description 1",
-                    "4 DAYS",
-                    4,
+                    your_wish_titles[position],
+                    your_wish_description[position],
+                    your_wish_time_for_expire[position],
+                    UNIT_DAY_ADD_MORE_EXPIRE,
                     your_wish_people_responses[position],
                     your_wish_latlng[position]
                 )

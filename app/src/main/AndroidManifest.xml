@@ -34,7 +34,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Wishs.AddWishActivity"
+            android:name=".Wishs.CRU_WishActivity"
             android:exported="false"
             android:screenOrientation="portrait">
             <meta-data

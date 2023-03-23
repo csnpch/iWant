@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         app:flexDirection="row"
         app:justifyContent="space_between"
-        app:alignItems="flex_end"
+        app:alignItems="flex_start"
     >
 
         <TextView
@@ -23,9 +23,11 @@
             android:layout_height="wrap_content"
             android:text="เนื้อสด สโพกหมู 4kg"
             android:textSize="16dp"
+            android:layout_marginRight="14dp"
             android:textColor="@color/primary"
             android:letterSpacing="0.04"
             android:fontFamily="@font/kanit_medium"
+            android:justificationMode="inter_word"
             />
 
         <ImageView
@@ -112,6 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2 DAYS LEFT"
+                android:textAllCaps="true"
                 android:textSize="16dp"
                 android:textColor="@color/danger_2"
                 android:fontFamily="@font/kanit_regular"

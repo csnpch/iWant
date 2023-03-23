@@ -24,6 +24,7 @@ import android.widget.Toast
 import com.example.iwant.CustomListView_DialogResponse
 import com.example.iwant.Helpers.Helpers
 import com.example.iwant.Maps.MapViewActivity
+import java.util.Locale
 
 @SuppressLint("MissingInflatedId")
 fun showDialogYourWish(
@@ -60,7 +61,7 @@ fun showDialogYourWish(
     tmpTitle.setSpan(UnderlineSpan(), 0, tmpTitle.length, 0)
     txt_title.text = tmpTitle
     txt_description.text = Description
-    txt_expire_time_left.text = "$TimeLeft LEFTS"
+    txt_expire_time_left.text = "$TimeLeft left"
     txt_btn_add_more_days.text = "Add $UnitDayAddMoreExpire more days for expire"
 
     if (PeopleResponse != null) {

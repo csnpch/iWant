@@ -38,7 +38,7 @@ class CustomListView_YourWish(
         titleTextView.text =
             if (title.length <= 42) title
             else Helpers().subStringLength(title, 42, true)
-        subtitleTextView.text = subtitles[position]
+        subtitleTextView.text = "${subtitles[position]} left for expire"
         timestampTextView.text = timestamps[position]
 
         if (peoples_responses[position] != null)

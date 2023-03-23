@@ -12,15 +12,14 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
+import com.example.iwant.Helpers.Helpers
 import com.example.iwant.Helpers.getCurrentLocation
 import com.example.iwant.Maps.PickupLocationActivity
 import com.example.iwant.R
 import com.google.android.flexbox.FlexboxLayout
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.model.LatLng
 
 
-class AddWishActivity : AppCompatActivity(), View.OnClickListener {
+class CRU_WishActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var txt_name_location: TextView
     private lateinit var btn_pickup_location: FlexboxLayout
@@ -64,7 +63,10 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
             return;
         }
 
-        txt_name_location.text = "${latLngChooseLocation[0]}, ${latLngChooseLocation[1]}"
+        val helpers = Helpers()
+        val strLat = helpers.subStringLength(latLngChooseLocation[0].toString(), 12)
+        val strLng = helpers.subStringLength(latLngChooseLocation[1].toString(), 12)
+        txt_name_location.text = "$strLat, $strLng"
     }
 
 
