@@ -46,11 +46,13 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- Google Maps API key -->
+        </activity>
+
+        <!-- Google Maps API key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyANCSskXy-Yl8iXtPFpUBgVzvhMSXKSRgE" />
-<!--        android:value="AIzaSyDqmAsr4iXa9cDBnTB5r-GjeURHT_ZYcJw" />-->
+            <!--        OLD KEY            "AIzaSyDqmAsr4iXa9cDBnTB5r-GjeURHT_ZYcJw"-->
 
         <activity
             android:name=".Auths.TermsActivity"
