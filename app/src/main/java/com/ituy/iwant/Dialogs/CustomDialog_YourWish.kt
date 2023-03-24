@@ -23,6 +23,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.ituy.iwant.CustomListView_DialogResponse
 import com.ituy.iwant.Helpers.Helpers
+import com.ituy.iwant.Helpers.PermissionUtils
 import com.ituy.iwant.Maps.MapViewActivity
 
 @SuppressLint("MissingInflatedId")
@@ -89,10 +90,16 @@ fun showDialogYourWish(
         title.setSpan(AbsoluteSizeSpan(14, true), 0, title.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         builder.setTitle(title)
         builder.setPositiveButton("CALL") { dialog, which ->
-            val cleanedPhoneNumber = Helpers().cleanPhoneNumber(txt_contact.text.toString().trim())
-            Context.startActivity(
-                Intent(Intent.ACTION_CALL, Uri.parse("tel:$cleanedPhoneNumber"))
-            )
+            if (PermissionUtils.isCallPhonePermissionGranted(Context as Activity)) {
+                // Permission already
+                val cleanedPhoneNumber = Helpers().cleanPhoneNumber(txt_contact.text.toString().trim())
+                Context.startActivity(
+                    Intent(Intent.ACTION_CALL, Uri.parse("tel:$cleanedPhoneNumber"))
+                )
+            } else {
+                // Request permission
+                PermissionUtils.requestCallPhonePermission(Context as Activity)
+            }
         }
         builder.setNegativeButton("Close") { _, _ -> }
 

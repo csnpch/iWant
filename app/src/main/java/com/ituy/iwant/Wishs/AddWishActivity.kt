@@ -32,7 +32,7 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btn_cancel: LinearLayout
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
-    private var currentLocation = DoubleArray(2)
+    private var currentUserLocation = DoubleArray(2)
     private var latLngChooseLocation = DoubleArray(2)
     private var statusOnUpdate: Boolean = true
 
@@ -83,7 +83,7 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun showPickupLocationName() {
         // Check if view only not move location
-        if (currentLocation[0] == latLngChooseLocation[0] && currentLocation[1] == latLngChooseLocation[1]) {
+        if (currentUserLocation[0] == latLngChooseLocation[0] && currentUserLocation[1] == latLngChooseLocation[1]) {
             txt_name_location.text = "Current location"
             return;
         }
@@ -129,10 +129,10 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
             latLngChooseLocation[1] = 101.36116666666666
         } else {
             getCurrentLocation(this) { location ->
-                currentLocation[0] = location.first!!
-                currentLocation[1] = location.second!!
-                latLngChooseLocation[0] = currentLocation[0]
-                latLngChooseLocation[1] = currentLocation[1]
+                currentUserLocation[0] = location.first!!
+                currentUserLocation[1] = location.second!!
+                latLngChooseLocation[0] = currentUserLocation[0]
+                latLngChooseLocation[1] = currentUserLocation[1]
             }
         }
 

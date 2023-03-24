@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.ituy.iwant.Helpers.Validates
 import com.ituy.iwant.R
+import com.ituy.iwant.MainActivity.Companion.myGlobalVar
 
 
 class ProfileFragment : Fragment(), View.OnClickListener {
@@ -44,6 +45,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
 
     private fun initView(view: View): View {
+
+        Toast.makeText(requireContext(), myGlobalVar, Toast.LENGTH_SHORT).show()
 
         // Form Section
         edt_fullname = view.findViewById(R.id.profile_edt_fullname)
@@ -116,6 +119,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         }
 
         if (statusOnEdit) {
+            myGlobalVar = "1234"
+            Toast.makeText(requireContext(), myGlobalVar, Toast.LENGTH_SHORT).show()
+
             setEditTextVisibility(true)
             area_signout.visibility = View.GONE
             area_btn_default.visibility = View.GONE

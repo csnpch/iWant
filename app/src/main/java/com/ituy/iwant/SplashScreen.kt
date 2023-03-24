@@ -16,7 +16,7 @@ class SplashScreen : AppCompatActivity() {
     private fun validateAuthentication() {
 
         // For dev need skip you can set statusAuth to true
-        var statusAuth: Boolean = !true
+        var statusAuth: Boolean = true
         when (statusAuth) {
             true -> {
                 // Go to Home (Wish Page)

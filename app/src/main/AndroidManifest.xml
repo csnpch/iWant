@@ -49,7 +49,8 @@
         </activity> <!-- Google Maps API key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDqmAsr4iXa9cDBnTB5r-GjeURHT_ZYcJw" />
+            android:value="AIzaSyANCSskXy-Yl8iXtPFpUBgVzvhMSXKSRgE" />
+<!--        android:value="AIzaSyDqmAsr4iXa9cDBnTB5r-GjeURHT_ZYcJw" />-->
 
         <activity
             android:name=".Auths.TermsActivity"

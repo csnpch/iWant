@@ -1,14 +1,15 @@
 package com.ituy.iwant
 
 import android.content.Context
-import android.graphics.fonts.FontFamily
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -18,16 +19,35 @@ import com.ituy.iwant.Fragments.ProfileFragment
 import com.ituy.iwant.Fragments.WishFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.ituy.iwant.Helpers.getCurrentLocation
 import nl.joery.animatedbottombar.AnimatedBottomBar
 
 
 class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBar.OnTabSelectListener {
 
+
     private lateinit var navigation_bar: AnimatedBottomBar
     private lateinit var fragmentManager: FragmentManager
+    private var currentUserLocation = DoubleArray(2)
+
+
+    companion object {
+        lateinit var myGlobalVar: String
+    }
+
+
+    private fun getLatLngLocationDefault() {
+        getCurrentLocation(this) { location ->
+            currentUserLocation[0] = location.first!!
+            currentUserLocation[1] = location.second!!
+            Toast.makeText(this, "${currentUserLocation[0]}:${currentUserLocation[1]}", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
     private fun init() {
+        myGlobalVar = "My Global Variable : Value1"
+
         navigation_bar = findViewById(R.id.navigation_bar)
         navigation_bar.setOnTabSelectListener(this@MainActivity)
 
@@ -90,6 +110,7 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.shape_rounded_appbar))
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.appbar_layout)
+//        this.getLatLngLocationDefault()
         this.init()
     }
 

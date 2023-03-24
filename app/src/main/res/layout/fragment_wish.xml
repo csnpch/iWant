@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,6 +21,7 @@
             >
 
             <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/wish_btn_location_choose_info"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_margin="4dp"

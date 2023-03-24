@@ -16,7 +16,7 @@
         >
 
          <com.google.android.flexbox.FlexboxLayout
-             android:id="@+id/map_btn_location_choose"
+             android:id="@+id/map_btn_location_choose_info"
              android:layout_width="match_parent"
              android:layout_height="52dp"
              android:layout_margin="4dp"

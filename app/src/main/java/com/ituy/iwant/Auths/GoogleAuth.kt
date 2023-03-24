@@ -12,10 +12,10 @@ class GoogleAuth {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
 
             return try {
-                System.out.println(task.getResult().email)
+                println(task.getResult().email)
                 "SUCCESS"
             } catch (e: Exception) {
-                System.out.println(e)
+                println(e)
                 "Google Login Error"
             }
         }

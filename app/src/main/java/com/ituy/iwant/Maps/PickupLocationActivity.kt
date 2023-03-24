@@ -16,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.ituy.iwant.Helpers.getCurrentLocation
 
 
 class PickupLocationActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -44,27 +45,34 @@ class PickupLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-    private fun getLatLngChooseLocationFromAddWish() {
+    private fun getLatLngChooseLocationFromPreviousContext() {
         // Retrieve the latitude and longitude values from the Intent
         val latLngString = intent.getStringExtra("latLngChooseLocation")
         val latLngParts = latLngString!!.split(",")
         if (latLngParts.isNotEmpty()) {
             latLngChooseLocation[0] = latLngParts[0].substring(4).toDouble()
             latLngChooseLocation[1] = latLngParts[1].substring(4).toDouble()
-            Toast.makeText(this, "Data from Previous Activity: lat = ${latLngChooseLocation[0]}, log = ${latLngChooseLocation[1]}", Toast.LENGTH_SHORT).show()
-
+            if (latLngChooseLocation[0] == 0.0 || latLngChooseLocation[1] == 0.0) {
+                getCurrentLocation(this) { location ->
+                    latLngChooseLocation[0] = location.first!!
+                    latLngChooseLocation[1] = location.second!!
+                    // before get current user location next move camera to location
+                    val currentLocation = LatLng(latLngChooseLocation[0], latLngChooseLocation[1])
+                    this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f))
+                }
+            }
+            Toast.makeText(this, "latLngChooseLocation start: lat = ${latLngChooseLocation[0]}, log = ${latLngChooseLocation[1]}", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, "Can't get latLng from AddWish", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Can't get latLng from Previous Context", Toast.LENGTH_SHORT).show()
         }
 
     }
 
 
-
     override fun onMapReady(googleMap: GoogleMap) {
 
         PermissionUtils.checkLocationPermission(this);
-        this.getLatLngChooseLocationFromAddWish()
+        this.getLatLngChooseLocationFromPreviousContext()
 
         this.googleMap = googleMap
         this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latLngChooseLocation[0], latLngChooseLocation[1]), 19f))

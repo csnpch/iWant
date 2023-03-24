@@ -1,14 +1,18 @@
 package com.ituy.iwant.Fragments
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.LinearLayout
-import android.widget.ListView
+import android.widget.*
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.google.android.flexbox.FlexboxLayout
 import com.ituy.iwant.CustomListView_Wish
 import com.ituy.iwant.CustomListView_YourWish
 import com.ituy.iwant.Helpers.setListViewHeightBasedOnChildren
@@ -18,14 +22,20 @@ import com.ituy.iwant.Helpers.PermissionUtils
 import com.ituy.iwant.R
 import com.ituy.iwant.Wishs.AddWishActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.ituy.iwant.Helpers.Helpers
+import com.ituy.iwant.Helpers.getCurrentLocation
+import com.ituy.iwant.Maps.PickupLocationActivity
 
-class WishFragment : Fragment(), AdapterView.OnItemClickListener {
+class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickListener {
 
+    private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var container_wish: LinearLayout
     private lateinit var container_your_wish: LinearLayout
     private lateinit var listview_wish: ListView
     private lateinit var listview_yourWish: ListView
+    private lateinit var txt_your_location: TextView
     private lateinit var btn_floating_action_button: FloatingActionButton
+    private lateinit var btn_location_choose_info: FlexboxLayout
 
     private var your_wish_ids: ArrayList<String> = ArrayList()
     private var your_wish_titles: ArrayList<String> = ArrayList()
@@ -45,26 +55,28 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     private var wish_latlng: ArrayList<ArrayList<Double>> = ArrayList()
 
     private var UNIT_DAY_ADD_MORE_EXPIRE: Int = 4
+    private var currentUserLocation = DoubleArray(2)
 
 
     private fun initView(view: View, savedInstanceState: Bundle?): View {
-
         container_wish = view.findViewById(R.id.wish_container_wish)
         container_your_wish = view.findViewById(R.id.wish_container_your_wish)
         listview_wish = view.findViewById(R.id.wish_items_wish)
         listview_yourWish = view.findViewById(R.id.wish_items_your_wish)
-        btn_floating_action_button = view.findViewById(R.id.wish_btn_floating_action_button)
+        txt_your_location = view.findViewById(R.id.wish_txt_your_location)
 
-        btn_floating_action_button.setOnClickListener{
-            startActivity(Intent(requireContext(), AddWishActivity::class.java))
-            requireActivity().overridePendingTransition(R.anim.slide_left,R.anim.no_change)
-        }
+        btn_floating_action_button = view.findViewById(R.id.wish_btn_floating_action_button)
+        btn_floating_action_button.setOnClickListener(this)
+
+        btn_location_choose_info = view.findViewById(R.id.wish_btn_location_choose_info)
+        btn_location_choose_info.setOnClickListener(this)
 
         this.setDataToYourWishList()
         this.setDataToWishList()
 
         return view;
     }
+
 
     // Your wish
     private fun setDataToYourWishList() {
@@ -124,6 +136,44 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     }
 
 
+    private fun showPickupLocationName() {
+        // Check if view only not move location
+        if (currentUserLocation[0] == currentUserLocation[0] && currentUserLocation[1] == currentUserLocation[1]) {
+            txt_your_location.text = "Current location"
+            return;
+        }
+
+        val helpers = Helpers()
+        val strLat = helpers.subStringLength(currentUserLocation[0].toString(), 12)
+        val strLng = helpers.subStringLength(currentUserLocation[1].toString(), 12)
+        txt_your_location.text = "$strLat, $strLng"
+    }
+
+
+    private fun getUserLocation() {
+    }
+
+
+    override fun onClick(v: View?) {
+
+        when (v?.id) {
+
+            btn_floating_action_button.id -> {
+                startActivity(Intent(requireContext(), AddWishActivity::class.java))
+                requireActivity().overridePendingTransition(R.anim.slide_left,R.anim.no_change)
+            }
+            btn_location_choose_info.id -> {
+                val intent = Intent(requireContext(), PickupLocationActivity::class.java)
+                intent.putExtra("latLngChooseLocation", "lat:${currentUserLocation[0]},lng:${currentUserLocation[1]}")
+                activityResultLauncher.launch(intent)
+                requireActivity().overridePendingTransition(R.anim.no_change, R.anim.no_change)
+            }
+
+        }
+
+    }
+
+
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
         when(parent?.adapter) {
@@ -164,6 +214,28 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
     }
 
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+                val returnedValueLatLng = data?.getStringExtra("latLngChooseLocation")
+                if (returnedValueLatLng != null) {
+                    val latLng = returnedValueLatLng!!.split(",")
+                    if (latLng.isNotEmpty()) {
+                        currentUserLocation[0] = latLng[0].substring(4).toDouble()
+                        currentUserLocation[1] = latLng[1].substring(4).toDouble()
+                        this.showPickupLocationName()
+                        Toast.makeText(requireContext(), "INTENT: lat = ${currentUserLocation[0]}, log = ${currentUserLocation[1]}", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), "Can't get latLng from previous activity", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { }
@@ -177,6 +249,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener {
         var root = inflater.inflate(R.layout.fragment_wish, container, false)
         root = this.initView(root, savedInstanceState)
 
+        this.getUserLocation()
         this.main()
         return root
     }
