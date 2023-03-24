@@ -1,11 +1,14 @@
 package com.example.iwant
 
+import android.content.Context
 import android.graphics.fonts.FontFamily
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
+import android.util.TypedValue
+import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -28,7 +31,23 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         navigation_bar = findViewById(R.id.navigation_bar)
         navigation_bar.setOnTabSelectListener(this@MainActivity)
 
+        // Add a global layout listener to the activity's layout
+        val layout = findViewById<View>(android.R.id.content)
+        layout.viewTreeObserver.addOnGlobalLayoutListener {
+            val heightDiff = layout.rootView.height - layout.height
+            if (heightDiff > dpToPx(this, 200f)) { // 200dp threshold for detecting keyboard is open
+                navigation_bar.visibility = View.GONE
+            } else {
+                navigation_bar.visibility = View.VISIBLE
+            }
+        }
+
         this.callFragment(WishFragment())
+    }
+
+    // Convert dp to px
+    private fun dpToPx(context: Context, dp: Float): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics).toInt()
     }
 
 

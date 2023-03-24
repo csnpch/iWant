@@ -14,6 +14,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import com.example.iwant.Helpers.Validates
 import com.example.iwant.MainActivity
 import com.example.iwant.R
 
@@ -90,8 +91,11 @@ class TermsActivity : AppCompatActivity(), View.OnClickListener {
     private fun onContinue() {
 
         val numberStr = edt_phoneNumber.text.toString()
-        if (numberStr.length !== 10 || numberStr[0] !== '0') {
-            edt_phoneNumber.error = "Phone number invalid"
+
+        val validates = Validates()
+        var msgValidate = validates.input("phone", numberStr)
+        if (msgValidate !== null) {
+            edt_phoneNumber.error = msgValidate
             return
         }
 

@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import com.example.iwant.Helpers.Helpers
+import com.example.iwant.Helpers.Validates
 import com.example.iwant.Helpers.getCurrentLocation
 import com.example.iwant.Maps.PickupLocationActivity
 import com.example.iwant.R
@@ -35,6 +36,7 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
     private var latLngChooseLocation = DoubleArray(2)
     private var statusOnUpdate: Boolean = true
 
+
     private fun init() {
 
         txt_title = findViewById(R.id.add_wish_txt_title)
@@ -54,6 +56,28 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
         btn_cancel = findViewById(R.id.add_wish_btn_cancel)
         btn_cancel.setOnClickListener(this)
 
+    }
+
+
+    private fun validateForm(): Boolean {
+        val inputFields = listOf(
+            "title" to txt_title,
+            "contact" to txt_contact,
+        )
+
+        var statusValidate = true
+        val validator = Validates()
+        for (inputField in inputFields) {
+            val key = inputField.first
+            val editText = inputField.second
+
+            val errorMessage = validator.input(key, editText.text.toString())
+            if (errorMessage != null) {
+                editText.error = errorMessage
+                statusValidate = false
+            }
+        }
+        return statusValidate;
     }
 
 
@@ -115,6 +139,13 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
+    private fun onCreateWish() {
+        if (!this.validateForm()) return
+
+        Toast.makeText(this, "onClick create wish", Toast.LENGTH_SHORT).show()
+    }
+
+
     override fun onClick(v: View?) {
 
         when (v?.id) {
@@ -126,7 +157,7 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
                 overridePendingTransition(R.anim.slide_left,R.anim.no_change)
             }
             btn_create_wish.id -> {
-                Toast.makeText(this, "onClick create wish", Toast.LENGTH_SHORT).show()
+                this.onCreateWish()
             }
             btn_cancel.id -> finish()
 

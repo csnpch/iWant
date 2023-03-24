@@ -164,7 +164,7 @@
                     android:textSize="16dp"
                     android:fontFamily="@font/kanit_regular"
                     android:hint="Por boston butt 4kg"
-                    android:textColor="@color/text_gray"
+                    android:textColor="@color/black"
                     android:letterSpacing="0.06"
                     android:singleLine="true"
                     />
@@ -222,7 +222,7 @@
                     android:textSize="16dp"
                     android:fontFamily="@font/kanit_regular"
                     android:hint="Find Pork boston butt about 4 kilo\ngrams, raised pigs, not wild \nboars..."
-                    android:textColor="@color/text_gray"
+                    android:textColor="@color/black"
                     android:letterSpacing="0.06"
                     android:gravity="top"
                     />
@@ -279,7 +279,7 @@
                     android:textSize="16dp"
                     android:fontFamily="@font/kanit_regular"
                     android:hint="As agreed / ตามที่ตกลง"
-                    android:textColor="@color/text_gray"
+                    android:textColor="@color/black"
                     android:letterSpacing="0.06"
                     android:singleLine="true"
                     />
@@ -318,7 +318,7 @@
                     android:textSize="16dp"
                     android:fontFamily="@font/kanit_regular"
                     android:hint="@string/hint_phone"
-                    android:textColor="@color/text_gray"
+                    android:textColor="@color/black"
                     android:letterSpacing="0.06"
                     android:inputType="numberSigned"
                     />

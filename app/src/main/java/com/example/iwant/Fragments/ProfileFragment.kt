@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.iwant.Helpers.Validates
 import com.example.iwant.R
 
 
@@ -74,6 +75,29 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
 
+    private fun validateForm(): Boolean {
+        val inputFields = listOf(
+            "fullname" to edt_fullname,
+            "phone" to edt_phone,
+            "email" to edt_email
+        )
+
+        var statusValidate = true
+        val validator = Validates()
+        for (inputField in inputFields) {
+            val key = inputField.first
+            val editText = inputField.second
+
+            val errorMessage = validator.input(key, editText.text.toString())
+            if (errorMessage != null) {
+                editText.error = errorMessage
+                statusValidate = false
+            }
+        }
+        return statusValidate;
+    }
+
+
     private fun toggleFormVisibility() {
 
         fun setEditTextVisibility(status: Boolean) {
@@ -122,6 +146,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
 
     private fun onSave() {
+        if (!this.validateForm()) return
 
         statusOnEdit = false
         this.toggleFormVisibility()

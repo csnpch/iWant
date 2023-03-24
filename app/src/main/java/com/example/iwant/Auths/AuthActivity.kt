@@ -1,11 +1,12 @@
 package com.example.iwant.Auths
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.iwant.R
 import com.google.android.flexbox.FlexboxLayout
+
 
 class AuthActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -20,6 +21,8 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
 
         auth_btnSignInGoogle = findViewById(R.id.auth_btnSignInGoogle)
         auth_btnSignInGoogle.setOnClickListener(this)
+
+
     }
 
     override fun onClick(v: View?) {
