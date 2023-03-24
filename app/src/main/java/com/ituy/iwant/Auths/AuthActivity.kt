@@ -53,7 +53,8 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
             auth_btnSignInGoogle.id -> {
                 loginType = "GOOGLE"
                 val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken("680036386293-cj4mjm09ehkgkeatmbe0t2i3ai62v3r6.apps.googleusercontent.com").requestEmail().build()
+                    .requestIdToken("680036386293-58s0621qpmvv4boktdssjn0630lmued5.apps.googleusercontent.com")
+                    .requestEmail().build()
                 val googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
                 val account: GoogleSignInAccount? = GoogleSignIn
                     .getLastSignedInAccount(this)
@@ -89,6 +90,8 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
             errorMessage = LineAuth.login(data)
         } else if (loginType.equals("GOOGLE")) {
             errorMessage = GoogleAuth.login(data)
+        } else {
+            return
         }
 
         if (!errorMessage.equals("SUCCESS")) {
@@ -98,8 +101,6 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
 
         if (false) {
             startActivity(Intent(this@AuthActivity, MainActivity::class.java))
-        } else {
-            startActivity(Intent(this@AuthActivity, TermsActivity::class.java))
         }
 
     }
