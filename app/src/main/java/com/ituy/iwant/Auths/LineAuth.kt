@@ -1,6 +1,7 @@
 package com.ituy.iwant.Auths
 
 import android.content.Intent
+import com.ituy.iwant.api.authentication.AuthenticationService
 import com.linecorp.linesdk.LineApiResponseCode
 import com.linecorp.linesdk.auth.LineLoginApi
 import com.linecorp.linesdk.auth.LineLoginResult
