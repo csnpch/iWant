@@ -17,7 +17,7 @@ class SplashScreen : AppCompatActivity() {
 
         // For dev need skip you can set statusAuth to true
         var statusAuth: Boolean = false
-        when (statusAuth) {
+        when (!statusAuth) {
             true -> {
                 // Go to Home (Wish Page)
                 startActivity(Intent(this@SplashScreen, MainActivity::class.java))

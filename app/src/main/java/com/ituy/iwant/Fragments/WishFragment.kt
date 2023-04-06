@@ -23,8 +23,8 @@ import com.ituy.iwant.R
 import com.ituy.iwant.Wishs.AddWishActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ituy.iwant.Helpers.Helpers
-import com.ituy.iwant.Helpers.getCurrentLocation
 import com.ituy.iwant.Maps.PickupLocationActivity
+import com.ituy.iwant.MainActivity.Companion.setStateLoading
 
 class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickListener {
 
@@ -74,6 +74,8 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
         this.setDataToYourWishList()
         this.setDataToWishList()
 
+        // import com.ituy.iwant.MainActivity.Companion.setStateLoading
+        setStateLoading(false, view.findViewById(R.id.loadingContainer))
         return view;
     }
 

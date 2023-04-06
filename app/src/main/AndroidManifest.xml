@@ -51,8 +51,7 @@
         <!-- Google Maps API key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyANCSskXy-Yl8iXtPFpUBgVzvhMSXKSRgE" />
-            <!--        OLD KEY            "AIzaSyDqmAsr4iXa9cDBnTB5r-GjeURHT_ZYcJw"-->
+            android:value="AIzaSyBCO36Lk2esDMZYR5bAEPbdYErm64uN-PQ" />
 
         <activity
             android:name=".Auths.TermsActivity"

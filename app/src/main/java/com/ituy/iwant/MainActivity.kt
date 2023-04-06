@@ -3,12 +3,14 @@ package com.ituy.iwant
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
@@ -30,9 +32,25 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
     private lateinit var fragmentManager: FragmentManager
     private var currentUserLocation = DoubleArray(2)
 
+    private lateinit var containerLoading: LinearLayout;
+
 
     companion object {
         lateinit var myGlobalVar: String
+        var statusLoading: Boolean = true
+        // Can call in frage
+
+        fun setStateLoading(payload: Boolean, containerLoading: View) {
+            var statusLoading = payload
+            containerLoading.visibility = if (statusLoading) View.VISIBLE else View.INVISIBLE
+
+            object: CountDownTimer(2000, 1000) {
+                override fun onTick(millisUntilFinished: Long) { }
+                override fun onFinish() {
+                    setStateLoading(false, containerLoading)
+                }
+            }.start()
+        }
     }
 
 
@@ -51,6 +69,8 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         navigation_bar = findViewById(R.id.navigation_bar)
         navigation_bar.setOnTabSelectListener(this@MainActivity)
 
+        containerLoading = findViewById(R.id.loadingContainer)
+
         // Add a global layout listener to the activity's layout
         val layout = findViewById<View>(android.R.id.content)
         layout.viewTreeObserver.addOnGlobalLayoutListener {
@@ -63,7 +83,23 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         }
 
         this.callFragment(WishFragment())
+        this.setStateLoading(true)
     }
+
+
+    // Can call in frage
+    fun setStateLoading(payload: Boolean) {
+        statusLoading = payload
+        containerLoading.visibility = if (statusLoading) View.VISIBLE else View.INVISIBLE
+
+        object: CountDownTimer(2000, 1000) {
+            override fun onTick(millisUntilFinished: Long) { }
+            override fun onFinish() {
+                setStateLoading(false)
+            }
+        }.start()
+    }
+
 
     // Convert dp to px
     private fun dpToPx(context: Context, dp: Float): Int {
@@ -110,7 +146,7 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.shape_rounded_appbar))
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.appbar_layout)
-//        this.getLatLngLocationDefault()
+        this.getLatLngLocationDefault()
         this.init()
     }
 

@@ -34,7 +34,7 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
 
     private var currentUserLocation = DoubleArray(2)
     private var latLngChooseLocation = DoubleArray(2)
-    private var statusOnUpdate: Boolean = true
+    private var statusOnUpdate: Boolean = false
 
 
     private fun init() {
