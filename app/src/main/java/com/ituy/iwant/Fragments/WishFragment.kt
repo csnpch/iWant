@@ -24,7 +24,8 @@ import com.ituy.iwant.Wishs.AddWishActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ituy.iwant.Helpers.Helpers
 import com.ituy.iwant.Maps.PickupLocationActivity
-import com.ituy.iwant.MainActivity.Companion.setStateLoading
+import com.ituy.iwant.Stores.LocalStore
+
 
 class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickListener {
 
@@ -74,8 +75,6 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
         this.setDataToYourWishList()
         this.setDataToWishList()
 
-        // import com.ituy.iwant.MainActivity.Companion.setStateLoading
-        setStateLoading(false, view.findViewById(R.id.loadingContainer))
         return view;
     }
 
@@ -241,6 +240,12 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { }
+
+        if (LocalStore(requireActivity()).saveString("CurrentLocationLatLng", "${14.158904701557415},${101.34582541674533}")) {
+            Toast.makeText(requireActivity(), "current location is Saved", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireActivity(), "current location is not saved :(", Toast.LENGTH_SHORT).show()
+        }
     }
 
 

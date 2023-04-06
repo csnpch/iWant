@@ -39,18 +39,6 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         lateinit var myGlobalVar: String
         var statusLoading: Boolean = true
         // Can call in frage
-
-        fun setStateLoading(payload: Boolean, containerLoading: View) {
-            var statusLoading = payload
-            containerLoading.visibility = if (statusLoading) View.VISIBLE else View.INVISIBLE
-
-            object: CountDownTimer(2000, 1000) {
-                override fun onTick(millisUntilFinished: Long) { }
-                override fun onFinish() {
-                    setStateLoading(false, containerLoading)
-                }
-            }.start()
-        }
     }
 
 
@@ -95,7 +83,7 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         object: CountDownTimer(2000, 1000) {
             override fun onTick(millisUntilFinished: Long) { }
             override fun onFinish() {
-                setStateLoading(false)
+                this@MainActivity.setStateLoading(false)
             }
         }.start()
     }

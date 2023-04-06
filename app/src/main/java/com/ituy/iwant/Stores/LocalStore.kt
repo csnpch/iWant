@@ -48,11 +48,17 @@ class LocalStore(context: Context) {
 
 
     // For string value
-    fun saveString(key: String, value: String) {
-        with(sharedPreferences.edit()) {
-            putString(key, value)
-            apply()
+    fun saveString(key: String, value: String): Boolean {
+        try {
+            with(sharedPreferences.edit()) {
+                putString(key, value)
+                apply()
+            }
+        } catch (err: Error) {
+            println(err)
+            return false
         }
+        return true
     }
 
     fun getString(key: String, defaultValue: String): String {

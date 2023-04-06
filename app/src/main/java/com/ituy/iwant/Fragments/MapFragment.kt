@@ -59,15 +59,24 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
 
     private fun getUserLocation() {
-        getCurrentLocation(requireActivity()) { location ->
-            currentUserLocation[0] = location.first!!
-            currentUserLocation[1] = location.second!!
-            println("Current Location is ${currentUserLocation[0]}:${currentUserLocation[1]}")
+//      Bypass current location
+        currentUserLocation[0] = 14.158904701557415
+        currentUserLocation[1] = 101.34582541674533
+        val currentLocation = LatLng(currentUserLocation[0], currentUserLocation[1])
+        this@MapFragment.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f))
 
-            // before get current user location next move camera to location
-            val currentLocation = LatLng(currentUserLocation[0], currentUserLocation[1])
-            this@MapFragment.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f))
-        }
+//        NORMAL
+//        getCurrentLocation(requireActivity()) { location ->
+//            currentUserLocation[0] = location.first!!
+//            currentUserLocation[1] = location.second!!
+//            println("Current Location is ${currentUserLocation[0]}:${currentUserLocation[1]}")
+//
+//            // before get current user location next move camera to location
+//            val currentLocation = LatLng(currentUserLocation[0], currentUserLocation[1])
+//            this@MapFragment.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f))
+//        }
+
+
     }
 
 
