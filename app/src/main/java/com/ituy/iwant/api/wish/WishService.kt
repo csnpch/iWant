@@ -4,20 +4,21 @@ import com.ituy.iwant.api.HttpRoutes
 import com.ituy.iwant.api.member.MemberService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface WishService {
+    @Headers("Header-Version: 1")
     @GET("/wish/{location}")
-    fun getWishByLocation(location: String): List<WishModel>
+    fun getWishByLocation(@Path("location") location: String): List<WishModel>
+    @Headers("Header-Version: 1")
     @POST("/wish")
-    fun createWish(wishModel: WishModel)
+    fun createWish(@Body wishModel: WishModel)
+    @Headers("Header-Version: 1")
     @PUT("/wish")
-    fun updateWish(wishModel: WishModel)
+    fun updateWish(@Body wishModel: WishModel)
+    @Headers("Header-Version: 1")
     @DELETE("/wish/{id}")
-    fun removeWish(id: Int): Boolean
+    fun removeWish(@Path("id") id: Int): Boolean
 
     companion object {
         fun retrofitBuild(): WishService {
