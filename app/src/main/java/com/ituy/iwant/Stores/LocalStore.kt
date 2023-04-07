@@ -11,7 +11,9 @@ import com.google.gson.reflect.TypeToken
 // EXAMPLE - data class Person(val name: String, val age: Int)
 
 //    GET
-//        val listPerson: ArrayList<Person> = LocalStore(this).getArrayList("personList", ArrayList())
+//          Activity
+//              val listPerson: ArrayList<Person> = LocalStore(this).getArrayList("personList", ArrayList())
+//          If use in fragment try change (this) to (requestActivity()) or (requestContext())
 
 //    SAVE
 //        listPerson.add(Person("SamaHam", 25))
