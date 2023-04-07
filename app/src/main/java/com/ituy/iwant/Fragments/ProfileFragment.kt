@@ -1,6 +1,8 @@
 package com.ituy.iwant.Fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.ituy.iwant.Helpers.Validates
+import com.ituy.iwant.MainActivity
 import com.ituy.iwant.R
 import com.ituy.iwant.MainActivity.Companion.myGlobalVar
 
@@ -74,7 +77,22 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         btn_signOut = view.findViewById(R.id.profile_btn_signOut)
         btn_signOut.setOnClickListener(this)
 
+        this.initLoading()
+
         return view
+    }
+
+
+    private fun initLoading() {
+        val containerLoading = requireActivity().findViewById<LinearLayout>(R.id.loadingContainer)
+//        MainActivity.setStateLoading(true, containerLoading)
+//
+//        Thread(Runnable {
+//            Thread.sleep(1000)
+//            Handler(Looper.getMainLooper()).post {
+//                MainActivity.setStateLoading(false, containerLoading)
+//            }
+//        }).start()
     }
 
 

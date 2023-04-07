@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +25,7 @@ import com.ituy.iwant.R
 import com.ituy.iwant.Wishs.AddWishActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ituy.iwant.Helpers.Helpers
+import com.ituy.iwant.MainActivity
 import com.ituy.iwant.Maps.PickupLocationActivity
 import com.ituy.iwant.Stores.LocalStore
 
@@ -75,7 +78,23 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
         this.setDataToYourWishList()
         this.setDataToWishList()
 
+        this.initLoading()
+
         return view;
+    }
+
+
+
+    private fun initLoading() {
+        val containerLoading = requireActivity().findViewById<LinearLayout>(R.id.loadingContainer)
+//        MainActivity.setStateLoading(true, containerLoading)
+//
+//        Thread(Runnable {
+//            Thread.sleep(1000)
+//            Handler(Looper.getMainLooper()).post {
+//                MainActivity.setStateLoading(false, containerLoading)
+//            }
+//        }).start()
     }
 
 

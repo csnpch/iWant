@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
@@ -23,6 +25,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.ituy.iwant.Helpers.getCurrentLocation
 import nl.joery.animatedbottombar.AnimatedBottomBar
+import kotlin.system.exitProcess
 
 
 class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBar.OnTabSelectListener {
@@ -39,6 +42,11 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         lateinit var myGlobalVar: String
         var statusLoading: Boolean = true
         // Can call in frage
+        @JvmStatic
+        fun setStateLoading(payload: Boolean, containerLoading: LinearLayout) {
+            statusLoading = payload
+            containerLoading.visibility = if (statusLoading) View.VISIBLE else View.INVISIBLE
+        }
     }
 
 
@@ -71,21 +79,39 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         }
 
         this.callFragment(WishFragment())
-        this.setStateLoading(true)
+        this.initLoading()
     }
 
 
-    // Can call in frage
-    fun setStateLoading(payload: Boolean) {
-        statusLoading = payload
-        containerLoading.visibility = if (statusLoading) View.VISIBLE else View.INVISIBLE
+    private fun initLoading() {
+        setStateLoading(true, containerLoading)
 
-        object: CountDownTimer(2000, 1000) {
-            override fun onTick(millisUntilFinished: Long) { }
+        var simulateData: Any? = null
+        var timeCount = 0
+        object: CountDownTimer(10000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                // fetch data here
+                if (timeCount >= 2000) {
+                    simulateData = "Have Data"  // comment here
+                }
+
+                if (simulateData !== null) {
+                    onFinish()
+                }
+
+                timeCount += 1000
+            }
+
             override fun onFinish() {
-                this@MainActivity.setStateLoading(false)
+                if (simulateData === null) {
+                    Toast.makeText(this@MainActivity, "Can't fetch data from server", Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    setStateLoading(false, containerLoading)
+                }
             }
         }.start()
+
     }
 
 

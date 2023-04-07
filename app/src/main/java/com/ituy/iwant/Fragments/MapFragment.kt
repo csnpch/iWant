@@ -5,10 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -25,6 +28,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ituy.iwant.Helpers.Helpers
+import com.ituy.iwant.MainActivity
 import com.ituy.iwant.Maps.PickupLocationActivity
 
 
@@ -54,8 +58,25 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
+        this.initLoading()
+
         return view;
     }
+
+
+
+    private fun initLoading() {
+        val containerLoading = requireActivity().findViewById<LinearLayout>(R.id.loadingContainer)
+//        MainActivity.setStateLoading(true, containerLoading)
+//
+//        Thread(Runnable {
+//            Thread.sleep(1000)
+//            Handler(Looper.getMainLooper()).post {
+//                MainActivity.setStateLoading(false, containerLoading)
+//            }
+//        }).start()
+    }
+
 
 
     private fun getUserLocation() {
