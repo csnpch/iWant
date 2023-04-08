@@ -1,8 +1,13 @@
 package com.ituy.iwant.api.authentication.dto
 
 data class AuthenticationResponse (
-    val memberId: Int,
-    val username: String,
-    val fullName: String,
-    val tel: String
+    val status: Boolean,
+    val message: String,
+    val data: AuthenticationResponseData,
+)
+
+data class AuthenticationResponseData (
+    val access_token: String,
+    val fullname: String,
+    val tel: String,
 )

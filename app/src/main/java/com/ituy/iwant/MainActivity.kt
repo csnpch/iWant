@@ -24,6 +24,7 @@ import com.ituy.iwant.Fragments.WishFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.ituy.iwant.Helpers.getCurrentLocation
+import com.ituy.iwant.api.wish.WishService
 import nl.joery.animatedbottombar.AnimatedBottomBar
 import kotlin.system.exitProcess
 

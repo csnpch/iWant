@@ -1,8 +1,10 @@
 package com.ituy.iwant.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +15,19 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.ituy.iwant.Auths.AuthActivity
 import com.ituy.iwant.Helpers.Validates
 import com.ituy.iwant.MainActivity
 import com.ituy.iwant.R
 import com.ituy.iwant.MainActivity.Companion.myGlobalVar
+import com.ituy.iwant.Stores.LocalStore
+import com.ituy.iwant.api.member.MemberModel
+import com.ituy.iwant.api.member.MemberService
+import com.ituy.iwant.api.member.dto.MemberRequest
+import com.ituy.iwant.api.member.dto.MemberResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ProfileFragment : Fragment(), View.OnClickListener {
@@ -46,10 +57,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private var param1: String? = null
     private var param2: String? = null
 
+    private val apiService = MemberService()
+
 
     private fun initView(view: View): View {
-
-        Toast.makeText(requireContext(), myGlobalVar, Toast.LENGTH_SHORT).show()
 
         // Form Section
         edt_fullname = view.findViewById(R.id.profile_edt_fullname)
@@ -137,9 +148,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         }
 
         if (statusOnEdit) {
-            myGlobalVar = "1234"
-            Toast.makeText(requireContext(), myGlobalVar, Toast.LENGTH_SHORT).show()
-
             setEditTextVisibility(true)
             area_signout.visibility = View.GONE
             area_btn_default.visibility = View.GONE
@@ -156,9 +164,28 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
     private fun setDataToForm() {
         // Get data from some store to form?
-        edt_fullname.setText("Chitsanuphong Chaihong")
-        edt_phone.setText("0987654321")
-        edt_email.setText("RamMaling555@gmail.com")
+        val token = LocalStore(requireContext()).getString("token", "")
+        val call = apiService.profile(token)
+        call.enqueue(object: Callback<MemberModel> {
+            override fun onResponse(call: Call<MemberModel>, response: Response<MemberModel>) {
+                val body = response.body()
+                if (body?.fullName?.isNotEmpty() == true) {
+                    edt_fullname.setText(body.fullName)
+                }
+                if (body?.tel?.isNotEmpty() == true) {
+                    edt_phone.setText(body.tel)
+                }
+                if (body?.email?.isNotEmpty() == true) {
+                    edt_email.setText(body.email)
+                }
+                loginWith = body?.authType.toString()
+            }
+
+            override fun onFailure(call: Call<MemberModel>, t: Throwable) {
+                Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
+            }
+
+        })
     }
 
 
@@ -171,6 +198,24 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
     private fun onSave() {
         if (!this.validateForm()) return
+
+        val token = LocalStore(requireContext()).getString("token", "")
+        val call = apiService.update(token, MemberRequest(edt_fullname.text.toString(), edt_phone.text.toString(), edt_email.text.toString()))
+        call.enqueue(object: Callback<MemberResponse> {
+            override fun onResponse(
+                call: Call<MemberResponse>,
+                response: Response<MemberResponse>
+            ) {
+                if (response.body()?.status == false) {
+                    Toast.makeText(requireContext(), response.body()?.message, Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<MemberResponse>, t: Throwable) {
+                Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
+            }
+
+        })
 
         statusOnEdit = false
         this.toggleFormVisibility()
@@ -201,8 +246,13 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 statusOnEdit = false
                 this.toggleFormVisibility()
             }
-            btn_signOut.id ->
+            btn_signOut.id -> {
+                LocalStore(requireContext()).clearAll()
+                val intent: Intent = Intent(requireContext(), AuthActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent);
                 Toast.makeText(activity, "On Click SignOut", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -235,7 +285,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
 
     private fun main() {
-        loginWith = "LINE"
         this.setDataToForm()
         this.changeViewSignout()
     }

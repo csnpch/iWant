@@ -12,11 +12,19 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.ituy.iwant.Helpers.Validates
 import com.ituy.iwant.MainActivity
 import com.ituy.iwant.R
+import com.ituy.iwant.Stores.LocalStore
+import com.ituy.iwant.api.member.MemberService
+import com.ituy.iwant.api.member.dto.MemberTelRequest
+import com.ituy.iwant.api.member.dto.MemberTelResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class TermsActivity : AppCompatActivity(), View.OnClickListener {
@@ -29,6 +37,7 @@ class TermsActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var edt_phoneNumber: EditText
     private var statusAcceptTerms: Boolean = false
+    private val apiService = MemberService()
 
 
     private fun init() {
@@ -104,8 +113,26 @@ class TermsActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        startActivity(Intent(this@TermsActivity, MainActivity::class.java))
-        finishAffinity();
+        val token = LocalStore(this).getString("token", "")
+        val call = apiService.updateTel(token, MemberTelRequest(numberStr))
+        call.enqueue(object: Callback<MemberTelResponse> {
+            override fun onResponse(
+                call: Call<MemberTelResponse>,
+                response: Response<MemberTelResponse>
+            ) {
+                if (response.body()?.status == true) {
+                    startActivity(Intent(this@TermsActivity, MainActivity::class.java))
+                    finishAffinity();
+                }
+            }
+
+            override fun onFailure(call: Call<MemberTelResponse>, t: Throwable) {
+                Toast.makeText(this@TermsActivity, t.message, Toast.LENGTH_LONG).show()
+                finishAffinity();
+            }
+
+        })
+
     }
 
 

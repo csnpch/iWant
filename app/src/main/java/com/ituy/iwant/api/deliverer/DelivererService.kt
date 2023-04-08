@@ -19,7 +19,7 @@ interface DelivererService {
     fun removeDeliverer(@Path("id") wishID: Int): Boolean
 
     companion object {
-        fun retrofitBuild(): DelivererService {
+        fun invoke(): DelivererService {
             return Retrofit.Builder()
                 .baseUrl(HttpRoutes.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

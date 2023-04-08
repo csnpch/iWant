@@ -18,6 +18,15 @@ import com.ituy.iwant.Helpers.getCurrentLocation
 import com.ituy.iwant.Maps.PickupLocationActivity
 import com.ituy.iwant.R
 import com.google.android.flexbox.FlexboxLayout
+import com.ituy.iwant.Stores.LocalStore
+import com.ituy.iwant.api.authentication.AuthenticationService
+import com.ituy.iwant.api.wish.WishModel
+import com.ituy.iwant.api.wish.WishService
+import com.ituy.iwant.api.wish.dto.CreateWishRequest
+import com.ituy.iwant.api.wish.dto.CreateWishResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class AddWishActivity : AppCompatActivity(), View.OnClickListener {
@@ -35,6 +44,7 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
     private var currentUserLocation = DoubleArray(2)
     private var latLngChooseLocation = DoubleArray(2)
     private var statusOnUpdate: Boolean = false
+    private val apiService = WishService()
 
 
     private fun init() {
@@ -141,8 +151,28 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun onCreateWish() {
         if (!this.validateForm()) return
+        val token = LocalStore(this@AddWishActivity).getString("token", "")
+        val call = apiService.createWish(token, CreateWishRequest(txt_title.text.toString(),
+            (latLngChooseLocation[0].toString()+","+latLngChooseLocation[1].toString()),
+            txt_description.text.toString(), txt_benefit.text.toString(),
+            txt_contact.text.toString()))
+        call.enqueue(object: Callback<CreateWishResponse> {
+            override fun onResponse(
+                call: Call<CreateWishResponse>,
+                response: Response<CreateWishResponse>
+            ) {
+                if (response.body()?.status == true) {
+                    finish()
+                } else {
+                    Toast.makeText(this@AddWishActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
+                }
+            }
 
-        Toast.makeText(this, "onClick create wish", Toast.LENGTH_SHORT).show()
+            override fun onFailure(call: Call<CreateWishResponse>, t: Throwable) {
+                Toast.makeText(this@AddWishActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
 

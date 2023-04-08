@@ -30,7 +30,8 @@ fun showDialogWish(
     Description: String = "",
     Benefit: String = "",
     Contact: String,
-    LatLog: ArrayList<Double>
+    LatLog: ArrayList<Double>,
+    myCallback: (result: String?) -> Unit
 ) {
     var dialogWish: AlertDialog? = null // create local variable to store dialog instance
 

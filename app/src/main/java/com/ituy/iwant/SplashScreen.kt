@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import com.ituy.iwant.Auths.AuthActivity
+import com.ituy.iwant.Stores.LocalStore
 
 class SplashScreen : AppCompatActivity() {
 
@@ -15,9 +17,9 @@ class SplashScreen : AppCompatActivity() {
 
     private fun validateAuthentication() {
 
+        val token = LocalStore(this).getString("token", "")
         // For dev need skip you can set statusAuth to true
-        var statusAuth: Boolean = true
-        when (!statusAuth) {
+        when (token.isNotEmpty()) {
             true -> {
                 // Go to Home (Wish Page)
                 startActivity(Intent(this@SplashScreen, MainActivity::class.java))

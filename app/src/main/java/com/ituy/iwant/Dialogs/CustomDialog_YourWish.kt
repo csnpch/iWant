@@ -25,6 +25,11 @@ import com.ituy.iwant.CustomListView_DialogResponse
 import com.ituy.iwant.Helpers.Helpers
 import com.ituy.iwant.Helpers.PermissionUtils
 import com.ituy.iwant.Maps.MapViewActivity
+import com.ituy.iwant.Stores.LocalStore
+import com.ituy.iwant.api.wish.WishService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @SuppressLint("MissingInflatedId")
 fun showDialogYourWish(
@@ -37,9 +42,11 @@ fun showDialogYourWish(
     TimeLeft: String,
     UnitDayAddMoreExpire: Int,
     PeopleResponse: Array<Array<String>>?,
-    LatLng: ArrayList<Double>
+    LatLng: ArrayList<Double>,
+    myCallback: (result: String?) -> Unit
 ) {
     var dialogYourWish: AlertDialog? = null // create local variable to store dialog instance
+
 
     val displayMetrics = DisplayMetrics()
     val mBuilder: AlertDialog.Builder = AlertDialog.Builder(Context, R.style.CustomAlertDialog)
@@ -59,6 +66,8 @@ fun showDialogYourWish(
 
     val listview_responses = mView.findViewById<ListView>(R.id.your_wish_dialog_listview_response)
     val container_peoples_reponses = mView.findViewById<LinearLayout>(R.id.your_wish_dialog_container_peoples_response)
+
+    val apiService = WishService()
 
     val tmpTitle = SpannableString(Title)
     tmpTitle.setSpan(UnderlineSpan(), 0, tmpTitle.length, 0)
@@ -138,7 +147,19 @@ fun showDialogYourWish(
     }
 
     btn_destroy.setOnClickListener {
-        Toast.makeText(Context, "On Click Destroy Index = $Index", Toast.LENGTH_SHORT).show()
+        val token = LocalStore(Context).getString("token", "")
+        val call = apiService.removeWish(token, Id)
+        call.enqueue(object: Callback<Boolean> {
+            override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
+                myCallback.invoke("Reload")
+                dialogYourWish?.dismiss()
+            }
+
+            override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                Toast.makeText(Context, t.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
 

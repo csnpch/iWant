@@ -63,6 +63,10 @@ class LocalStore(context: Context) {
         return true
     }
 
+    fun clearAll() {
+        sharedPreferences.edit().clear().commit()
+    }
+
     fun getString(key: String, defaultValue: String): String {
         return sharedPreferences.getString(key, defaultValue) ?: defaultValue
     }

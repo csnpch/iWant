@@ -13,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.ituy.iwant.MainActivity
+import com.ituy.iwant.Stores.LocalStore
 import com.ituy.iwant.api.authentication.AuthenticationService
 import com.ituy.iwant.api.authentication.dto.AuthenticationRequest
 import com.ituy.iwant.api.authentication.dto.AuthenticationResponse
@@ -66,19 +67,40 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                 val account: GoogleSignInAccount? = GoogleSignIn
                     .getLastSignedInAccount(this)
                 if (account != null && account.idToken?.isNotEmpty() == true) {
-                    val token = account.idToken
-                    val call = token?.let { AuthenticationRequest(it) }
+                    val token = account.id
+                    val call = token?.let { AuthenticationRequest("Google",token, account.displayName.toString(), account.email) }
                         ?.let { apiService.login(it) }
                     call?.enqueue(object: Callback<AuthenticationResponse> {
                         override fun onResponse(
                             call: Call<AuthenticationResponse>,
                             response: Response<AuthenticationResponse>
                         ) {
-                            startActivity(Intent(this@AuthActivity, com.ituy.iwant.Auths.TermsActivity::class.java))
+                            val body = response.body()
+                            if (body?.status == true) {
+                                val token = body?.data?.access_token
+                                val tel = body?.data?.tel
+                                val fullname = body?.data?.fullname
+                                if (token != null) {
+                                    LocalStore(this@AuthActivity).saveString("token", "Bearer $token")
+                                }
+                                val profile = ArrayList<String>()
+                                if (fullname != null) {
+                                    profile.add(fullname)
+                                }
+                                if (tel != null) {
+                                    profile.add(tel)
+                                }
+                                LocalStore(this@AuthActivity).saveArrayList("profile", profile)
+                                if (tel?.isNotEmpty() == true) {
+                                    startActivity(Intent(this@AuthActivity, MainActivity::class.java))
+                                } else {
+                                    startActivity(Intent(this@AuthActivity, com.ituy.iwant.Auths.TermsActivity::class.java))
+                                }
+                            }
                         }
 
                         override fun onFailure(call: Call<AuthenticationResponse>, t: Throwable) {
-                            t.message?.let { Log.e("API", it) }
+                            Toast.makeText(this@AuthActivity, t.message, Toast.LENGTH_LONG).show()
                         }
                     });
                 }
@@ -105,27 +127,23 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        var errorMessage: String = ""
-
-        errorMessage = when (loginType) {
+        when (loginType) {
             "LINE" -> {
-                LineAuth.login(data)
+                LineAuth.login(this, data, apiService)
             }
             "GOOGLE" -> {
-                GoogleAuth.login(data)
-            }
-            else -> {
-                return
+                GoogleAuth.login(this, data, apiService)
             }
         }
-
-        if (errorMessage != "SUCCESS") {
-            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
-            return
+        val token = LocalStore(this).getString("token", "")
+        val profile = LocalStore(this).getArrayList("profile", ArrayList<String>())
+        if (token.isNotEmpty() && profile.size > 0) {
+            if (profile.size == 2) {
+                startActivity(Intent(this@AuthActivity, MainActivity::class.java))
+            } else {
+                startActivity(Intent(this@AuthActivity, com.ituy.iwant.Auths.TermsActivity::class.java))
+            }
         }
-
-        startActivity(Intent(this@AuthActivity, MainActivity::class.java))
-
     }
 
 }

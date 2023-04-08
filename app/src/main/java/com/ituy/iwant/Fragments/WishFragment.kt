@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,11 @@ import com.ituy.iwant.Helpers.Helpers
 import com.ituy.iwant.MainActivity
 import com.ituy.iwant.Maps.PickupLocationActivity
 import com.ituy.iwant.Stores.LocalStore
+import com.ituy.iwant.api.wish.WishModel
+import com.ituy.iwant.api.wish.WishService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickListener {
@@ -61,6 +67,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
     private var UNIT_DAY_ADD_MORE_EXPIRE: Int = 4
     private var currentUserLocation = DoubleArray(2)
 
+    private val apiWish = WishService()
 
     private fun initView(view: View, savedInstanceState: Bundle?): View {
         container_wish = view.findViewById(R.id.wish_container_wish)
@@ -102,57 +109,120 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
     private fun setDataToYourWishList() {
 
         var statusHaveWishList: Boolean = false
-        for (i in 0..1) {
-            statusHaveWishList = true
-            your_wish_ids.add("0$i");
-            your_wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
-            your_wish_description.add("Sula Sama Description Description 1")
-            your_wish_time_for_expire.add("${i+1} days") // dialog += "left for expire"
-            your_wish_timestamps.add("${i+1} min")
-            your_wish_latlng.add(arrayListOf(14.1508167 + (0.1 + i), 101.3611667 + (0.1 + i)))
-            // if check data peoples responses then
-            if (i % 2 == 0) {
-                for (i in 0..1) {
-                    val response1 = arrayOf(
-                        arrayOf("Somjit Nimitmray$i", "0987654321", "03/03/2023, 20:24"),
-                        arrayOf("John Doe$i", "0123456789", "03/03/2023, 20:24")
-                    )
-                    your_wish_people_responses.add(response1)
+        val token = LocalStore(requireContext()).getString("token", "")
+        val call = apiWish.getWishByMe(token)
+        call.enqueue(object: Callback<List<WishModel>> {
+            override fun onResponse(
+                call: Call<List<WishModel>>,
+                response: Response<List<WishModel>>
+            ) {
+                statusHaveWishList = true
+                response.body()?.listIterator()?.forEach { item ->
+                    your_wish_ids.add(item.id.toString())
+                    your_wish_titles.add(item.title)
+                    your_wish_description.add(item.description)
+                    your_wish_time_for_expire.add("${1} days") // dialog += "left for expire"
+                    your_wish_timestamps.add("${1} min")
+                    val loc = item.location.split(",")
+                    your_wish_latlng.add(arrayListOf(loc[0].toDouble(), loc[1].toDouble()))
+                    your_wish_people_responses.add(null)
                 }
-            } else {
-                your_wish_people_responses.add(null)
+                listview_yourWish.adapter = CustomListView_YourWish(
+                    requireContext(), your_wish_ids, your_wish_titles, your_wish_time_for_expire, your_wish_timestamps, your_wish_people_responses
+                )
+
+                if (statusHaveWishList)
+                    container_your_wish.visibility = View.VISIBLE
+
+                setListViewHeightBasedOnChildren(listview_yourWish)
             }
-        }
+
+            override fun onFailure(call: Call<List<WishModel>>, t: Throwable) {
+                Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
+                statusHaveWishList = false
+            }
+
+        })
+
+//        for (i in 0..1) {
+//            statusHaveWishList = true
+//            your_wish_ids.add("0$i");
+//            your_wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
+//            your_wish_description.add("Sula Sama Description Description 1")
+//            your_wish_time_for_expire.add("${i+1} days") // dialog += "left for expire"
+//            your_wish_timestamps.add("${i+1} min")
+//            your_wish_latlng.add(arrayListOf(14.1508167 + (0.1 + i), 101.3611667 + (0.1 + i)))
+//            // if check data peoples responses then
+//            if (i % 2 == 0) {
+//                for (i in 0..1) {
+//                    val response1 = arrayOf(
+//                        arrayOf("Somjit Nimitmray$i", "0987654321", "03/03/2023, 20:24"),
+//                        arrayOf("John Doe$i", "0123456789", "03/03/2023, 20:24")
+//                    )
+//                    your_wish_people_responses.add(response1)
+//                }
+//            } else {
+//                your_wish_people_responses.add(null)
+//            }
+//        }
 
 
-        if (statusHaveWishList)
-            container_your_wish.visibility = View.VISIBLE
 
-
-        listview_yourWish.adapter = CustomListView_YourWish(
-            requireContext(), your_wish_ids, your_wish_titles, your_wish_time_for_expire, your_wish_timestamps, your_wish_people_responses
-        )
         listview_yourWish.onItemClickListener = this;
-        setListViewHeightBasedOnChildren(listview_yourWish)
+    }
 
+    private fun clearDataYourWush() {
+        your_wish_ids = ArrayList()
+        your_wish_titles = ArrayList()
+        your_wish_description = ArrayList()
+        your_wish_time_for_expire = ArrayList()
+        your_wish_timestamps = ArrayList()
+        your_wish_people_responses = arrayListOf(null)
+        your_wish_latlng = ArrayList()
+    }
+
+    private fun clearDataWush() {
+        wish_ids = ArrayList()
+        wish_titles = ArrayList()
+        wish_description = ArrayList()
+        wish_distances = ArrayList()
+        wish_timestamps = ArrayList()
+        wish_benefit = ArrayList()
+        wish_contact = ArrayList()
+        wish_latlng = ArrayList()
     }
 
     // Wish public
     private fun setDataToWishList() {
-        for (i in 0..6) {
-            wish_ids.add("0$i")
-            wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
-            wish_description.add("Sub Title Allow Access port when you need something maybe you can")
-            wish_distances.add("0." + (i+1).toString() + " km")
-            wish_timestamps.add((i+1).toString() + " hour ago")
-            wish_benefit.add("Give a 10 bath")
-            wish_contact.add("098765432" + (i+1).toString())
-            wish_latlng.add(arrayListOf(14.1508167 + (0.1 + i), 101.3611667 + (0.1 + i)))
-        }
+        val token = LocalStore(requireContext()).getString("token", "")
+        val call = apiWish.getWishByLocation(token, (currentUserLocation[0].toString() + "," +currentUserLocation[1].toString()))
+        call.enqueue(object: Callback<List<WishModel>> {
+            override fun onResponse(
+                call: Call<List<WishModel>>,
+                response: Response<List<WishModel>>
+            ) {
+                response.body()?.listIterator()?.forEach { item ->
+                    wish_ids.add(item.id.toString())
+                    wish_titles.add(item.title)
+                    wish_description.add(item.description)
+                    wish_distances.add("0." + " km")
+                    wish_timestamps.add(" hour ago")
+                    wish_benefit.add(item.benefit)
+                    wish_contact.add(item.contact)
+                    val loc = item.location.split(",")
+                    wish_latlng.add(arrayListOf(loc[0].toDouble(), loc[1].toDouble()))
+                }
+                listview_wish.adapter = CustomListView_Wish(requireContext(), wish_ids, wish_titles, wish_description, wish_distances, wish_timestamps)
+                setListViewHeightBasedOnChildren(listview_wish)
+            }
 
-        listview_wish.adapter = CustomListView_Wish(requireContext(), wish_ids, wish_titles, wish_description, wish_distances, wish_timestamps)
+            override fun onFailure(call: Call<List<WishModel>>, t: Throwable) {
+                Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
+            }
+
+        })
+
         listview_wish.onItemClickListener = this;
-        setListViewHeightBasedOnChildren(listview_wish)
     }
 
 
@@ -179,7 +249,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
         when (v?.id) {
 
             btn_floating_action_button.id -> {
-                startActivity(Intent(requireContext(), AddWishActivity::class.java))
+                startActivityForResult(Intent(requireContext(), AddWishActivity::class.java), 100)
                 requireActivity().overridePendingTransition(R.anim.slide_left,R.anim.no_change)
             }
             btn_location_choose_info.id -> {
@@ -210,7 +280,10 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
                     UNIT_DAY_ADD_MORE_EXPIRE,
                     your_wish_people_responses[position],
                     your_wish_latlng[position]
-                )
+                ) {
+                    clearDataYourWush()
+                    setDataToYourWishList()
+                }
 
             }
             listview_wish.adapter -> {
@@ -227,7 +300,10 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
                     wish_benefit[position],
                     wish_contact[position],
                     wish_latlng[position]
-                )
+                ) {
+                    clearDataWush()
+                    setDataToWishList()
+                }
 
             }
         }
@@ -292,6 +368,16 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
 
     private fun main() {
         PermissionUtils.checkLocationPermission(this@WishFragment);
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100) {
+            clearDataYourWush()
+            clearDataWush()
+            setDataToYourWishList()
+            setDataToWishList()
+        }
     }
 
 
