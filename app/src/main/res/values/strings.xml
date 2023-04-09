@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">iWant</string>
+
+    <!-- Term of Services -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message_auth_screen">The iWant application will be an intermediary that will allow users and users with each other. Items can be delivered to each other through an agreement (Dil).</string>
+    <string name="hint_phone">098XXXXXXX</string>
+    <string name="message_accept_terms">Accept <u>Terms of Services</u></string>
+    <string name="title_terms_and_condition">Terms and Conditions</string>
+    <string name="text_terms_and_condition">\t\t\t\tPhone number and address information on your map, We will not be responsible for any incidents that cause damage to yourself or property and likewise We would like to lead you to think about the safety of life and property as the main priority. Things should be done with caution, thank you.</string>
+
+    <!-- Your wish -->
+    <string name="title_your_wish_list"><u>Your wish</u></string>
+    <string name="title_wish_list"><u>Wish list near you</u></string>
+
 </resources>

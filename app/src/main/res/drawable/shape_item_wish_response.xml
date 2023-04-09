@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- pressed -->
+    <item android:state_pressed="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <corners  android:topRightRadius="8dp" android:topLeftRadius="8dp" />
+            <solid android:color="@color/success_hover"></solid>
+        </shape>
+    </item>
+    <!-- default -->
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <corners  android:topRightRadius="8dp" android:topLeftRadius="8dp" />
+            <solid android:color="@color/success"></solid>
+        </shape>
+    </item>
+</selector>
+

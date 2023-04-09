@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomText">
+        <item name="android:fontFamily">@font/kanit_regular</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/shape_rounded_dialog</item>
+    </style>
+    <style name="MyListViewStyle" parent="@android:style/Widget.ListView">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:divider">@null</item>
+    </style>
+</resources>

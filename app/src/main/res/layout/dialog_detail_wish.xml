@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/shape_rounded_dialog">
+
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexDirection="row"
+        app:alignItems="flex_end"
+        >
+
+
+        <TextView
+            android:id="@+id/wish_dialog_txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ไข่ไก่เบอร์ 0"
+            android:textSize="16dp"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:letterSpacing="0.04"
+            android:fontFamily="@font/kanit_medium"
+            />
+
+
+        <ImageView
+            android:id="@+id/wish_dialog_btn_exit"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/circle_xmark_solid"
+            />
+
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+
+    <TextView
+        android:id="@+id/wish_dialog_txt_when"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="14dp"
+        android:textColor="@color/very_gray"
+        android:fontFamily="@font/kanit_regular"
+        android:text="Post when 1 day ago"
+        android:justificationMode="inter_word"
+        android:letterSpacing="0.02"
+        android:textAlignment="center"
+    />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        >
+
+
+        <!-- Row Input -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+        >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary"
+                android:fontFamily="@font/kanit_regular"
+                android:letterSpacing="0.06"
+                android:text="Distance from you"
+                />
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:justifyContent="flex_start"
+                app:alignItems="flex_start"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="4dp"
+                >
+                <ImageView
+                    android:layout_marginTop="6dp"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:src="@drawable/circle_solid"
+                    />
+                <TextView
+                    android:id="@+id/wish_dialog_txt_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_secondary"
+                    android:fontFamily="@font/kanit_regular"
+                    android:text="0.5 km"
+                    android:letterSpacing="0.04"
+                    android:layout_marginLeft="8dp"
+                    />
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+
+
+        <!-- Row Input -->
+        <LinearLayout
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary"
+                android:fontFamily="@font/kanit_regular"
+                android:text="Description"
+                android:letterSpacing="0.06"
+                />
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:justifyContent="flex_start"
+                app:alignItems="flex_start"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="4dp"
+                >
+                <ImageView
+                    android:layout_marginTop="6dp"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:src="@drawable/circle_solid"
+                    />
+                <TextView
+                    android:id="@+id/wish_dialog_txt_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_secondary"
+                    android:fontFamily="@font/kanit_regular"
+                    android:text="ต้องการไข่ไก่เบอร์ 0 จำนวน 2 แผง ขอเป็นแผงพาสติก ไม่เอาแผงกระดาษ มาส่งได้ทุกวันจันทร์-ศุกร์ ช่วงเวลา 13:00 - 20:00"
+                    android:letterSpacing="0.04"
+                    android:layout_marginLeft="8dp"
+                    />
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+
+
+        <!-- Row Input -->
+        <LinearLayout
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/secondary"
+                    android:fontFamily="@font/kanit_regular"
+                    android:text="Benefit"
+                    android:letterSpacing="0.06"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:textColor="@color/warning_text"
+                    android:fontFamily="@font/kanit_regular"
+                    android:text="( Should call to confirm Dil again )"
+                    android:letterSpacing="0.04"
+                    />
+
+            </LinearLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:justifyContent="flex_start"
+                app:alignItems="flex_start"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="4dp"
+                >
+
+                <ImageView
+                    android:layout_marginTop="6dp"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:src="@drawable/circle_solid"
+                    />
+                <TextView
+                    android:id="@+id/wish_dialog_txt_benefit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_secondary"
+                    android:fontFamily="@font/kanit_regular"
+                    android:text="ให้ค่าเอามาส่ง 60 บาท"
+                    android:letterSpacing="0.04"
+                    android:layout_marginLeft="8dp"
+                    />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+
+
+        <!-- Row Input -->
+        <LinearLayout
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:justifyContent="space_between"
+                app:alignItems="flex_end"
+            >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/secondary"
+                        android:fontFamily="@font/kanit_regular"
+                        android:text="Contact"
+                        />
+
+                    <com.google.android.flexbox.FlexboxLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="4dp"
+                        app:flexDirection="row"
+                        app:justifyContent="flex_start"
+                        app:alignItems="flex_start"
+                        android:letterSpacing="0.06"
+                        >
+
+                        <ImageView
+                            android:layout_marginTop="6dp"
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:src="@drawable/circle_solid"
+                            />
+                        <TextView
+                            android:id="@+id/wish_dialog_txt_contact"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_secondary"
+                            android:fontFamily="@font/kanit_regular"
+                            android:text="0987654321"
+                            android:letterSpacing="0.04"
+                            android:layout_marginLeft="8dp"
+                            />
+
+                    </com.google.android.flexbox.FlexboxLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/wish_dialog_btn_call"
+                    android:paddingTop="12dp"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@drawable/phone_solid"
+                    android:scaleX="-1"
+                />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <!-- Button Open Navigator -->
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/wish_dialog_btn_open_navigator"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
+            android:elevation="6dp"
+            android:gravity="center"
+            android:background="@drawable/shape_btn_secondary"
+            app:justifyContent="center"
+            app:alignItems="center"
+            >
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/map_pin_solid_white"
+                />
+
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fontFamily="@font/kanit_medium"
+                android:textAlignment="center"
+                android:letterSpacing="0.08"
+                android:textSize="14dp"
+                android:text="OPEN NAVIGATOR DROP WISH"
+                />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <!-- Button Accept To Deliver -->
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/wish_dialog_btn_accept_to_deliver"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:elevation="6dp"
+            android:gravity="center"
+            android:background="@drawable/shape_btn_primary"
+            app:justifyContent="center"
+            app:alignItems="center"
+            >
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/people_carry_box_solid"
+                />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fontFamily="@font/kanit_medium"
+                android:textAlignment="center"
+                android:textSize="14dp"
+                android:letterSpacing="0.08"
+                android:text="ACCEPT TO DELIVER"
+                />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

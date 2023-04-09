@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Wishs.AddWishActivity"
+    android:background="@color/background"
+    android:orientation="vertical"
+>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="120dp"
+            android:paddingBottom="120dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:alignItems="flex_end"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kanit_semi_bold"
+                    android:text="WISH"
+                    android:textSize="24dp"
+                    android:textColor="@color/primary"
+                    android:letterSpacing="0.04"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="@font/kanit_regular"
+                    android:text="/ Add"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:letterSpacing="0.04"
+                    />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+
+            <!-- Gap -->
+            <LinearLayout
+                android:layout_marginTop="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <!-- Pickup location -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pickup location"
+                        android:fontFamily="@font/kanit_regular"
+                        android:textColor="@color/secondary"
+                        android:letterSpacing="0.04"
+                        />
+
+                    <TextView
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="( Choose check )"
+                        android:fontFamily="@font/kanit_regular"
+                        android:textColor="@color/soft_gray"
+                        android:letterSpacing="0.04"
+                        />
+
+                </LinearLayout>
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/add_wish_btn_pickup_location"
+                    android:layout_width="340dp"
+                    android:layout_height="44dp"
+                    android:elevation="4dp"
+                    android:paddingHorizontal="14dp"
+                    android:layout_marginBottom="4dp"
+                    app:flexDirection="row"
+                    app:alignItems="center"
+                    android:background="@drawable/shape_btn_white"
+                    >
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/location_dot_solid"
+                        />
+
+                    <TextView
+                        android:id="@+id/add_wish_txt_name_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="9dp"
+                        android:text="Current location"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/kanit_regular"
+                        android:letterSpacing="0.04"
+                        />
+
+                </com.google.android.flexbox.FlexboxLayout>
+
+            </LinearLayout>
+
+
+            <!-- Title -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+
+                <TextView
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:text="Title"
+                    android:fontFamily="@font/kanit_regular"
+                    android:textColor="@color/secondary"
+                    android:letterSpacing="0.04"
+                    />
+
+                <EditText
+                    android:id="@+id/add_wish_txt_title"
+                    android:layout_width="340dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="6dp"
+                    android:elevation="3dp"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="6dp"
+                    android:background="@drawable/shape_input_text_white"
+                    android:textSize="16dp"
+                    android:fontFamily="@font/kanit_regular"
+                    android:hint="Por boston butt 4kg"
+                    android:textColor="@color/black"
+                    android:letterSpacing="0.06"
+                    android:singleLine="true"
+                    />
+
+            </LinearLayout>
+
+
+            <!-- Description -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:fontFamily="@font/kanit_regular"
+                        android:textColor="@color/secondary"
+                        android:letterSpacing="0.04"
+                        />
+
+                    <TextView
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="( option )"
+                        android:fontFamily="@font/kanit_regular"
+                        android:textColor="@color/soft_gray"
+                        android:letterSpacing="0.04"
+                        />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/add_wish_txt_description"
+                    android:layout_width="340dp"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="6dp"
+                    android:elevation="3dp"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp"
+                    android:background="@drawable/shape_input_text_white"
+                    android:textSize="16dp"
+                    android:fontFamily="@font/kanit_regular"
+                    android:hint="Find Pork boston butt about 4 kilo\ngrams, raised pigs, not wild \nboars..."
+                    android:textColor="@color/black"
+                    android:letterSpacing="0.06"
+                    android:gravity="top"
+                    />
+
+            </LinearLayout>
+
+
+            <!-- Benefit -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Benefit"
+                        android:fontFamily="@font/kanit_regular"
+                        android:textColor="@color/secondary"
+                        android:letterSpacing="0.04"
+                        />
+
+                    <TextView
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="( option )"
+                        android:fontFamily="@font/kanit_regular"
+                        android:textColor="@color/soft_gray"
+                        android:letterSpacing="0.04"
+                        />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/add_wish_txt_benefit"
+                    android:layout_width="340dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="6dp"
+                    android:elevation="3dp"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="6dp"
+                    android:background="@drawable/shape_input_text_white"
+                    android:textSize="16dp"
+                    android:fontFamily="@font/kanit_regular"
+                    android:hint="As agreed / ตามที่ตกลง"
+                    android:textColor="@color/black"
+                    android:letterSpacing="0.06"
+                    android:singleLine="true"
+                    />
+
+            </LinearLayout>
+
+
+            <!-- Contact -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+
+                <TextView
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:text="Contact"
+                    android:fontFamily="@font/kanit_regular"
+                    android:textColor="@color/secondary"
+                    android:letterSpacing="0.04"
+                    />
+
+                <EditText
+                    android:id="@+id/add_wish_txt_contact"
+                    android:layout_width="340dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="6dp"
+                    android:elevation="3dp"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="6dp"
+                    android:background="@drawable/shape_input_text_white"
+                    android:textSize="16dp"
+                    android:fontFamily="@font/kanit_regular"
+                    android:hint="@string/hint_phone"
+                    android:textColor="@color/black"
+                    android:letterSpacing="0.06"
+                    android:inputType="numberSigned"
+                    />
+
+            </LinearLayout>
+
+
+            <!-- Action -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="visible"
+                >
+
+                <LinearLayout
+                    android:id="@+id/add_wish_btn_create_wish"
+                    android:layout_width="340dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/shape_btn_primary"
+                    android:gravity="center"
+                    android:elevation="3dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CREATE YOUR WISH"
+                        android:fontFamily="@font/kanit_regular"
+                        android:textColor="@color/white"
+                        android:letterSpacing="0.04"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_wish_btn_cancel"
+                android:layout_width="340dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/shape_btn_cancel"
+                android:gravity="center"
+                android:elevation="3dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CANCEL"
+                    android:fontFamily="@font/kanit_regular"
+                    android:textColor="@color/white"
+                    android:letterSpacing="0.04"
+                    android:singleLine="true"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

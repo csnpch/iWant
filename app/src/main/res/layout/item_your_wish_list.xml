@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_item_list_wish"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/your_wish_status_someone_responds"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:visibility="gone"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="-10dp"
+        android:layout_marginHorizontal="4dp"
+        android:background="@drawable/shape_item_wish_response"
+        android:gravity="center_horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/kanit_regular"
+            android:letterSpacing="0.04"
+            android:text="Someone responds to what you want"
+            />
+
+    </LinearLayout>
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:paddingVertical="14dp"
+        android:paddingHorizontal="18dp"
+        android:background="@drawable/shape_item_wish"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:elevation="3dp"
+        app:flexDirection="row"
+        app:justifyContent="space_between"
+        >
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:justifyContent="space_between"
+            app:flexDirection="column"
+            >
+
+            <TextView
+                android:id="@+id/your_wish_txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="เนื้อสด สโพกหมู 4kg"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/kanit_regular"
+                />
+
+            <TextView
+                android:id="@+id/your_wish_txt_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 days left for expire"
+                android:textSize="12dp"
+                android:fontFamily="@font/kanit_regular"
+                android:textColor="@color/danger"
+                />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:alignItems="center"
+            app:justifyContent="flex_end"
+            >
+
+            <TextView
+                android:id="@+id/your_wish_txt_timestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="now"
+                android:textSize="14dp"
+                android:textColor="@color/text_gray"
+                android:fontFamily="@font/kanit_regular"
+                />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+</LinearLayout>

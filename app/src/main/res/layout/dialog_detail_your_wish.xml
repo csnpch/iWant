@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/shape_rounded_dialog"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexDirection="row"
+        app:justifyContent="space_between"
+        app:alignItems="flex_start"
+    >
+
+        <TextView
+            android:id="@+id/your_wish_dialog_txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="เนื้อสด สโพกหมู 4kg"
+            android:textSize="16dp"
+            android:layout_marginRight="14dp"
+            android:textColor="@color/primary"
+            android:letterSpacing="0.04"
+            android:fontFamily="@font/kanit_medium"
+            android:justificationMode="inter_word"
+            />
+
+        <ImageView
+            android:id="@+id/your_wish_dialog_map_preview"
+            android:layout_width="50dp"
+            android:layout_height="26dp"
+            android:src="@drawable/map_location_dot_solid_gray"
+            />
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+
+
+    <TextView
+        android:id="@+id/your_wish_dialog_txt_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:textSize="14dp"
+        android:textColor="@color/text_gray"
+        android:fontFamily="@font/kanit_regular"
+        android:text="เนื้อสด สโพกหมูประมาณ 4kg ขอเป็นหมูเลี้ยงนะ ไม่ใช่หมูป่า โทรมาถาม ก่อนมาส่งนะคะ"
+        android:justificationMode="inter_word"
+        android:letterSpacing="0.02"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/your_wish_dialog_container_peoples_response"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/secondary"
+            android:fontFamily="@font/kanit_regular"
+            android:letterSpacing="0.06"
+            android:text="Peoples response to what you want"
+            />
+
+
+            <ListView
+                android:id="@+id/your_wish_dialog_listview_response"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+    </LinearLayout>
+
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:flexDirection="row"
+        app:justifyContent="space_between"
+        app:alignItems="center"
+    >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXPIRE : "
+                android:textSize="16dp"
+                android:textColor="@color/very_gray"
+                android:fontFamily="@font/kanit_regular"
+                />
+
+
+            <TextView
+                android:id="@+id/your_wish_dialog_txt_expire_time_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 DAYS LEFT"
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:textColor="@color/danger_2"
+                android:fontFamily="@font/kanit_regular"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/your_wish_dialog_btn_destroy"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:background="@drawable/shape_btn_danger"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            >
+
+            <TextView
+                android:text="DESTROY"
+                android:textColor="@color/white"
+                android:fontFamily="@font/kanit_regular"
+                android:textAlignment="center"
+                android:letterSpacing="0.08"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:orientation="vertical"
+        >
+
+        <!-- Button add more days for Expire -->
+        <LinearLayout
+            android:id="@+id/your_wish_dialog_btn_add_more_days_for_expire"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:background="@drawable/shape_btn_secondary"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            >
+
+            <TextView
+                android:id="@+id/your_wish_dialog_txt_btn_add_more_days_for_expire"
+                android:text="Add 2 more days for expire"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:fontFamily="@font/kanit_regular"
+                android:textAlignment="center"
+                android:letterSpacing="0.08"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        >
+
+
+            <!-- Button Edit -->
+            <LinearLayout
+                android:id="@+id/your_wish_dialog_btn_edit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="8dp"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:background="@drawable/shape_btn_warning"
+                >
+
+                <TextView
+                    android:text="EDIT"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/kanit_regular"
+                    android:textAlignment="center"
+                    android:letterSpacing="0.08"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+
+            <!-- Button Close -->
+            <LinearLayout
+                android:id="@+id/your_wish_dialog_btn_close"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="8dp"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/shape_btn_nothing"
+                >
+
+                <TextView
+                    android:text="CLOSE"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/kanit_medium"
+                    android:textSize="14dp"
+                    android:textAlignment="center"
+                    android:letterSpacing="0.08"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.MapFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="24dp"
+        android:orientation="vertical"
+        >
+
+         <com.google.android.flexbox.FlexboxLayout
+             android:id="@+id/map_btn_location_choose_info"
+             android:layout_width="match_parent"
+             android:layout_height="52dp"
+             android:layout_margin="4dp"
+             android:paddingVertical="10dp"
+             android:paddingHorizontal="16dp"
+             app:flexDirection="row"
+             app:alignItems="center"
+             android:background="@drawable/shape_btn_white"
+             android:elevation="4dp"
+            >
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/location_dot_solid"
+                />
+
+            <TextView
+                 android:id="@+id/map_txt_your_location"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="14dp"
+                 android:text="Prachinburi, Thailand"
+                 android:textSize="15dp"
+                 android:fontFamily="@font/kanit_regular"
+                 android:textColor="@color/black"
+                 android:letterSpacing="0.02"
+                 />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginBottom="40dp"
+            android:elevation="2dp"
+            >
+
+            <!-- uiZoomControls is shortcut navigation -->
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map_googleMapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                map:cameraZoom="12"
+                map:liteMode="false"
+                map:uiZoomControls="false"
+            />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/map_btn_floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="28dp"
+        android:layout_marginBottom="66dp"
+        android:layout_gravity="bottom|end"
+        app:fabSize="mini"
+        app:tint="@color/white"
+        android:backgroundTint="@color/btn_continue"
+        app:srcCompat="@drawable/plus_solid_small"
+        />
+
+
+</FrameLayout>

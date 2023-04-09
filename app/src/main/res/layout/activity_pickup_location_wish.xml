@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Maps.PickupLocationActivity"
+>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+    >
+
+        <!-- uiZoomControls is shortcut navigation -->
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/pickup_location_googleMapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            map:cameraZoom="12"
+            map:liteMode="false"
+            map:uiZoomControls="false"
+            android:layout_alignParentTop="true"
+        />
+
+
+
+        <LinearLayout
+            android:id="@+id/pickup_location_btn_confirm_location"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="-4dp"
+            android:background="@drawable/shape_btn_primary_rect"
+            android:gravity="center"
+            android:elevation="4dp"
+            android:layout_alignParentBottom="true"
+            >
+
+            <TextView
+                android:layout_marginTop="-2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CONFIRM LOCATION"
+                android:fontFamily="@font/kanit_medium"
+                android:textColor="@color/white"
+                android:letterSpacing="0.06"
+                />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

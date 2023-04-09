@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Auths.TermsActivity"
+    android:orientation="vertical"
+>
+
+
+    <LinearLayout
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginTop="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    >
+
+        <ImageView
+            android:id="@+id/term_btn_back"
+            android:src="@drawable/chevron_left_solid"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    >
+
+        <ImageView
+            android:src="@drawable/banner_terms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        />
+
+        <TextView
+            android:layout_marginTop="25dp"
+            android:text="Please provide information necessary"
+            android:textColor="@color/gray"
+            android:textSize="14dp"
+            android:letterSpacing="0.06"
+            android:fontFamily="@font/kanit_regular"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+    >
+
+        <TextView
+            android:text="Phone number"
+            android:fontFamily="@font/kanit_regular"
+            android:textColor="@color/secondary"
+            android:letterSpacing="0.04"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+        />
+
+        <EditText
+            android:id="@+id/terms_edt_phoneNumber"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="6dp"
+            android:elevation="4dp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:background="@drawable/shape_input_text"
+            android:textSize="16dp"
+            android:fontFamily="@font/kanit_regular"
+            android:hint="@string/hint_phone"
+            android:textColorHint="@color/text_veryHint"
+            android:letterSpacing="0.06"
+            android:inputType="numberSigned"
+            android:maxLength="10"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:singleLine="true"
+        />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    >
+        
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_width="292dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+        >
+
+            <com.google.android.flexbox.FlexboxLayout
+                app:flexDirection="row"
+                app:alignItems="center"
+                app:alignContent="center"
+                android:layout_marginBottom="4dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+            >
+
+                <CheckBox
+                    android:id="@+id/terms_cb_accept"
+                    android:padding="0dp"
+                    android:buttonTint="@color/text_gray"
+                    android:layout_margin="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/terms_btn_read_terms_of_services"
+                    android:text="@string/message_accept_terms"
+                    android:textSize="14dp"
+                    android:letterSpacing="0.04"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/kanit_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+
+            <LinearLayout
+                android:id="@+id/terms_btn_continue"
+                android:layout_margin="8dp"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:background="@drawable/shape_btn_continue"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+            >
+                <TextView
+                    android:text="CONTINUE"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/kanit_medium"
+                    android:letterSpacing="0.08"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
