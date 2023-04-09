@@ -33,6 +33,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -113,22 +116,23 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
             ) {
                 response.body()?.listIterator()?.forEach { item ->
                     statusHaveWishList = true
-
-                    val now: Date = Date()
-                    val created: Date = item.createdAt
-                    val expire: Date = item.expire
+                    val formatter = SimpleDateFormat("MM/dd/yyyy")
+                    val now: String = formatter.format(Date())
+                    val created: String = formatter.format(item.createdAt)
+                    val expire: String = formatter.format(item.expire)
 
                     if (now.compareTo(expire) < 0) {
-                        val created_time = now.time - created.time
-                        val expire_time = expire.time - now.time
-                        val cal_expire = TimeUnit.DAYS.convert(expire_time, TimeUnit.MILLISECONDS)
-                        val cal_created = TimeUnit.MINUTES.convert(created_time, TimeUnit.MILLISECONDS)
+                        val dateFormatter: DateTimeFormatter =  DateTimeFormatter.ofPattern("MM/dd/yyyy")
+                        val now_format = LocalDate.parse(now, dateFormatter)
+                        val expire_format = LocalDate.parse(expire, dateFormatter)
+                        val cal_expire = Period.between(now_format, expire_format)
+                        val cal_created =  TimeUnit.MILLISECONDS.toMinutes(Date().time - item.createdAt.time)
 
                         your_wish_ids.add(item.id.toString())
                         your_wish_titles.add(item.title.toString())
                         your_wish_description.add(item.description.toString())
 
-                        your_wish_time_for_expire.add("$cal_expire days") // dialog += "left for expire"
+                        your_wish_time_for_expire.add("${cal_expire.days} days") // dialog += "left for expire"
 
                         your_wish_timestamps.add("$cal_created mins")
                         val loc = item.location.split(",")

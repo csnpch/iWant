@@ -64,7 +64,9 @@ class LocalStore(context: Context) {
     }
 
     fun clearAll() {
-        sharedPreferences.edit().clear().commit()
+        sharedPreferences.edit().remove("token").commit()
+        sharedPreferences.edit().remove("profile").commit()
+//        sharedPreferences.edit().clear().commit()
     }
 
     fun getString(key: String, defaultValue: String): String {
