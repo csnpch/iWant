@@ -227,7 +227,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
                     val created: Date = item.createdAt
                     val expire: Date = item.expire
 
-                    if (now.compareTo(expire) < 0) {
+                    if (now < expire) {
                         val created_time = now.time - created.time
                         val cal_created = TimeUnit.MINUTES.convert(created_time, TimeUnit.MILLISECONDS)
                         wish_ids.add(item.id.toString())

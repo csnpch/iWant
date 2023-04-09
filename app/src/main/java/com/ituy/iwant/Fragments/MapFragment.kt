@@ -3,6 +3,7 @@ package com.ituy.iwant.Fragments
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.location.Location
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -29,10 +30,21 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.ituy.iwant.CustomListView_Wish
+import com.ituy.iwant.Dialogs.showDialogWish
 import com.ituy.iwant.Helpers.Helpers
+import com.ituy.iwant.Helpers.setListViewHeightBasedOnChildren
 import com.ituy.iwant.MainActivity
 import com.ituy.iwant.Maps.PickupLocationActivity
 import com.ituy.iwant.Stores.LocalStore
+import com.ituy.iwant.api.wish.WishModel
+import com.ituy.iwant.api.wish.WishService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 
 class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
@@ -49,28 +61,84 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
     private var markers: ArrayList<MarkerOptions> = ArrayList()
 
+    private val apiService = WishService()
+
 
     private fun markerOnMap() {
 
-        // Add a marker to the map
-        val latitude =  14.158904701557415
-        val longitude = 101.34582541674533
-        val marker = MarkerOptions()
-            .position(LatLng(latitude, longitude))
-            .title("Marker Title")
-            .snippet("Marker Snippet")
 
-        // Add to Array List
-        markers.add(marker)
-        googleMap.addMarker(marker)
+        val token = LocalStore(requireContext()).getString("token", "")
+        val locationSearch = (currentUserLocation[0].toString() + "," +currentUserLocation[1].toString())
+        val call = apiService.getWishByLocation(token, locationSearch)
+        call.enqueue(object: Callback<List<WishModel>> {
+            override fun onResponse(
+                call: Call<List<WishModel>>,
+                response: Response<List<WishModel>>
+            ) {
+                var index = 0
+                response.body()?.listIterator()?.forEach { item ->
+                    val now: Date = Date()
+                    val expire: Date = item.expire
+                    val created: Date = item.createdAt
 
-        // Set a click listener for the marker
-        googleMap.setOnMarkerClickListener { marker ->
-            // Handle marker click event here
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitude, longitude), 18f))
-            marker.showInfoWindow()
-            true // Return true to indicate that the event has been consumed
-        }
+                    if (now < expire) {
+                        val loc = item.location.split(",")
+                        // Add a marker to the map
+                        val latitude =  loc[0].toDouble()
+                        val longitude = loc[1].toDouble()
+                        val marker = MarkerOptions()
+                            .position(LatLng(latitude, longitude))
+                            .title(item.title)
+                            .snippet(item.benefit)
+
+                        var wish_latlng: ArrayList<Double> = ArrayList()
+                        wish_latlng.add(loc[0].toDouble())
+                        wish_latlng.add(loc[1].toDouble())
+
+                        val created_time = now.time - created.time
+                        val cal_created = TimeUnit.MINUTES.convert(created_time, TimeUnit.MILLISECONDS)
+
+                        val results = FloatArray(1)
+                        Location.distanceBetween(currentUserLocation[0], currentUserLocation[1], loc[0].toDouble(), loc[1].toDouble(), results)
+
+                        // Add to Array List
+                        markers.add(marker)
+                        googleMap.addMarker(marker)
+
+                        googleMap.setOnInfoWindowClickListener { marker ->
+                            showDialogWish(
+                                requireContext(),
+                                requireActivity(),
+                                index,
+                                item.id.toString(),
+                                item.title,
+                                "$cal_created mins",
+                                "${results[0]} km",
+                                item.description,
+                                item.benefit,
+                                item.contact,
+                                wish_latlng
+                            ) {
+                            }
+                        }
+
+                        // Set a click listener for the marker
+                        googleMap.setOnMarkerClickListener { marker ->
+                            // Handle marker click event here
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitude, longitude), 18f))
+                            marker.showInfoWindow()
+                            true // Return true to indicate that the event has been consumed
+                        }
+                        index++
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<WishModel>>, t: Throwable) {
+                Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
+            }
+        })
+
 
     }
 
@@ -181,7 +249,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         PermissionUtils.checkLocationPermission(this@MapFragment);
 //        this.getUserLocation()
         val currentLocation = LatLng(currentUserLocation[0], currentUserLocation[1])
-        this@MapFragment.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f))
+        this@MapFragment.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 16f))
         this.markerOnMap()
     }
 
