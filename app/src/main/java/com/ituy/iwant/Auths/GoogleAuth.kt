@@ -4,10 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.ituy.iwant.MainActivity
 import com.ituy.iwant.Stores.LocalStore
 import com.ituy.iwant.api.authentication.AuthenticationService
 import com.ituy.iwant.api.authentication.dto.AuthenticationRequest
@@ -51,6 +53,19 @@ class GoogleAuth {
                                     profile.add(tel)
                                 }
                                 LocalStore(context).saveArrayList("profile", profile)
+                                if (token?.isNotEmpty() == true && tel != null) {
+                                    ContextCompat.startActivity(
+                                        context,
+                                        Intent(context, MainActivity::class.java),
+                                        null
+                                    )
+                                } else {
+                                    ContextCompat.startActivity(
+                                        context,
+                                        Intent(context, TermsActivity::class.java),
+                                        null
+                                    )
+                                }
                             }
                         }
 

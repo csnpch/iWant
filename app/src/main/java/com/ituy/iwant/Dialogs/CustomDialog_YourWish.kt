@@ -74,7 +74,8 @@ fun showDialogYourWish(
     txt_title.text = tmpTitle
     txt_description.text = Description
     txt_expire_time_left.text = "$TimeLeft left"
-    txt_btn_add_more_days.text = "Add $UnitDayAddMoreExpire more days for expire"
+//    txt_btn_add_more_days.text = "Add $UnitDayAddMoreExpire more days for expire"
+    txt_btn_add_more_days.text = "Add 1 days for expire"
 
     if (PeopleResponse != null) {
         container_peoples_reponses.visibility = View.VISIBLE
@@ -143,7 +144,19 @@ fun showDialogYourWish(
     }
 
     btn_add_more_days.setOnClickListener {
-        Toast.makeText(Context, "On Click Add More $Index", Toast.LENGTH_SHORT).show()
+        val token = LocalStore(Context).getString("token", "")
+        val call = apiService.updateWishExpire(token, Id)
+        call.enqueue(object: Callback<Boolean> {
+            override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
+                myCallback.invoke("Reload")
+                dialogYourWish?.dismiss()
+            }
+
+            override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                Toast.makeText(Context, t.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     btn_destroy.setOnClickListener {

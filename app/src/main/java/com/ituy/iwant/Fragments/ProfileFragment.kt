@@ -179,6 +179,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     edt_email.setText(body.email)
                 }
                 loginWith = body?.authType.toString()
+                changeViewSignout()
             }
 
             override fun onFailure(call: Call<MemberModel>, t: Throwable) {

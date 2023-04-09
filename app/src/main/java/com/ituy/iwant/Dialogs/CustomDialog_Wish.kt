@@ -18,6 +18,12 @@ import android.widget.Toast
 import com.ituy.iwant.Helpers.Helpers
 import com.ituy.iwant.Helpers.PermissionUtils
 import com.google.android.flexbox.FlexboxLayout
+import com.ituy.iwant.Stores.LocalStore
+import com.ituy.iwant.api.deliverer.DelivererService
+import com.ituy.iwant.api.deliverer.dto.DelivererResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 fun showDialogWish(
     Context: Context,
@@ -34,6 +40,8 @@ fun showDialogWish(
     myCallback: (result: String?) -> Unit
 ) {
     var dialogWish: AlertDialog? = null // create local variable to store dialog instance
+
+    val apiService = DelivererService()
 
     val displayMetrics = DisplayMetrics()
     val mBuilder: AlertDialog.Builder = AlertDialog.Builder(Context, R.style.CustomAlertDialog)
@@ -85,6 +93,22 @@ fun showDialogWish(
     }
 
     btn_accept_to_deliver.setOnClickListener {
+        val token = LocalStore(Context).getString("token", "")
+        val call = apiService.createDeliverer(token, Id)
+        call.enqueue(object: Callback<DelivererResponse> {
+            override fun onResponse(
+                call: Call<DelivererResponse>,
+                response: Response<DelivererResponse>
+            ) {
+                myCallback.invoke("Reload")
+                dialogWish?.dismiss()
+            }
+
+            override fun onFailure(call: Call<DelivererResponse>, t: Throwable) {
+                Toast.makeText(Context, t.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
         Toast.makeText(Context, "onAcceptToDeliver Index = $Index", Toast.LENGTH_SHORT).show()
     }
 

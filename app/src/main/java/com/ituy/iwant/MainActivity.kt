@@ -55,7 +55,7 @@ class MainActivity: AppCompatActivity(), OnTabSelectedListener, AnimatedBottomBa
         getCurrentLocation(this) { location ->
             currentUserLocation[0] = location.first!!
             currentUserLocation[1] = location.second!!
-            Toast.makeText(this, "${currentUserLocation[0]}:${currentUserLocation[1]}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "${currentUserLocation[0]}:${currentUserLocation[1]}", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -20,6 +20,9 @@ interface WishService {
     @POST("/wish")
     fun createWish(@Header("Authorization") token: String, @Body wishModel: CreateWishRequest): Call<CreateWishResponse>
     @Headers("Header-Version: 1")
+    @PUT("/wish/expire/{id}")
+    fun updateWishExpire(@Header("Authorization") token: String, @Path("id") id: String): Call<Boolean>
+    @Headers("Header-Version: 1")
     @DELETE("/wish/{id}")
     fun removeWish(@Header("Authorization") token: String, @Path("id") id: String): Call<Boolean>
 

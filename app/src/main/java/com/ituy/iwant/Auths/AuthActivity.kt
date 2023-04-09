@@ -135,15 +135,6 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                 GoogleAuth.login(this, data, apiService)
             }
         }
-        val token = LocalStore(this).getString("token", "")
-        val profile = LocalStore(this).getArrayList("profile", ArrayList<String>())
-        if (token.isNotEmpty() && profile.size > 0) {
-            if (profile.size == 2) {
-                startActivity(Intent(this@AuthActivity, MainActivity::class.java))
-            } else {
-                startActivity(Intent(this@AuthActivity, com.ituy.iwant.Auths.TermsActivity::class.java))
-            }
-        }
     }
 
 }
