@@ -46,6 +46,8 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
     private var statusOnUpdate: Boolean = false
     private val apiService = WishService()
 
+    private lateinit var profile: ArrayList<String>
+
 
     private fun init() {
 
@@ -65,6 +67,11 @@ class AddWishActivity : AppCompatActivity(), View.OnClickListener {
 
         btn_cancel = findViewById(R.id.add_wish_btn_cancel)
         btn_cancel.setOnClickListener(this)
+
+        profile = LocalStore(this).getArrayList("profile", ArrayList())
+        if (profile != null) {
+            txt_contact.text = profile[1]
+        }
 
     }
 
