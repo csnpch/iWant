@@ -25,7 +25,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ituy.iwant.Helpers.Helpers
 import com.ituy.iwant.MainActivity
@@ -133,10 +135,29 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     }
 
 
+    private fun markerOnMap() {
+        val icon = BitmapDescriptorFactory.fromResource(R.drawable.map_pin_solid_blue)
+
+        // Get the GoogleMap object from the MapView
+        mapView.getMapAsync { googleMap ->
+            // Set the map type to normal
+            googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+
+            // Add a marker to the map
+            val marker = MarkerOptions()
+                .position(LatLng(14.158904701557415, 101.34582541674533))
+                .title("Marker Title")
+                .snippet("Marker Snippet")
+            googleMap.addMarker(marker)
+        }
+    }
+
+
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
         PermissionUtils.checkLocationPermission(this@MapFragment);
         this.getUserLocation()
+        this.markerOnMap()
     }
 
     override fun onResume() {

@@ -38,6 +38,7 @@ import java.time.Period
 import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 
 class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickListener {
@@ -258,20 +259,10 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
 
 
     private fun showPickupLocationName() {
-        // Check if view only not move location
-        if (currentUserLocation[0] == currentUserLocation[0] && currentUserLocation[1] == currentUserLocation[1]) {
-            txt_your_location.text = "Current location"
-            return;
-        }
-
         val helpers = Helpers()
         val strLat = helpers.subStringLength(currentUserLocation[0].toString(), 12)
         val strLng = helpers.subStringLength(currentUserLocation[1].toString(), 12)
         txt_your_location.text = "$strLat, $strLng"
-    }
-
-
-    private fun getUserLocation() {
     }
 
 
@@ -355,6 +346,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
                         this.showPickupLocationName()
                         clearDataWish()
                         setDataToWishList()
+
 //                        Toast.makeText(requireContext(), "INTENT: lat = ${currentUserLocation[0]}, log = ${currentUserLocation[1]}", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(requireContext(), "Can't get latLng from previous activity", Toast.LENGTH_SHORT).show()
@@ -383,7 +375,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
         var root = inflater.inflate(R.layout.fragment_wish, container, false)
         root = this.initView(root, savedInstanceState)
 
-        this.getUserLocation()
+//        this.getUserLocation()
         this.main()
         return root
     }

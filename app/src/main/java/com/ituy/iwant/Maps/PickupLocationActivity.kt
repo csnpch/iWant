@@ -62,9 +62,14 @@ class PickupLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         if (latLngParts.isNotEmpty()) {
 //            BYPASS : location i think this should new feature
             var latLngStrFromStore = LocalStore(this).getString("CurrentLocationLatLng", "0.0,0.0")
-            val latLng = latLngStrFromStore.split(",")
-            latLngChooseLocation[0] = latLng[0].toDouble()
-            latLngChooseLocation[1] = latLng[1].toDouble()
+            if (latLngStrFromStore === "0.0,0.0") {
+                latLngChooseLocation[0] = 14.158904701557415
+                latLngChooseLocation[1] = 101.34582541674533
+            } else {
+                val latLng = latLngStrFromStore.split(",")
+                latLngChooseLocation[0] = latLng[0].toDouble()
+                latLngChooseLocation[1] = latLng[1].toDouble()
+            }
 
 //            NORMAL
 //            latLngChooseLocation[0] = latLngParts[0].substring(4).toDouble()
@@ -78,7 +83,6 @@ class PickupLocationActivity : AppCompatActivity(), OnMapReadyCallback {
 //                    this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f))
 //                }
 //            }
-
 
             Toast.makeText(this, "latLngChooseLocation start: lat = ${latLngChooseLocation[0]}, log = ${latLngChooseLocation[1]}", Toast.LENGTH_SHORT).show()
         } else {
