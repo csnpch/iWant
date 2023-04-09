@@ -47,6 +47,34 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     private lateinit var googleMap: GoogleMap
     private var currentUserLocation = DoubleArray(2)
 
+    private var markers: ArrayList<MarkerOptions> = ArrayList()
+
+
+    private fun markerOnMap() {
+
+        // Add a marker to the map
+        val latitude =  14.158904701557415
+        val longitude = 101.34582541674533
+        val marker = MarkerOptions()
+            .position(LatLng(latitude, longitude))
+            .title("Marker Title")
+            .snippet("Marker Snippet")
+
+        // Add to Array List
+        markers.add(marker)
+        googleMap.addMarker(marker)
+
+        // Set a click listener for the marker
+        googleMap.setOnMarkerClickListener { marker ->
+            // Handle marker click event here
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitude, longitude), 18f))
+            marker.showInfoWindow()
+            true // Return true to indicate that the event has been consumed
+        }
+
+    }
+
+
 
     private fun initView(view: View, savedInstanceState: Bundle?): View {
         txt_your_location = view.findViewById(R.id.map_txt_your_location)
@@ -56,6 +84,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
         btn_floating_action_button = view.findViewById(R.id.map_btn_floating_action_button)
         btn_floating_action_button.setOnClickListener(this)
+
 
         mapView = view.findViewById(R.id.map_googleMapView)
         mapView.onCreate(savedInstanceState)
@@ -144,24 +173,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
             }
         }
 
-    }
-
-
-    private fun markerOnMap() {
-        val icon = BitmapDescriptorFactory.fromResource(R.drawable.map_pin_solid_blue)
-
-        // Get the GoogleMap object from the MapView
-        mapView.getMapAsync { googleMap ->
-            // Set the map type to normal
-            googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-
-            // Add a marker to the map
-            val marker = MarkerOptions()
-                .position(LatLng(14.158904701557415, 101.34582541674533))
-                .title("Marker Title")
-                .snippet("Marker Snippet")
-            googleMap.addMarker(marker)
-        }
     }
 
 
