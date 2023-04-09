@@ -60,6 +60,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private val apiService = MemberService()
 
 
+    // Loading
+    private lateinit var containerLoading: LinearLayout
+
+
     private fun initView(view: View): View {
 
         // Form Section
@@ -88,22 +92,20 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         btn_signOut = view.findViewById(R.id.profile_btn_signOut)
         btn_signOut.setOnClickListener(this)
 
-        this.initLoading()
+        this.initLoading(view)
 
         return view
     }
 
 
-    private fun initLoading() {
-        val containerLoading = requireActivity().findViewById<LinearLayout>(R.id.loadingContainer)
-//        MainActivity.setStateLoading(true, containerLoading)
-//
-//        Thread(Runnable {
-//            Thread.sleep(1000)
-//            Handler(Looper.getMainLooper()).post {
-//                MainActivity.setStateLoading(false, containerLoading)
-//            }
-//        }).start()
+    private fun initLoading(view: View) {
+        containerLoading = view.findViewById(R.id.profile_loadingContainer)
+        setStateLoading(true)
+    }
+
+
+    private fun setStateLoading(status: Boolean) {
+        containerLoading.visibility = if (status) View.VISIBLE else View.INVISIBLE
     }
 
 
@@ -163,6 +165,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
 
     private fun setDataToForm() {
+
         // Get data from some store to form?
         val token = LocalStore(requireContext()).getString("token", "")
         val call = apiService.profile(token)
@@ -180,9 +183,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 }
                 loginWith = body?.authType.toString()
                 changeViewSignout()
+                // Disable loading
+                setStateLoading(false)
             }
 
             override fun onFailure(call: Call<MemberModel>, t: Throwable) {
+                MainActivity.setStateLoading(false, containerLoading)
                 Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
             }
 

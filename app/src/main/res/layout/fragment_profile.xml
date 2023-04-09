@@ -5,6 +5,33 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.ProfileFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        >
+
+
+        <LinearLayout
+            android:id="@+id/profile_loadingContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:background="@color/white"
+            >
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"

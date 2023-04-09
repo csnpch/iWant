@@ -117,8 +117,9 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
                 call: Call<List<WishModel>>,
                 response: Response<List<WishModel>>
             ) {
-                statusHaveWishList = true
                 response.body()?.listIterator()?.forEach { item ->
+                    statusHaveWishList = true
+
                     val now: Date = Date()
                     val created: Date = item.createdAt
                     val expire: Date = item.expire
