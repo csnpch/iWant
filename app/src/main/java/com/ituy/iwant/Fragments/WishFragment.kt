@@ -48,6 +48,8 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
     private lateinit var btn_floating_action_button: FloatingActionButton
     private lateinit var btn_location_choose_info: FlexboxLayout
 
+    private lateinit var wish_no_data_wish: TextView
+
     private var your_wish_ids: ArrayList<String> = ArrayList()
     private var your_wish_titles: ArrayList<String> = ArrayList()
     private var your_wish_description: ArrayList<String> = ArrayList()
@@ -83,6 +85,8 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
         btn_location_choose_info = view.findViewById(R.id.wish_btn_location_choose_info)
         btn_location_choose_info.setOnClickListener(this)
 
+        wish_no_data_wish = view.findViewById(R.id.wish_no_data_wish)
+
         this.setDataToYourWishList()
         this.setDataToWishList()
 
@@ -92,17 +96,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
     }
 
 
-
     private fun initLoading() {
-        val containerLoading = requireActivity().findViewById<LinearLayout>(R.id.loadingContainer)
-//        MainActivity.setStateLoading(true, containerLoading)
-//
-//        Thread(Runnable {
-//            Thread.sleep(1000)
-//            Handler(Looper.getMainLooper()).post {
-//                MainActivity.setStateLoading(false, containerLoading)
-//            }
-//        }).start()
     }
 
 
@@ -127,7 +121,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
                     if (now.compareTo(expire) < 0) {
                         val created_time = now.time - created.time
                         val expire_time = expire.time - now.time
-                        val cal_expire = TimeUnit.DAYS.convert(expire_time, TimeUnit.MILLISECONDS) + 1
+                        val cal_expire = TimeUnit.DAYS.convert(expire_time, TimeUnit.MILLISECONDS)
                         val cal_created = TimeUnit.MINUTES.convert(created_time, TimeUnit.MILLISECONDS)
 
                         your_wish_ids.add(item.id.toString())
@@ -160,6 +154,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
                 )
 
                 if (statusHaveWishList)
+
                     container_your_wish.visibility = View.VISIBLE
 
                 setListViewHeightBasedOnChildren(listview_yourWish)
@@ -171,29 +166,6 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
             }
 
         })
-
-//        for (i in 0..1) {
-//            statusHaveWishList = true
-//            your_wish_ids.add("0$i");
-//            your_wish_titles.add("Title Title Title Title Title Title Title " + (i+1))
-//            your_wish_description.add("Sula Sama Description Description 1")
-//            your_wish_time_for_expire.add("${i+1} days") // dialog += "left for expire"
-//            your_wish_timestamps.add("${i+1} min")
-//            your_wish_latlng.add(arrayListOf(14.1508167 + (0.1 + i), 101.3611667 + (0.1 + i)))
-//            // if check data peoples responses then
-//            if (i % 2 == 0) {
-//                for (i in 0..1) {
-//                    val response1 = arrayOf(
-//                        arrayOf("Somjit Nimitmray$i", "0987654321", "03/03/2023, 20:24"),
-//                        arrayOf("John Doe$i", "0123456789", "03/03/2023, 20:24")
-//                    )
-//                    your_wish_people_responses.add(response1)
-//                }
-//            } else {
-//                your_wish_people_responses.add(null)
-//            }
-//        }
-
 
         listview_yourWish.adapter = CustomListView_YourWish(
             requireContext(), your_wish_ids, your_wish_titles, your_wish_time_for_expire, your_wish_timestamps, your_wish_people_responses
@@ -230,6 +202,9 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
 
     // Wish public
     private fun setDataToWishList() {
+        var statusHaveDataWishList = false
+        wish_no_data_wish.visibility = View.VISIBLE
+
         val token = LocalStore(requireContext()).getString("token", "")
         val locationSearch = (currentUserLocation[0].toString() + "," +currentUserLocation[1].toString())
         val call = apiWish.getWishByLocation(token, locationSearch)
@@ -239,6 +214,10 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
                 response: Response<List<WishModel>>
             ) {
                 response.body()?.listIterator()?.forEach { item ->
+                    if (!statusHaveDataWishList)
+                        wish_no_data_wish.visibility = View.GONE
+                    statusHaveDataWishList = true
+
                     val now: Date = Date()
                     val created: Date = item.createdAt
                     val expire: Date = item.expire
@@ -268,6 +247,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
             }
 
         })
+
 
         listview_wish.onItemClickListener = this;
     }
