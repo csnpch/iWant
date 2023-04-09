@@ -367,6 +367,18 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
         currentUserLocation[1] = locSplit[1].toDouble()
     }
 
+    private fun getUserLocation() {
+        val location = LocalStore(requireActivity()).getString("CurrentLocationLatLng", "${14.158904701557415},${101.34582541674533}")
+        val locSplit = location.split(",")
+        if (currentUserLocation[0] == locSplit[0].toDouble() && currentUserLocation[1] == locSplit[1].toDouble()) {
+            txt_your_location.text = "Current location"
+        } else if (locSplit[0] != "14.158904701557415" && locSplit[1] != "101.34582541674533") {
+            txt_your_location.text = locSplit[0] + "," + locSplit[1]
+        }
+        currentUserLocation[0] = locSplit[0].toDouble()
+        currentUserLocation[1] = locSplit[1].toDouble()
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -375,7 +387,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
         var root = inflater.inflate(R.layout.fragment_wish, container, false)
         root = this.initView(root, savedInstanceState)
 
-//        this.getUserLocation()
+        this.getUserLocation()
         this.main()
         return root
     }

@@ -32,6 +32,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ituy.iwant.Helpers.Helpers
 import com.ituy.iwant.MainActivity
 import com.ituy.iwant.Maps.PickupLocationActivity
+import com.ituy.iwant.Stores.LocalStore
 
 
 class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
@@ -83,10 +84,21 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
     private fun getUserLocation() {
 //      Bypass current location
+/*
         currentUserLocation[0] = 14.158904701557415
         currentUserLocation[1] = 101.34582541674533
-        val currentLocation = LatLng(currentUserLocation[0], currentUserLocation[1])
-        this@MapFragment.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f))
+*/
+        val location = LocalStore(requireActivity()).getString("CurrentLocationLatLng", "${14.158904701557415},${101.34582541674533}")
+        val locSplit = location.split(",")
+        if (locSplit[0] != "14.158904701557415" && locSplit[1] != "101.34582541674533") {
+            currentUserLocation[0] = locSplit[0].toDouble()
+            currentUserLocation[1] = locSplit[1].toDouble()
+            if (currentUserLocation[0] == locSplit[0].toDouble() && currentUserLocation[1] == locSplit[1].toDouble()) {
+                txt_your_location.text = "Current location"
+            } else {
+                txt_your_location.text = locSplit[0] + "," + locSplit[1]
+            }
+        }
 
 //        NORMAL
 //        getCurrentLocation(requireActivity()) { location ->
@@ -156,7 +168,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
         PermissionUtils.checkLocationPermission(this@MapFragment);
-        this.getUserLocation()
+//        this.getUserLocation()
+        val currentLocation = LatLng(currentUserLocation[0], currentUserLocation[1])
+        this@MapFragment.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 14f))
         this.markerOnMap()
     }
 
@@ -193,7 +207,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
                         currentUserLocation[0] = latLng[0].substring(4).toDouble()
                         currentUserLocation[1] = latLng[1].substring(4).toDouble()
                         this.showPickupLocationName()
-                        Toast.makeText(requireContext(), "INTENT: lat = ${currentUserLocation[0]}, log = ${currentUserLocation[1]}", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(requireContext(), "INTENT: lat = ${currentUserLocation[0]}, log = ${currentUserLocation[1]}", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(requireContext(), "Can't get latLng from previous activity", Toast.LENGTH_SHORT).show()
                     }
@@ -203,11 +217,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     }
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {}
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -215,7 +229,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     ): View? {
         var root = inflater.inflate(R.layout.fragment_map, container, false)
         root = this.initView(root, savedInstanceState)
-
+        this.getUserLocation()
         this.main()
         return root
     }
