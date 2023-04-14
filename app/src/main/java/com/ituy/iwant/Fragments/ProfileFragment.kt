@@ -219,6 +219,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             }
 
             override fun onFailure(call: Call<MemberResponse>, t: Throwable) {
+                LocalStore(requireContext()).clearAll()
                 Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
             }
 

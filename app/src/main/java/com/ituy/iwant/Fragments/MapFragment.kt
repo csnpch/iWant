@@ -28,6 +28,7 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ituy.iwant.CustomListView_Wish
@@ -58,8 +59,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
     private var currentUserLocation = DoubleArray(2)
+    private val data: ArrayList<WishModel> = arrayListOf()
 
-    private var markers: ArrayList<MarkerOptions> = ArrayList()
+    private var markers: ArrayList<Marker> = ArrayList()
 
     private val apiService = WishService()
 
@@ -75,13 +77,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
                 call: Call<List<WishModel>>,
                 response: Response<List<WishModel>>
             ) {
-                var index = 0
                 response.body()?.listIterator()?.forEach { item ->
                     val now: Date = Date()
                     val expire: Date = item.expire
                     val created: Date = item.createdAt
 
                     if (now < expire) {
+                        data.add(item)
                         val loc = item.location.split(",")
                         // Add a marker to the map
                         val latitude =  loc[0].toDouble()
@@ -90,46 +92,57 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
                             .position(LatLng(latitude, longitude))
                             .title(item.title)
                             .snippet(item.benefit)
-
-                        var wish_latlng: ArrayList<Double> = ArrayList()
-                        wish_latlng.add(loc[0].toDouble())
-                        wish_latlng.add(loc[1].toDouble())
-
-                        val created_time = now.time - created.time
-                        val cal_created = TimeUnit.MINUTES.convert(created_time, TimeUnit.MILLISECONDS)
-
-                        val results = FloatArray(1)
-                        Location.distanceBetween(currentUserLocation[0], currentUserLocation[1], loc[0].toDouble(), loc[1].toDouble(), results)
-
                         // Add to Array List
-                        markers.add(marker)
-                        googleMap.addMarker(marker)
+                        googleMap.addMarker(marker)?.let { markers.add(it) }
+                    }
+                    googleMap.setOnInfoWindowClickListener { marker ->
+                        markers.forEachIndexed { index, item ->
+                            if (item == marker) {
+                                val loc = data[index].location.split(",")
+                                // Add a marker to the map
+                                val latitude =  loc[0].toDouble()
+                                val longitude = loc[1].toDouble()
 
-                        googleMap.setOnInfoWindowClickListener { marker ->
-                            showDialogWish(
-                                requireContext(),
-                                requireActivity(),
-                                index,
-                                item.id.toString(),
-                                item.title,
-                                "$cal_created mins",
-                                "${results[0]} km",
-                                item.description,
-                                item.benefit,
-                                item.contact,
-                                wish_latlng
-                            ) {
+
+                                val created_time = now.time - created.time
+                                val cal_created = TimeUnit.MINUTES.convert(created_time, TimeUnit.MILLISECONDS)
+                                var wish_latlng: ArrayList<Double> = ArrayList()
+                                wish_latlng.add(loc[0].toDouble())
+                                wish_latlng.add(loc[1].toDouble())
+                                val results = FloatArray(1)
+                                Location.distanceBetween(currentUserLocation[0], currentUserLocation[1], loc[0].toDouble(), loc[1].toDouble(), results)
+                                showDialogWish(
+                                    requireContext(),
+                                    requireActivity(),
+                                    index,
+                                    data[index].id.toString(),
+                                    data[index].title,
+                                    "$cal_created mins",
+                                    "${results[0] / 1000} km",
+                                    data[index].description,
+                                    data[index].benefit,
+                                    data[index].contact,
+                                    wish_latlng
+                                ) {
+                                }
                             }
                         }
+                    }
 
-                        // Set a click listener for the marker
-                        googleMap.setOnMarkerClickListener { marker ->
-                            // Handle marker click event here
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitude, longitude), 18f))
-                            marker.showInfoWindow()
-                            true // Return true to indicate that the event has been consumed
+                    // Set a click listener for the marker
+                    googleMap.setOnMarkerClickListener { marker ->
+                        markers.forEachIndexed { index, item ->
+                            if (item == marker) {
+                                val loc = data[index].location.split(",")
+                                // Add a marker to the map
+                                val latitude =  loc[0].toDouble()
+                                val longitude = loc[1].toDouble()
+                                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitude, longitude), 18f))
+                            }
                         }
-                        index++
+                        // Handle marker click event here
+                        marker.showInfoWindow()
+                        true // Return true to indicate that the event has been consumed
                     }
                 }
             }

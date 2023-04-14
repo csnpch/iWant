@@ -190,7 +190,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
         your_wish_description = ArrayList()
         your_wish_time_for_expire = ArrayList()
         your_wish_timestamps = ArrayList()
-        your_wish_people_responses = arrayListOf(null)
+        your_wish_people_responses = arrayListOf()
         your_wish_latlng = ArrayList()
     }
 
@@ -240,7 +240,7 @@ class WishFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickLi
                         wish_latlng.add(arrayListOf(loc[0].toDouble(), loc[1].toDouble()))
                         val results = FloatArray(1)
                         Location.distanceBetween(currentUserLocation[0], currentUserLocation[1], loc[0].toDouble(), loc[1].toDouble(), results)
-                        wish_distances.add("${results[0]} km")
+                        wish_distances.add("${results[0] / 1000} km")
                     }
                 }
                 listview_wish.adapter = CustomListView_Wish(requireContext(), wish_ids, wish_titles, wish_description, wish_distances, wish_timestamps)
